@@ -1,4 +1,4 @@
-/* J1 Forth CPU with Wishbone interface
+/* J1 Forth CPU with two Wishbone interfaces
  *
  * based on
  *     http://excamera.com/sphinx/fpga-j1.html
@@ -6,41 +6,18 @@
  *     jamesb@willowgarage.com
  */
 
-module j1_wb(if_wb.master wb);
+`default_nettype none
 
-   typedef enum logic [2:0] {TAG_UBRANCH, TAG_ZBRANCH, TAG_CALL, TAG_ALU} tag_t;
+module j1_wb
+  (input wire   sys_clk_i, // clock
+   input wire   sys_rst_i, // reset
+   if_wb.master wbc,       // code bus
+   if_wb.master wbd);      // data bus
 
-   typedef enum logic [3:0] {OP_T, OP_N, OP_T_PLUS_N, OP_T_AND_N,
-			     OP_T_IOR_N, OP_T_XOR_N, OP_INV_T, OP_N_EQ_T,
-			     OP_N_LS_T, OP_N_RSHIFT_T, OP_T_MINUS_1, OP_R,
-			     OP_AT, OP_N_LSHIFT_T, OP_DEPTH, OP_N_ULS_T} op_t;
-
-   typedef union packed {
-      struct packed {
-	 logic        tag;
-	 logic [14:0] immediate;
-      } lit;
-
-      struct packed {
-	 tag_t        tag;
-	 logic [12:0] address;
-      } bra;
-
-      struct packed {
-	 tag_t              tag;
-	 logic              r_to_pc;
-	 op_t               op;
-	 logic              t_to_n;
-	 logic              t_to_r;
-	 logic              n_to_mem;
-	 logic              reserved;
-	 logic signed [1:0] rstack;
-	 logic signed [1:0] dstack;
-      } alu;
-   } instr_t;
+   import types::*;
 
    instr_t      insn;      // instruction
-   logic [12:0] _pc, pc,   // processor counter
+   logic [15:0] _pc, pc,   // processor counter
 		pc_plus_1; // processor counter + 1
    logic        io_sel;    // I/O select
 
@@ -66,36 +43,27 @@ module j1_wb(if_wb.master wb);
    logic               _rstkW;     // return stack write
 
    /* I/O / Wishbone bridge */
-   wire                sys_clk_i;  // main clock
-   wire                sys_rst_i;  // reset
    wire         [15:0] io_din;     // io data in
    logic               io_rd;      // io read
    logic               io_wr;      // io write
    logic        [15:0] io_addr;    // io address
    logic        [15:0] io_dout;    // io data out
    wire                io_wait;    // io wait state
+   logic               wr_en;
 
-   io_wb_bridge inst_io_wb_bridge
-     (.wb,
-      .sys_clk_i,
-      .sys_rst_i,
-      .io_din,
-      .io_rd,
-      .io_wr,
-      .io_addr,
-      .io_dout,
-      .io_wait);
+   assign wbc.adr   = _pc;
+   assign wbc.cyc   = 1'b1;
+   assign wbc.stb   = ~wbc.stall; // wbc.stall is always 0
+   assign wbc.we    = 1'b0;
+   assign insn      = wbc.dat_i;
+   assign wbc.dat_o = 16'b0;
 
-   dpram8kx16 dpram
-     (.clock(sys_clk_i),
-      .address_a(_pc),
-      .data_a(16'h0),
-      .wren_a(1'b0),
-      .q_a(insn),
-      .address_b(_st0[13:1]),
-      .data_b(st1),
-      .wren_b(_ramWE),
-      .q_b(ramrd));
+   assign wbd.adr   = {1'b0, _st0[15:1]};
+   assign wbd.cyc   = 1'b1;
+   assign wbd.stb   = ~wbd.stall; // !wbd.stall && ((is_alu && (insn.alu.op == OP_AT)) || wr_en);
+   assign wbd.we    = _ramWE;
+   assign ramrd     = wbd.dat_i;
+   assign wbd.dat_o = st1;
 
    /* data and return stack */
    always_ff @(posedge sys_clk_i)
@@ -163,8 +131,6 @@ module j1_wb(if_wb.master wb);
    /* I/O and RAM control */
    always_comb
      begin
-	logic wr_en;
-
 	wr_en   = is_alu & insn.alu.n_to_mem;
 	io_sel  = (st0[15:14] != 2'b00); // I/O:4000H...FFFFH
 	io_rd   = (is_alu && (insn.alu.op == OP_AT) && io_sel);
@@ -219,7 +185,7 @@ module j1_wb(if_wb.master wb);
      end
 
    /* control PC */
-   always_comb pc_plus_1 = (io_wait) ? pc : pc + 13'd1;
+   always_comb pc_plus_1 = /*(!wbd.ack) ? pc :*/ pc + 16'd1;
 
    always_comb
      if (sys_rst_i)
@@ -242,11 +208,13 @@ module j1_wb(if_wb.master wb);
 	  rsp <=  5'd0;
        end
      else
-       if (!io_wait)
-	 begin
-	    pc  <= _pc;
-	    dsp <= _dsp;
-	    st0 <= _st0;
-	    rsp <= _rsp;
-	 end
+       // if (wbd.ack)
+       begin
+	  pc  <= _pc;
+	  dsp <= _dsp;
+	  st0 <= _st0;
+	  rsp <= _rsp;
+       end
 endmodule
+
+`resetall

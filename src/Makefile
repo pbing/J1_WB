@@ -1,6 +1,6 @@
 # Create firmware
 
-FORTH=~/SwiftForth/bin/osx/sf
+FORTH=/usr/local/opt/SwiftForth/bin/osx/sf
 #FORTH=gforth -e
 
 j1.hex j1.lst: *.fs Makefile

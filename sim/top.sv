@@ -4,37 +4,55 @@ module top;
    timeunit 1ns;
    timeprecision 1ps;
 
-   bit rst_i; // reset
-   bit clk_i; // clock
+   bit rst; // reset
+   bit clk; // clock
 
-   if_wb wbm(.*);
-   if_wb wbs(.*);
+   if_wb wbc1(.*);
+   if_wb wbc2(.*);
+   if_wb wbd1(.*);
+   if_wb wbd2(.*);
 
-   j1_wb    dut  (.wb(wbm));
-   wb_slave slave(.wb(wbs));
+   j1_wb dut 
+     (.sys_clk_i (clk),
+      .sys_rst_i (rst),
+      .wbc       (wbc1),
+      .wbd       (wbd1));
+
+   wb_rom wb_rom(.wb(wbc2));
+   wb_ram wb_ram(.wb(wbd2));
 
    /* Interconnection */
-   assign wbm.dat_i = wbs.dat_o;
-   assign wbm.ack_i = wbs.ack_o;
+   assign wbc1.ack   = wbc2.ack;
+   assign wbc2.adr   = wbc1.adr;
+   assign wbc2.cyc   = wbc1.cyc;
+   assign wbc1.stall = wbc2.stall;
+   assign wbc2.stb   = wbc1.stb;
+   assign wbc2.we    = wbc1.we;
+   assign wbc2.dat_i = wbc1.dat_o;
+   assign wbc1.dat_i = wbc2.dat_o;
 
-   assign wbs.adr_i = wbm.adr_o;
-   assign wbs.dat_i = wbm.dat_o;
-   assign wbs.we_i  = wbm.we_o;
-   assign wbs.cyc_i = wbm.cyc_o;
-   assign wbs.stb_i = (wbm.cyc_o && wbm.adr_o[15:4] == 'h400) ? wbm.stb_o : 1'b0;
+   assign wbd1.ack   = wbd2.ack;
+   assign wbd2.adr   = wbd1.adr;
+   assign wbd2.cyc   = wbd1.cyc;
+   assign wbd1.stall = wbd2.stall;
+   assign wbd2.stb   = wbd1.stb;
+   assign wbd2.we    = wbd1.we;
+   assign wbd2.dat_i = wbd1.dat_o;
+   assign wbd1.dat_i = wbd2.dat_o;
 
-   always #5ns clk_i = ~clk_i;
+
+   always #5ns clk = ~clk;
 
    initial
      begin
 	$timeformat(-9, 3, " ns");
-	$readmemh("j1.hex", dut.dpram.mem);
+	$readmemh("j1.hex", top.wb_rom.rom.mem);
 
-	rst_i = 1'b1;
-	repeat(2) @(negedge clk_i);
-	rst_i = 1'b0;
+	rst = 1'b1;
+	repeat(2) @(negedge clk);
+	rst = 1'b0;
 
-	repeat(50) @(negedge clk_i);
-	$stop;
+	repeat(100) @(negedge clk);
+	$finish;
      end
 endmodule
