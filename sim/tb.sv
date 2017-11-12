@@ -1,6 +1,6 @@
 /* Testbench */
 
-module top;
+module tb;
    timeunit 1ns;
    timeprecision 1ps;
 
@@ -13,6 +13,9 @@ module top;
    if_wb wbm2(.*);   // J1 data bus
    if_wb wbs2_1(.*); // RAM
    if_wb wbs2_2(.*); // I/O
+   if_wb wbs2_3(.*); // I/O
+   if_wb wbs2_4(.*); // I/O
+   if_wb wbs2_5(.*); // I/O
 
    j1_wb dut 
      (.sys_clk_i (clk),
@@ -30,7 +33,7 @@ module top;
    initial
      begin
 	$timeformat(-9, 3, " ns");
-	$readmemh("j1.hex", top.wb_rom.rom.mem);
+	$readmemh("j1.hex", tb.wb_rom.rom.mem);
 
 	rst = 1'b1;
 	repeat(2) @(negedge clk);
