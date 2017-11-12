@@ -8,8 +8,8 @@ module wb_ram(if_wb.slave wb);
    wire ram_wen;
 
    /* Single port RAM */
-   spram4kx16 ram(.clock   (wb.clk),
-                  .address (wb.adr[11:0]),
+   spram8kx16 ram(.clock   (wb.clk),
+                  .address (wb.adr[12:0]),
                   .data    (wb.dat_i),
                   .q       (wb.dat_o),
                   .cen     (ram_cen),

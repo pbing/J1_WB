@@ -2,8 +2,8 @@
 
 `default_nettype none
 
-module spram4kx16
-  #(parameter size       = 'h1000,
+module spram8kx16
+  #(parameter size       = 'h2000,
     parameter addr_width = $clog2(size),
     parameter data_width = 16)
    (input  wire                    clock,

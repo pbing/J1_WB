@@ -18,7 +18,7 @@ module j1_wb
 
    /* instruction fetch */
    instr_t      insn;              // instruction
-   logic [15:0] _pc, pc,           // processor counter
+   logic [12:0] _pc, pc,           // processor counter
 		pc_plus_1;         // processor counter + 1
 
    /* select instruction types */
@@ -46,7 +46,7 @@ module j1_wb
    logic        [15:0] io_dout;    // io data out
 
    /* Wishbone code bus */
-   assign wbc.adr   = _pc;
+   assign wbc.adr   = {3'b0, _pc};
    assign wbc.cyc   = 1'b1;       // only one master
    assign wbc.stb   = ~wbc.stall; // wbc.stall is always 0
    assign wbc.we    = 1'b0;
@@ -180,7 +180,7 @@ module j1_wb
      end
 
    /* control PC */
-   always_comb pc_plus_1 = pc + 16'd1;
+   always_comb pc_plus_1 = pc + 13'd1;
 
    always_comb
      if (sys_rst_i)

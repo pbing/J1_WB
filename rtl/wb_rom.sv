@@ -7,8 +7,8 @@ module wb_rom(if_wb.slave wb);
    wire rom_cen;
 
    /* Single port ROM */
-   rom4kx16 rom(.clock   (wb.clk),
-                .address (wb.adr[11:0]),
+   rom8kx16 rom(.clock   (wb.clk),
+                .address (wb.adr[12:0]),
                 .q       (wb.dat_o),
                 .cen     (rom_cen));
 
