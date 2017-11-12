@@ -7,39 +7,23 @@ module top;
    bit rst; // reset
    bit clk; // clock
 
-   if_wb wbc1(.*);
-   if_wb wbc2(.*);
-   if_wb wbd1(.*);
-   if_wb wbd2(.*);
+   if_wb wbm1(.*);   // J1 code bus
+   if_wb wbs1(.*);   // ROM
+
+   if_wb wbm2(.*);   // J1 data bus
+   if_wb wbs2_1(.*); // RAM
+   if_wb wbs2_2(.*); // I/O
 
    j1_wb dut 
      (.sys_clk_i (clk),
       .sys_rst_i (rst),
-      .wbc       (wbc1),
-      .wbd       (wbd1));
+      .wbc       (wbm1),
+      .wbd       (wbm2));
 
-   wb_rom wb_rom(.wb(wbc2));
-   wb_ram wb_ram(.wb(wbd2));
+   wb_rom wb_rom(.wb(wbs1));
+   wb_ram wb_ram(.wb(wbs2_1));
 
-   /* Interconnection */
-   assign wbc1.ack   = wbc2.ack;
-   assign wbc2.adr   = wbc1.adr;
-   assign wbc2.cyc   = wbc1.cyc;
-   assign wbc1.stall = wbc2.stall;
-   assign wbc2.stb   = wbc1.stb;
-   assign wbc2.we    = wbc1.we;
-   assign wbc2.dat_i = wbc1.dat_o;
-   assign wbc1.dat_i = wbc2.dat_o;
-
-   assign wbd1.ack   = wbd2.ack;
-   assign wbd2.adr   = wbd1.adr;
-   assign wbd2.cyc   = wbd1.cyc;
-   assign wbd1.stall = wbd2.stall;
-   assign wbd2.stb   = wbd1.stb;
-   assign wbd2.we    = wbd1.we;
-   assign wbd2.dat_i = wbd1.dat_o;
-   assign wbd1.dat_i = wbd2.dat_o;
-
+   wb_intercon wb_intercon (.*);
 
    always #5ns clk = ~clk;
 
