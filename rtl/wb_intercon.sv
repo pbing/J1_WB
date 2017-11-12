@@ -14,10 +14,10 @@ module wb_intercon
    if_wb.master wbs2_5); // I/O
 
    wire sel2_1 = wbm2.adr[15:14] == 2'b00;   // RAM
-   wire sel2_2 = wbm2.adr[15:13] == 2'b0100; // I/O 4000H...4FFFH
-   wire sel2_3 = wbm2.adr[15:13] == 2'b0101; // I/O 5000H...5FFFH
-   wire sel2_4 = wbm2.adr[15:13] == 2'b0110; // I/O 6000H...6FFFH
-   wire sel2_5 = wbm2.adr[15:13] == 2'b0111; // I/O 7000H...7FFFH
+   wire sel2_2 = wbm2.adr[15:13] == 4'b0100; // I/O 4000H...4FFFH
+   wire sel2_3 = wbm2.adr[15:13] == 4'b0101; // I/O 5000H...5FFFH
+   wire sel2_4 = wbm2.adr[15:13] == 4'b0110; // I/O 6000H...6FFFH
+   wire sel2_5 = wbm2.adr[15:13] == 4'b0111; // I/O 7000H...7FFFH
 
    assign wbm1.ack     = wbs1.ack;
    assign wbs1.adr     = wbm1.adr;
@@ -70,11 +70,11 @@ module wb_intercon
                        (wbs2_4.stall & sel2_4) |
                        (wbs2_5.stall & sel2_5);
 
-   assign wbm2.dat_i = (wbs2_1.dat_i & {16, {sel2_1}}) |
-                       (wbs2_2.dat_i & {16, {sel2_2}}) |
-                       (wbs2_3.dat_i & {16, {sel2_3}}) |
-                       (wbs2_4.dat_i & {16, {sel2_4}}) |
-                       (wbs2_5.dat_i & {16, {sel2_5}});
+   assign wbm2.dat_i = (wbs2_1.dat_o & {16{sel2_1}}) |
+                       (wbs2_2.dat_o & {16{sel2_2}}) |
+                       (wbs2_3.dat_o & {16{sel2_3}}) |
+                       (wbs2_4.dat_o & {16{sel2_4}}) |
+                       (wbs2_5.dat_o & {16{sel2_5}});
 endmodule
 
 `resetall
