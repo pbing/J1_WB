@@ -23,9 +23,9 @@ module tb;
       .wbc       (wbm1),
       .wbd       (wbm2));
 
-   wb_rom wb_rom(.wb(wbs1));
+   wb_rom wb_rom(.wb(wbs1));   // ROM 0000H...3FFFH
 
-   wb_ram wb_ram(.wb(wbs2_1));
+   wb_ram wb_ram(.wb(wbs2_1)); // RAM 0000H...3FFFH
 
    wb_io wb_io1(.wb(wbs2_2)); // I/O 4000H...4FFFH
    wb_io wb_io2(.wb(wbs2_3)); // I/O 5000H...5FFFH
