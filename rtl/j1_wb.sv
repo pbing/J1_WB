@@ -1,4 +1,4 @@
-/* J1 Forth CPU with two Wishbone interfaces
+/* J1 Forth CPU with Havard architecture and Wishbone interfaces
  *
  * based on
  *     http://excamera.com/sphinx/fpga-j1.html
@@ -16,17 +16,13 @@ module j1_wb
 
    import types::*;
 
-   instr_t      insn;      // instruction
-   logic [15:0] _pc, pc,   // processor counter
-		pc_plus_1; // processor counter + 1
-   logic        io_sel;    // I/O select
+   /* instruction fetch */
+   instr_t      insn;              // instruction
+   logic [15:0] _pc, pc,           // processor counter
+		pc_plus_1;         // processor counter + 1
 
    /* select instruction types */
    logic is_lit, is_ubranch, is_zbranch, is_call, is_alu;
-
-   /* RAM */
-   wire  [15:0] ramrd;  // RAM read data
-   logic        _ramWE; // RAM write enable
 
    /* data stack */
    logic        [15:0] dstack[32]; // data stack memory
@@ -42,28 +38,28 @@ module j1_wb
    logic        [15:0] _rstkD;     // return stack data
    logic               _rstkW;     // return stack write
 
-   /* I/O / Wishbone bridge */
+   /* data access */
    wire         [15:0] io_din;     // io data in
    logic               io_rd;      // io read
    logic               io_wr;      // io write
    logic        [15:0] io_addr;    // io address
    logic        [15:0] io_dout;    // io data out
-   wire                io_wait;    // io wait state
-   logic               wr_en;
 
+   /* Wishbone code bus */
    assign wbc.adr   = _pc;
-   assign wbc.cyc   = 1'b1;
+   assign wbc.cyc   = 1'b1;       // only one master
    assign wbc.stb   = ~wbc.stall; // wbc.stall is always 0
    assign wbc.we    = 1'b0;
    assign insn      = wbc.dat_i;
    assign wbc.dat_o = 16'b0;
 
-   assign wbd.adr   = {1'b0, _st0[15:1]};
-   assign wbd.cyc   = 1'b1;
-   assign wbd.stb   = ~wbd.stall; // !wbd.stall && ((is_alu && (insn.alu.op == OP_AT)) || wr_en);
-   assign wbd.we    = _ramWE;
-   assign ramrd     = wbd.dat_i;
-   assign wbd.dat_o = st1;
+   /* Wishbone data bus */
+   assign wbd.adr   = {1'b0, io_addr[15:1]};
+   assign wbd.cyc   = 1'b1;                         // only one master
+   assign wbd.stb   = ~wbd.stall & (io_rd | io_wr); // wbd.stall is always 0, io_rd is always 1
+   assign wbd.we    = io_wr;
+   assign io_din    = wbd.dat_i;
+   assign wbd.dat_o = io_dout;
 
    /* data and return stack */
    always_ff @(posedge sys_clk_i)
@@ -85,10 +81,10 @@ module j1_wb
    always_comb
      begin
 	is_lit     = insn.lit.tag;
-	is_ubranch = (insn.bra.tag == TAG_UBRANCH);
-	is_zbranch = (insn.bra.tag == TAG_ZBRANCH);
-	is_call    = (insn.bra.tag == TAG_CALL);
-	is_alu     = (insn.bra.tag == TAG_ALU);
+	is_ubranch = insn.bra.tag == TAG_UBRANCH;
+	is_zbranch = insn.bra.tag == TAG_ZBRANCH;
+	is_call    = insn.bra.tag == TAG_CALL;
+	is_alu     = insn.bra.tag == TAG_ALU;
      end
 
    /* calculate next TOS value */
@@ -120,7 +116,7 @@ module j1_wb
             OP_N_RSHIFT_T: _st0 = st1 >> st0[3:0];
             OP_T_MINUS_1 : _st0 = st0 - 16'd1;
             OP_R         : _st0 = rst0;
-            OP_AT        : _st0 = (io_sel) ? io_din : ramrd;
+            OP_AT        : _st0 = io_din;
             OP_N_LSHIFT_T: _st0 = st1 << st0[3:0];
             OP_DEPTH     : _st0 = {3'b0, rsp, 3'b0, dsp};
             OP_N_ULS_T   : _st0 = {16{(st1 < st0)}};
@@ -131,13 +127,12 @@ module j1_wb
    /* I/O and RAM control */
    always_comb
      begin
-	wr_en   = is_alu & insn.alu.n_to_mem;
-	io_sel  = (st0[15:14] != 2'b00); // I/O:4000H...FFFFH
-	io_rd   = (is_alu && (insn.alu.op == OP_AT) && io_sel);
-	io_wr   = wr_en & io_sel;
-	io_addr = st0;
+	io_wr   = is_alu & insn.alu.n_to_mem;
+	//io_rd   = is_alu && (insn.alu.op == OP_AT);
+	//io_addr = st0;
+	io_rd   = 1'b1;
+	io_addr = _st0;
 	io_dout = st1;
-	_ramWE  = wr_en & ~io_sel;       // RAM:0000H...3FFFH
      end
 
    /* data and return stack control */
@@ -185,7 +180,7 @@ module j1_wb
      end
 
    /* control PC */
-   always_comb pc_plus_1 = /*(!wbd.ack) ? pc :*/ pc + 16'd1;
+   always_comb pc_plus_1 = pc + 16'd1;
 
    always_comb
      if (sys_rst_i)
@@ -208,7 +203,6 @@ module j1_wb
 	  rsp <=  5'd0;
        end
      else
-       // if (wbd.ack)
        begin
 	  pc  <= _pc;
 	  dsp <= _dsp;
