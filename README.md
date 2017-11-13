@@ -7,7 +7,6 @@ Havard architecture, one bus for code (ROM), second bus for data (RAM or I/O).
 bus  | module | address range
 -----|--------|------------------
 code | ROM    | 0x0000 ... 0x3fff
----------------------------------
 data | RAM    | 0x0000 ... 0x3fff
 data | I/O    | 0x4000 ... 0x7fff
 
