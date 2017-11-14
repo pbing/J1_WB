@@ -43,10 +43,6 @@ module tb;
         /* load ROM image */
 	$readmemh("j1.hex", tb.wb_rom.rom.mem);
 
-        /* initialize RAM */
-        for (int i = 0; i < 'h2000; i++)
-          tb.wb_ram.ram.mem[i] = $random;
-
 	rst = 1'b1;
 	repeat(2) @(negedge clk);
 	rst = 1'b0;

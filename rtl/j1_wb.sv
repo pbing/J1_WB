@@ -59,7 +59,7 @@ module j1_wb
    /* Wishbone data bus */
    assign wbd.adr   = {1'b0, io_addr[15:1]};
    assign wbd.cyc   = wbd.stb | wbd_stb_r;
-   assign wbd.stb   = (io_rd | io_wr);
+   assign wbd.stb   = io_rd | io_wr;
    assign wbd.we    = io_wr;
    assign io_din    = wbd.dat_i;
    assign wbd.dat_o = io_dout;
