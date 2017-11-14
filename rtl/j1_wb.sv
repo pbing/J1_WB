@@ -45,21 +45,31 @@ module j1_wb
    logic        [15:0] io_addr;    // io address
    logic        [15:0] io_dout;    // io data out
 
-   /* Wishbone code bus */
+   /* misc. */
+   logic wbd_stb_r;
+
+    /* Wishbone code bus */
    assign wbc.adr   = {3'b0, _pc};
-   assign wbc.cyc   = 1'b1;       // only one master
-   assign wbc.stb   = ~wbc.stall; // wbc.stall is always 0
+   assign wbc.cyc   = 1'b1;
+   assign wbc.stb   = 1'b1;
    assign wbc.we    = 1'b0;
    assign insn      = wbc.dat_i;
    assign wbc.dat_o = 16'b0;
 
    /* Wishbone data bus */
    assign wbd.adr   = {1'b0, io_addr[15:1]};
-   assign wbd.cyc   = 1'b1;                         // only one master
-   assign wbd.stb   = ~wbd.stall & (io_rd | io_wr); // wbd.stall is always 0, io_rd is always 1
+   assign wbd.cyc   = wbd.stb | wbd_stb_r;
+   assign wbd.stb   = (io_rd | io_wr);
    assign wbd.we    = io_wr;
    assign io_din    = wbd.dat_i;
    assign wbd.dat_o = io_dout;
+
+   /* extend STB by one cycle */
+   always_ff @(posedge sys_clk_i)
+     if (sys_rst_i)
+       wbd_stb_r <= 1'b0;
+     else
+       wbd_stb_r <= wbd.stb;
 
    /* data and return stack */
    always_ff @(posedge sys_clk_i)
