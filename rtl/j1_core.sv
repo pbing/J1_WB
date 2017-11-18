@@ -209,7 +209,7 @@ module j1_core
          mem_wait <= 1'b0;
 
    /* keep instruction constant during memory wait state */
-   always_ff @(posedge clk or posedge reset)
+   always_ff @(posedge clk)
      if (!mem_wait)
        insn_r <= ibus.dat_i;
 endmodule
