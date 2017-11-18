@@ -3,101 +3,89 @@
 `default_nettype none
 
 module wb_intercon
-  (if_wb.slave  wbm1,    // J1 code bus
-   if_wb.master wbs1,    // ROM
+  (if_wb.slave  wbm,   // CPU
+   if_wb.master wbs1,  // ROM
+   if_wb.master wbs2,  // RAM
+   if_wb.master wbs3,  // I/O
+   if_wb.master wbs4,  // I/O
+   if_wb.master wbs5); // I/O
 
-   if_wb.slave  wbm2,    // J1 data bus
-   if_wb.master wbs2_1,  // RAM
-   if_wb.master wbs2_2,  // I/O
-   if_wb.master wbs2_3,  // I/O
-   if_wb.master wbs2_4,  // I/O
-   if_wb.master wbs2_5); // I/O
-
-   wire  wbm2_valid;
-   wire  sel2_1, sel2_2, sel2_3, sel2_4, sel2_5;
-   logic selr2_1, selr2_2, selr2_3, selr2_4, selr2_5;
+   wire  wbmvalid;
+   wire  sel1, sel2, sel3, sel4, sel5;
+   logic sel1_r, sel2_r, sel3_r, sel4_r, sel4_5;
    
-   assign wbm2_valid = wbm2.cyc & wbm2.stb;
-   assign sel2_1     = wbm2_valid && (wbm2.adr[15:13] == 3'b000);   // RAM 0000H...3FFFH
-   assign sel2_2     = wbm2_valid && (wbm2.adr[15:11] == 5'b00100); // I/O 4000H...4FFFH
-   assign sel2_3     = wbm2_valid && (wbm2.adr[15:11] == 5'b00101); // I/O 5000H...5FFFH
-   assign sel2_4     = wbm2_valid && (wbm2.adr[15:11] == 5'b00110); // I/O 6000H...6FFFH
-   assign sel2_5     = wbm2_valid && (wbm2.adr[15:11] == 5'b00111); // I/O 7000H...7FFFH
+   assign wbmvalid = wbm.cyc & wbm.stb;
+   assign sel1     = wbmvalid && (wbm.adr[15:13] == 3'b000);   // ROM 0000H...3FFFH
+   assign sel2     = wbmvalid && (wbm.adr[15:11] == 5'b00100); // RAM 4000H...4FFFH
+   assign sel3     = wbmvalid && (wbm.adr[15:11] == 5'b00101); // I/O 5000H...5FFFH
+   assign sel4     = wbmvalid && (wbm.adr[15:11] == 5'b00110); // I/O 6000H...6FFFH
+   assign sel5     = wbmvalid && (wbm.adr[15:11] == 5'b00111); // I/O 7000H...7FFFH
 
-   always_ff @(posedge wbm2.clk)
-     if (wbm2.rst)
+   always_ff @(posedge wbm.clk)
+     if (wbm.rst)
        begin
-          selr2_1 <= 1'b0;
-          selr2_2 <= 1'b0;
-          selr2_3 <= 1'b0;
-          selr2_4 <= 1'b0;
-          selr2_5 <= 1'b0;
+          sel1_r <= 1'b0;
+          sel2_r <= 1'b0;
+          sel3_r <= 1'b0;
+          sel4_r <= 1'b0;
+          sel4_5 <= 1'b0;
        end
      else
        begin
-          selr2_1 <= sel2_1;
-          selr2_2 <= sel2_2;
-          selr2_3 <= sel2_3;
-          selr2_4 <= sel2_4;
-          selr2_5 <= sel2_5;
+          sel1_r <= sel1;
+          sel2_r <= sel2;
+          sel3_r <= sel3;
+          sel4_r <= sel4;
+          sel4_5 <= sel5;
        end
 
-   assign wbm1.ack     = wbs1.ack;
-   assign wbs1.adr     = wbm1.adr;
-   assign wbs1.cyc     = wbm1.cyc;
-   assign wbm1.stall   = wbs1.stall;
-   assign wbs1.stb     = wbm1.stb;
-   assign wbs1.we      = wbm1.we;
-   assign wbs1.dat_i   = wbm1.dat_o;
-   assign wbm1.dat_i   = wbs1.dat_o;
+   assign wbs1.adr   = wbm.adr;
+   assign wbs1.cyc   = wbm.cyc & sel1;
+   assign wbs1.stb   = wbm.stb & sel1;
+   assign wbs1.we    = wbm.we;
+   assign wbs1.dat_i = wbm.dat_o;
 
-   assign wbs2_1.adr   = wbm2.adr;
-   assign wbs2_1.cyc   = wbm2.cyc & sel2_1;
-   assign wbs2_1.stb   = wbm2.stb & sel2_1;
-   assign wbs2_1.we    = wbm2.we;
-   assign wbs2_1.dat_i = wbm2.dat_o;
+   assign wbs2.adr   = wbm.adr;
+   assign wbs2.cyc   = wbm.cyc & sel2;
+   assign wbs2.stb   = wbm.stb & sel2;
+   assign wbs2.we    = wbm.we;
+   assign wbs2.dat_i = wbm.dat_o;
 
-   assign wbs2_2.adr   = wbm2.adr;
-   assign wbs2_2.cyc   = wbm2.cyc & sel2_2;
-   assign wbs2_2.stb   = wbm2.stb & sel2_2;
-   assign wbs2_2.we    = wbm2.we;
-   assign wbs2_2.dat_i = wbm2.dat_o;
+   assign wbs3.adr   = wbm.adr;
+   assign wbs3.cyc   = wbm.cyc & sel3;
+   assign wbs3.stb   = wbm.stb & sel3;
+   assign wbs3.we    = wbm.we;
+   assign wbs3.dat_i = wbm.dat_o;
 
-   assign wbs2_3.adr   = wbm2.adr;
-   assign wbs2_3.cyc   = wbm2.cyc & sel2_3;
-   assign wbs2_3.stb   = wbm2.stb & sel2_3;
-   assign wbs2_3.we    = wbm2.we;
-   assign wbs2_3.dat_i = wbm2.dat_o;
+   assign wbs4.adr   = wbm.adr;
+   assign wbs4.cyc   = wbm.cyc & sel4;
+   assign wbs4.stb   = wbm.stb & sel4;
+   assign wbs4.we    = wbm.we;
+   assign wbs4.dat_i = wbm.dat_o;
 
-   assign wbs2_4.adr   = wbm2.adr;
-   assign wbs2_4.cyc   = wbm2.cyc & sel2_4;
-   assign wbs2_4.stb   = wbm2.stb & sel2_4;
-   assign wbs2_4.we    = wbm2.we;
-   assign wbs2_4.dat_i = wbm2.dat_o;
+   assign wbs5.adr   = wbm.adr;
+   assign wbs5.cyc   = wbm.cyc & sel5;
+   assign wbs5.stb   = wbm.stb & sel5;
+   assign wbs5.we    = wbm.we;
+   assign wbs5.dat_i = wbm.dat_o;
 
-   assign wbs2_5.adr   = wbm2.adr;
-   assign wbs2_5.cyc   = wbm2.cyc & sel2_5;
-   assign wbs2_5.stb   = wbm2.stb & sel2_5;
-   assign wbs2_5.we    = wbm2.we;
-   assign wbs2_5.dat_i = wbm2.dat_o;
+   assign wbm.stall = (wbs1.stall & sel1) |
+                      (wbs2.stall & sel2) |
+                      (wbs3.stall & sel3) |
+                      (wbs4.stall & sel4) |
+                      (wbs5.stall & sel5);
 
-   assign wbm2.stall = (wbs2_1.stall & sel2_1) |
-                       (wbs2_2.stall & sel2_2) |
-                       (wbs2_3.stall & sel2_3) |
-                       (wbs2_4.stall & sel2_4) |
-                       (wbs2_5.stall & sel2_5);
+   assign wbm.ack   = (wbs1.ack & sel1_r) |
+                      (wbs2.ack & sel2_r) |
+                      (wbs3.ack & sel3_r) |
+                      (wbs4.ack & sel4_r) |
+                      (wbs5.ack & sel4_5);
 
-   assign wbm2.ack   = (wbs2_1.ack & selr2_1) |
-                       (wbs2_2.ack & selr2_2) |
-                       (wbs2_3.ack & selr2_3) |
-                       (wbs2_4.ack & selr2_4) |
-                       (wbs2_5.ack & selr2_5);
-
-   assign wbm2.dat_i = (wbs2_1.dat_o & {16{selr2_1}}) |
-                       (wbs2_2.dat_o & {16{selr2_2}}) |
-                       (wbs2_3.dat_o & {16{selr2_3}}) |
-                       (wbs2_4.dat_o & {16{selr2_4}}) |
-                       (wbs2_5.dat_o & {16{selr2_5}});
+   assign wbm.dat_i = (wbs1.dat_o & {16{sel1_r}}) |
+                      (wbs2.dat_o & {16{sel2_r}}) |
+                      (wbs3.dat_o & {16{sel3_r}}) |
+                      (wbs4.dat_o & {16{sel4_r}}) |
+                      (wbs5.dat_o & {16{sel4_5}});
 endmodule
 
 `resetall

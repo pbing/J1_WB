@@ -1,9 +1,9 @@
-/* ROM 4Kx16 */
+/* ROM */
 
 `default_nettype none
 
-module rom8kx16
-  #(parameter size       = 'h2000,
+module rom
+  #(parameter size       = 'h1000,
     parameter addr_width = $clog2(size),
     parameter data_width = 16)
    (input  wire                    clock,

@@ -2,15 +2,20 @@
 
 `default_nettype none
 
-module wb_rom(if_wb.slave wb);
+module wb_rom
+  #(parameter size = 'h2000) // ROM8192x16
+   (if_wb.slave wb);
+
    wire valid;
    wire rom_cen;
 
-   /* Single port ROM */
-   rom8kx16 rom(.clock   (wb.clk),
-                .address (wb.adr[12:0]),
-                .q       (wb.dat_o),
-                .cen     (rom_cen));
+   rom
+     #(.size(size))
+   rom
+     (.clock   (wb.clk),
+      .address (wb.adr[$clog2(size) - 1:0]),
+      .q       (wb.dat_o),
+      .cen     (rom_cen));
 
    assign rom_cen = valid;
 

@@ -1,9 +1,9 @@
-/* Single port RAM 4Kx16 */
+/* Single port RAM */
 
 `default_nettype none
 
-module spram8kx16
-  #(parameter size       = 'h2000,
+module spram
+  #(parameter size       = 'h1000,
     parameter addr_width = $clog2(size),
     parameter data_width = 16)
    (input  wire                    clock,
