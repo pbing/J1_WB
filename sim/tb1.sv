@@ -17,7 +17,7 @@ module tb1;
    rom
      (.clock   (clk),
       .address (ibus.adr[12:0]),
-      .q       (ibus.dat_i),
+      .q       (ibus.dat),
       .cen     (ibus.re));
 
    spram

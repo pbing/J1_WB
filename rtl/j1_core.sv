@@ -183,8 +183,7 @@ module j1_core
      begin
         ibus.adr   = {3'b0, _pc};
         ibus.re    = reset | ~insn_wait;
-        insn       = !mem_wait ? ibus.dat_i : insn_r;
-	ibus.dat_o = 16'b0;
+        insn       = !mem_wait ? ibus.dat : insn_r;
 
 	dbus.adr   = {1'b0, st0[15:1]};
         dbus.re    = stb_re;
@@ -211,7 +210,7 @@ module j1_core
    /* keep instruction constant during memory wait state */
    always_ff @(posedge clk)
      if (!mem_wait)
-       insn_r <= ibus.dat_i;
+       insn_r <= ibus.dat;
 endmodule
 
 `resetall

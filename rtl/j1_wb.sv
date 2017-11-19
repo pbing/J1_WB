@@ -32,7 +32,7 @@ module j1_wb
         wb.cyc     = wb.stb;
         wb.we      = dbus.we;
         wb.dat_o   = dbus.dat_o;
-        ibus.dat_i = wb.dat_i;
+        ibus.dat   = wb.dat_i;
         dbus.dat_i = wb.dat_i;
      end
 endmodule

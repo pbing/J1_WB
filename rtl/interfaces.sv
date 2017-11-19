@@ -60,25 +60,22 @@ interface if_ibus;
 
    logic [adr_width - 1 : 0] adr;
    logic                     re;
-   logic [dat_width - 1 : 0] dat_i, dat_o;
+   logic [dat_width - 1 : 0] dat;
 
    modport master
      (output adr,
       output re,
-      input  dat_i,
-      output dat_o);
+      input  dat);
 
    modport slave
      (input  adr,
       input  re,
-      input  dat_i,
-      output dat_o);
+      output dat);
 
    modport monitor
      (input  adr,
       input  re,
-      input  dat_i,
-      input  dat_o);
+      input  dat);
 endinterface: if_ibus
 
 /* Data bus */
