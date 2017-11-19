@@ -22,14 +22,12 @@ module j1_core
          is_fetch, is_store;
 
    /* data stack */
-   logic [15:0] dstack[dstack_depth]; // data stack memory
    logic [4:0]  _dsp, dsp;            // data stack pointer
    logic [15:0] _st0, st0;            // top of data stack
    logic [15:0] st1;                  // next of data stack
    logic        _dstkW;               // data stack write
 
    /* return stack */
-   logic [15:0] rstack[rstack_depth]; // return stack memory
    logic [4:0]  _rsp, rsp;            // return stack pointer
    logic [15:0] rst0;                 // top of return stack
    logic [15:0] _rstkD;               // return stack data
@@ -40,22 +38,27 @@ module j1_core
    logic        insn_wait;            // instruction wait
    logic        mem_wait;             // memory wait
 
-   /* data and return stack */
-   always_ff @(posedge clk)
-     if (!insn_wait)
-       begin
-	  if (_dstkW)
-	    dstack[_dsp] <= st0;
+   /* data stack */
+   register_file
+     #(dstack_depth)
+   dstack
+     (.clk,
+      .wen (_dstkW),
+      .wa  (_dsp),
+      .ra  (dsp),
+      .d   (st0),
+      .q   (st1));
 
-	  if (_rstkW)
-	    rstack[_rsp] <= _rstkD;
-       end
-
-   always_comb
-     begin
-	st1  = dstack[dsp];
-	rst0 = rstack[rsp];
-     end
+   /* return stack */
+   register_file
+     #(rstack_depth)
+   rstack
+     (.clk,
+      .wen (_rstkW),
+      .wa  (_rsp),
+      .ra  (rsp),
+      .d   (_rstkD),
+      .q   (rst0));
 
    /* select instruction types */
    always_comb
