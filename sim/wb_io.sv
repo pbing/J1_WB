@@ -4,7 +4,7 @@
 
 module wb_io(if_wb.slave wb);
    wire valid;
-   wire io_sel;
+   wire io_ren;
    wire io_wen;
 
    always_ff @(posedge wb.clk)
@@ -13,7 +13,7 @@ module wb_io(if_wb.slave wb);
 
 
    always_ff @(posedge wb.clk)
-     if (io_sel)
+     if (io_ren)
        begin
           logic [15:0] dat_o;
 
@@ -23,8 +23,8 @@ module wb_io(if_wb.slave wb);
        end
 
 
-   assign io_sel = valid;
-   assign io_wen = io_sel & wb.we;
+   assign io_ren = valid & ~wb.we;
+   assign io_wen = valid &  wb.we;
 
    /* Wishbone control
     * Classic pipelined bus cycles
