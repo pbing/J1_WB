@@ -12,7 +12,7 @@ Almost all instructions are performed in one clock cycle. Memory access needs tw
 ## Synthesis results TSMC 90 nm Logic low-power
 fclk = 400 MHz
 
-Area dependend on stack depth:
+Area of module `j1_wb` dependend on stack depth:
 ```
 dc_shell> get_lib_attribute tcbn90lphpwc_ccs/ND2D1 area
 2.822400
