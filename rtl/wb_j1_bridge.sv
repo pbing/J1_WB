@@ -8,12 +8,12 @@ module wb_j1_bridge
    /* connect to Wishbone interface with no wait states */
    always_comb
      begin
-        wb.adr       = ibus.re ? ibus.adr : dbus.adr;
-        wb.stb       = ibus.re | dbus.re | dbus.we;
-        wb.cyc       = wb.stb;
-        wb.we        = dbus.we;
-        wb.m_dat_o   = dbus.s_dat_i;
-        ibus.dat     = wb.m_dat_i;
-        dbus.s_dat_o = wb.m_dat_i;
+        wb.adr     = ibus.re ? ibus.adr : dbus.adr;
+        wb.stb     = ibus.re | dbus.re | dbus.we;
+        wb.cyc     = wb.stb;
+        wb.we      = dbus.we;
+        wb.dat_m   = dbus.dat_m;
+        ibus.dat   = wb.dat_s;
+        dbus.dat_s = wb.dat_s;
      end
 endmodule

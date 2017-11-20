@@ -4,8 +4,8 @@
  *
  * These modport expressions do not work with Design Compiler:
  *
- * modport master (.dat_i(m_dat_i), .dat_o(m_dat_o), ...);
- * modport slave  (.dat_i(s_dat_i), .dat_o(s_dat_o), ...);
+ * modport master (.dat_i(dat_s), .dat_o(dat_m), ...);
+ * modport slave  (.dat_i(dat_m), .dat_o(dat_s), ...);
  */
 
 interface if_wb
@@ -21,11 +21,8 @@ interface if_wb
    logic                     stall;
    logic                     stb;
    logic                     we;
-   logic [dat_width - 1 : 0] m_dat_i, m_dat_o;
-   logic [dat_width - 1 : 0] s_dat_i, s_dat_o;
-
-   assign m_dat_i = s_dat_o;
-   assign s_dat_i = m_dat_o;
+   logic [dat_width - 1 : 0] dat_m; // channel from master
+   logic [dat_width - 1 : 0] dat_s; // channel from slave
 
    modport master
      (input  clk,
@@ -36,8 +33,8 @@ interface if_wb
       input  stall,
       output stb,
       output we,
-      input  m_dat_i,
-      output m_dat_o);
+      input  dat_s,
+      output dat_m);
 
    modport slave
      (input  clk,
@@ -48,8 +45,8 @@ interface if_wb
       output stall,
       input  stb,
       input  we,
-      input  s_dat_i,
-      output s_dat_o);
+      input  dat_m,
+      output dat_s);
 endinterface: if_wb
 
 /* Instruction bus */
@@ -80,23 +77,20 @@ interface if_dbus;
    logic [adr_width - 1 : 0] adr;
    logic                     re;
    logic                     we;
-   logic [dat_width - 1 : 0] m_dat_i, m_dat_o;
-   logic [dat_width - 1 : 0] s_dat_i, s_dat_o;
-
-   assign m_dat_i = s_dat_o;
-   assign s_dat_i = m_dat_o;
+   logic [dat_width - 1 : 0] dat_m; // channel from master
+   logic [dat_width - 1 : 0] dat_s; // channel from slave
 
    modport master
      (output adr,
       output re,
       output we,
-      input  m_dat_i,
-      output m_dat_o);
+      input  dat_s,
+      output dat_m);
 
    modport slave
      (input  adr,
       input  re,
       input  we,
-      input  s_dat_i,
-      output s_dat_o);
+      input  dat_m,
+      output dat_s);
 endinterface: if_dbus

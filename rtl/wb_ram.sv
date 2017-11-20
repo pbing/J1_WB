@@ -14,8 +14,8 @@ module wb_ram
      #(.size(size))
    ram(.clock   (wb.clk),
        .address (wb.adr[$clog2(size) - 1:0]),
-       .data    (wb.s_dat_i),
-       .q       (wb.s_dat_o),
+       .data    (wb.dat_m),
+       .q       (wb.dat_s),
        .cen     (ram_cen),
        .wren    (ram_wen));
 
