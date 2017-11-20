@@ -18,23 +18,13 @@ module j1_wb
    if_ibus ibus();
    if_dbus dbus();
 
+   wb_j1_bridge bridge(.ibus, .dbus, .wb);
+
    j1_core
      #(.dstack_depth(dstack_depth),
        .rstack_depth(rstack_depth))
    core
      (.clk, .reset, .ibus, .dbus);
-
-   /* connect to Wishbone interface with no wait states */
-   always_comb
-     begin
-        wb.adr     = ibus.re ? ibus.adr : dbus.adr;
-        wb.stb     = ibus.re | dbus.re | dbus.we;
-        wb.cyc     = wb.stb;
-        wb.we      = dbus.we;
-        wb.dat_o   = dbus.dat_o;
-        ibus.dat   = wb.dat_i;
-        dbus.dat_i = wb.dat_i;
-     end
 endmodule
 
 `resetall

@@ -14,7 +14,7 @@ module wb_rom
    rom
      (.clock   (wb.clk),
       .address (wb.adr[$clog2(size) - 1:0]),
-      .q       (wb.dat_o),
+      .q       (wb.s_dat_o),
       .cen     (rom_cen));
 
    assign rom_cen = valid;

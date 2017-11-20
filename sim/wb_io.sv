@@ -9,7 +9,7 @@ module wb_io(if_wb.slave wb);
 
    always_ff @(posedge wb.clk)
      if (io_wen)
-       $display("%t %M DAT_I = %h", $realtime, wb.dat_i);
+       $display("%t %M DAT_I = %h", $realtime, wb.s_dat_i);
 
 
    always_ff @(posedge wb.clk)
@@ -19,7 +19,7 @@ module wb_io(if_wb.slave wb);
 
           dat_o = $random;
           $display("%t %M DAT_O = %h", $realtime, dat_o);
-          wb.dat_o <= dat_o;
+          wb.s_dat_o <= dat_o;
        end
 
 

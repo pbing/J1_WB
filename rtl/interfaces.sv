@@ -1,6 +1,13 @@
 /* Interfaces */
 
-/* Classic pipelined bus cycle Wishbone */
+/* Classic pipelined bus cycle Wishbone
+ *
+ * These modport expressions do not work with Design Compiler:
+ *
+ * modport master (.dat_i(m_dat_i), .dat_o(m_dat_o), ...);
+ * modport slave  (.dat_i(s_dat_i), .dat_o(s_dat_o), ...);
+ */
+
 interface if_wb
   (input wire rst,
    input wire clk);
@@ -14,7 +21,11 @@ interface if_wb
    logic                     stall;
    logic                     stb;
    logic                     we;
-   logic [dat_width - 1 : 0] dat_i, dat_o;
+   logic [dat_width - 1 : 0] m_dat_i, m_dat_o;
+   logic [dat_width - 1 : 0] s_dat_i, s_dat_o;
+
+   assign m_dat_i = s_dat_o;
+   assign s_dat_i = m_dat_o;
 
    modport master
      (input  clk,
@@ -25,8 +36,8 @@ interface if_wb
       input  stall,
       output stb,
       output we,
-      input  dat_i,
-      output dat_o);
+      input  m_dat_i,
+      output m_dat_o);
 
    modport slave
      (input  clk,
@@ -37,20 +48,8 @@ interface if_wb
       output stall,
       input  stb,
       input  we,
-      input  dat_i,
-      output dat_o);
-
-   modport monitor
-     (input  clk,
-      input  rst,
-      input  ack,
-      input  adr,
-      input  cyc,
-      input  stall,
-      input  stb,
-      input  we,
-      input  dat_i,
-      input  dat_o);
+      input  s_dat_i,
+      output s_dat_o);
 endinterface: if_wb
 
 /* Instruction bus */
@@ -71,11 +70,6 @@ interface if_ibus;
      (input  adr,
       input  re,
       output dat);
-
-   modport monitor
-     (input  adr,
-      input  re,
-      input  dat);
 endinterface: if_ibus
 
 /* Data bus */
@@ -86,26 +80,23 @@ interface if_dbus;
    logic [adr_width - 1 : 0] adr;
    logic                     re;
    logic                     we;
-   logic [dat_width - 1 : 0] dat_i, dat_o;
+   logic [dat_width - 1 : 0] m_dat_i, m_dat_o;
+   logic [dat_width - 1 : 0] s_dat_i, s_dat_o;
+
+   assign m_dat_i = s_dat_o;
+   assign s_dat_i = m_dat_o;
 
    modport master
      (output adr,
       output re,
       output we,
-      input  dat_i,
-      output dat_o);
+      input  m_dat_i,
+      output m_dat_o);
 
    modport slave
      (input  adr,
       input  re,
       input  we,
-      input  dat_i,
-      output dat_o);
-
-   modport monitor
-     (input  adr,
-      input  re,
-      input  we,
-      input  dat_i,
-      input  dat_o);
+      input  s_dat_i,
+      output s_dat_o);
 endinterface: if_dbus

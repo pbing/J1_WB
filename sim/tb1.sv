@@ -10,25 +10,9 @@ module tb1;
    if_ibus ibus();
    if_dbus dbus();
 
-   j1_core dut(.*);
-
-   rom
-     #(.size('h2000))
-   rom
-     (.clock   (clk),
-      .address (ibus.adr[12:0]),
-      .q       (ibus.dat),
-      .cen     (ibus.re));
-
-   spram
-     #(.size('h1000))
-   ram
-     (.clock   (clk),
-      .address (dbus.adr[11:0]),
-      .data    (dbus.dat_o),
-      .q       (dbus.dat_i),
-      .wren    (dbus.we),
-      .cen     (dbus.re | dbus.we));
+   j1_core       dut(.*);
+   rom_wrapper   rom(.*);
+   spram_wrapper ram(.*);
 
    always #5ns clk = ~clk;
 
@@ -37,7 +21,7 @@ module tb1;
 	$timeformat(-9, 3, " ns");
 
         /* load ROM image */
-	$readmemh("j1.hex", tb1.rom.mem);
+	$readmemh("j1.hex", tb1.rom.rom.mem);
 
 	reset = 1'b1;
 	repeat(2) @(negedge clk);
