@@ -43,31 +43,31 @@ module wb_intercon
    assign wbs1.cyc   = wbm.cyc & sel1;
    assign wbs1.stb   = wbm.stb & sel1;
    assign wbs1.we    = wbm.we;
-   assign wbs1.dat_i = wbm.dat_o;
+   assign wbs1.dat_o = wbm.dat_i;
 
    assign wbs2.adr   = wbm.adr;
    assign wbs2.cyc   = wbm.cyc & sel2;
    assign wbs2.stb   = wbm.stb & sel2;
    assign wbs2.we    = wbm.we;
-   assign wbs2.dat_i = wbm.dat_o;
+   assign wbs2.dat_o = wbm.dat_i;
 
    assign wbs3.adr   = wbm.adr;
    assign wbs3.cyc   = wbm.cyc & sel3;
    assign wbs3.stb   = wbm.stb & sel3;
    assign wbs3.we    = wbm.we;
-   assign wbs3.dat_i = wbm.dat_o;
+   assign wbs3.dat_o = wbm.dat_i;
 
    assign wbs4.adr   = wbm.adr;
    assign wbs4.cyc   = wbm.cyc & sel4;
    assign wbs4.stb   = wbm.stb & sel4;
    assign wbs4.we    = wbm.we;
-   assign wbs4.dat_i = wbm.dat_o;
+   assign wbs4.dat_o = wbm.dat_i;
 
    assign wbs5.adr   = wbm.adr;
    assign wbs5.cyc   = wbm.cyc & sel5;
    assign wbs5.stb   = wbm.stb & sel5;
    assign wbs5.we    = wbm.we;
-   assign wbs5.dat_i = wbm.dat_o;
+   assign wbs5.dat_o = wbm.dat_i;
 
    assign wbm.stall = (wbs1.stall & sel1) |
                       (wbs2.stall & sel2) |
@@ -81,11 +81,11 @@ module wb_intercon
                       (wbs4.ack & sel4_r) |
                       (wbs5.ack & sel4_5);
 
-   assign wbm.dat_i = (wbs1.dat_o & {16{sel1_r}}) |
-                      (wbs2.dat_o & {16{sel2_r}}) |
-                      (wbs3.dat_o & {16{sel3_r}}) |
-                      (wbs4.dat_o & {16{sel4_r}}) |
-                      (wbs5.dat_o & {16{sel4_5}});
+   assign wbm.dat_o = (wbs1.dat_i & {16{sel1_r}}) |
+                      (wbs2.dat_i & {16{sel2_r}}) |
+                      (wbs3.dat_i & {16{sel3_r}}) |
+                      (wbs4.dat_i & {16{sel4_r}}) |
+                      (wbs5.dat_i & {16{sel4_5}});
 endmodule
 
 `resetall
