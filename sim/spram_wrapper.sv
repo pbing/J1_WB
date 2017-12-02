@@ -9,8 +9,8 @@ module spram_wrapper
    spram
      (.clock   (clk),
       .address (dbus.adr[11:0]),
-      .data    (dbus.dat_m),
-      .q       (dbus.dat_s),
+      .data    (dbus.dat_i),
+      .q       (dbus.dat_o),
       .wren    (dbus.we),
       .cen     (dbus.re | dbus.we));
 endmodule

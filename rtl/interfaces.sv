@@ -33,8 +33,14 @@ interface if_wb
       input  stall,
       output stb,
       output we,
+`ifdef SYNTHESIS
       input  dat_s,
-      output dat_m);
+      output dat_m
+`else
+      input  .dat_i(dat_s),
+      output .dat_o(dat_m)
+`endif
+      );
 
    modport slave
      (input  clk,
@@ -45,8 +51,14 @@ interface if_wb
       output stall,
       input  stb,
       input  we,
+`ifdef SYNTHESIS
       input  dat_m,
-      output dat_s);
+      output dat_s
+`else
+      input  .dat_i(dat_m),
+      output .dat_o(dat_s)
+`endif
+      );
 endinterface: if_wb
 
 /* Instruction bus */
@@ -84,13 +96,25 @@ interface if_dbus;
      (output adr,
       output re,
       output we,
+`ifdef SYNTHESIS
       input  dat_s,
-      output dat_m);
+      output dat_m
+`else
+      input  .dat_i(dat_s),
+      output .dat_o(dat_m)
+`endif
+      );
 
    modport slave
      (input  adr,
       input  re,
       input  we,
+`ifdef SYNTHESIS
       input  dat_m,
-      output dat_s);
+      output dat_s
+`else
+      input  .dat_i(dat_m),
+      output .dat_o(dat_s)
+`endif
+      );
 endinterface: if_dbus

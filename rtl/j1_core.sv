@@ -38,6 +38,17 @@ module j1_core
    logic        insn_wait;            // instruction wait
    logic        mem_wait;             // memory wait
 
+   wire  [15:0] dbus_dat_i;
+   logic [15:0] dbus_dat_o;
+
+`ifdef SYNTHESIS
+   assign dbus_dat_i = dbus.dat_s;
+   assign dbus.dat_o = dbus_dat_m;
+`else
+   assign dbus_dat_i = dbus.dat_i;
+   assign dbus.dat_o = dbus_dat_o;
+`endif
+
    /* data stack */
    register_file
      #(dstack_depth)
@@ -99,7 +110,7 @@ module j1_core
             OP_N_RSHIFT_T: _st0 = st1 >> st0[3:0];
             OP_T_MINUS_1 : _st0 = st0 - 16'd1;
             OP_R         : _st0 = rst0;
-            OP_AT        : _st0 = dbus.dat_s;
+            OP_AT        : _st0 = dbus_dat_i;
             OP_N_LSHIFT_T: _st0 = st1 << st0[3:0];
             OP_DEPTH     : _st0 = {3'b0, rsp, 3'b0, dsp};
             OP_N_ULS_T   : _st0 = {16{(st1 < st0)}};
@@ -191,7 +202,7 @@ module j1_core
 	dbus.adr   = {1'b0, st0[15:1]};
         dbus.re    = stb_re;
         dbus.we    = stb_we;
-	dbus.dat_m = st1;
+	dbus_dat_o = st1;
      end
 
    /* memory access control */

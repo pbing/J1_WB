@@ -6,15 +6,22 @@ module wb_rom
   #(parameter size = 'h2000) // ROM8192x16
    (if_wb.slave wb);
 
-   wire valid;
-   wire rom_cen;
+   wire [15:0] wb_dat_o;
+   wire        valid;
+   wire        rom_cen;
+
+`ifdef SYNTHESIS
+   assign wb.dat_s = wb_dat_o;
+`else
+   assign wb.dat_o = wb_dat_o;
+`endif
 
    rom
      #(.size(size))
    rom
      (.clock   (wb.clk),
       .address (wb.adr[$clog2(size) - 1:0]),
-      .q       (wb.dat_s),
+      .q       (wb_dat_o),
       .cen     (rom_cen));
 
    assign rom_cen = valid;

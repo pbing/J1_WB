@@ -6,16 +6,25 @@ module wb_ram
   #(parameter size = 'h800) // RAM2048x16
    (if_wb.slave wb);
 
-   wire valid;
-   wire ram_cen;
-   wire ram_wen;
+   wire [15:0] wb_dat_i, wb_dat_o;
+   wire        valid;
+   wire        ram_cen;
+   wire        ram_wen;
+
+`ifdef SYNTHESIS
+   assign wb_dat_i = wb.dat_m;
+   assign wb.dat_s = wb_dat_o;
+`else
+   assign wb_dat_i = wb.dat_i;
+   assign wb.dat_o = wb_dat_o;
+`endif
 
    spram
      #(.size(size))
    ram(.clock   (wb.clk),
        .address (wb.adr[$clog2(size) - 1:0]),
-       .data    (wb.dat_m),
-       .q       (wb.dat_s),
+       .data    (wb_dat_i),
+       .q       (wb_dat_o),
        .cen     (ram_cen),
        .wren    (ram_wen));
 
