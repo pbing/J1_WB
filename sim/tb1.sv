@@ -1,5 +1,7 @@
 /* Testbench */
 
+`default_nettype none
+
 module tb1;
    timeunit 1ns;
    timeprecision 1ps;
@@ -31,3 +33,5 @@ module tb1;
 	$finish;
      end
 endmodule
+
+`resetall

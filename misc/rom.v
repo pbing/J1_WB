@@ -11,7 +11,7 @@ module rom
     output reg  [data_width - 1:0] q,
     input  wire                    cen);
 
-   reg [data_width - 1:0] mem[0:size - 1];
+   reg [data_width - 1:0] mem[0:size - 1] /* synthesis ram_init_file = "j1.mif" */;
 
    always @(posedge clock)
      if (cen)

@@ -2,7 +2,11 @@
 
 `default_nettype none
 
-module wb_io(if_wb.slave wb);
+module wb_io
+  (if_wb.slave         wb,
+   output logic [15:0] io_out,
+   input  wire  [15:0] io_in);
+
    wire valid;
    wire io_ren;
    wire io_wen;
@@ -20,15 +24,11 @@ module wb_io(if_wb.slave wb);
 
    always_ff @(posedge wb.clk)
      if (io_wen)
-       $display("%t %M DAT_I = %h", $realtime, wb_dat_i);
-
+       io_out <= wb_dat_i;
 
    always_ff @(posedge wb.clk)
      if (io_ren)
-       begin
-          wb_dat_o = $random;
-          $display("%t %M DAT_O = %h", $realtime, wb_dat_o);
-       end
+       wb_dat_o <= io_in; // FIXME add synchronizers
 
    assign io_ren = valid & ~wb.we;
    assign io_wen = valid &  wb.we;
