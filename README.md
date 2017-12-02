@@ -9,6 +9,10 @@ Almost all instructions are performed in one clock cycle. Memory access needs tw
 | ROM      | 0x0000 ... 0x3fff |
 | RAM, I/O | 0x4000 ... 0x7fff |
 
+## FPGA synthesis
+[Cyclone V GX Starter Kit](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=830&PartNo=1)
+fclk ~ 100 MHz
+
 ## Synthesis results TSMC 90 nm Logic low-power
 fclk = 400 MHz
 
