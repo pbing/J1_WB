@@ -13,7 +13,7 @@ module j1_core
    import types::*;
 
    /* instruction fetch */
-   instr_t      insn, insn_r;         // instruction
+   var instr_t  insn, insn_r;         // instruction
    logic [12:0] _pc, pc,              // processor counter
 		pc_plus_1;            // processor counter + 1
 
@@ -114,7 +114,7 @@ module j1_core
             OP_N_LSHIFT_T: _st0 = st1 << st0[3:0];
             OP_DEPTH     : _st0 = {3'b0, rsp, 3'b0, dsp};
             OP_N_ULS_T   : _st0 = {16{(st1 < st0)}};
-            default        _st0 = 16'hx;
+            default        _st0 = 'x;
 	  endcase
        end
 
@@ -171,7 +171,7 @@ module j1_core
      else if (is_ubranch || (is_zbranch && (st0 == 16'h0)) || is_call)
        _pc = insn.bra.address;
      else if (is_alu && insn.alu.r_to_pc)
-       _pc = rst0 >> 1;
+       _pc = rst0[13:1];
      else
        _pc = pc_plus_1;
 

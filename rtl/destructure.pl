@@ -5,7 +5,7 @@ use warnings;
 use strict;
 
 while (<>) {
-    s/instr_t/logic [15:0]/;
+    s/var\s+instr_t/logic [15:0]/;
     s/\.lit\.tag/[15]/;
     s/\.lit\.immediate/[14:0]/;
 

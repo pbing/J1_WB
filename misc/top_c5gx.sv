@@ -149,7 +149,7 @@ module top_c5gx
    if_wb wbs4(.rst(reset), .clk);
    if_wb wbs5(.rst(reset), .clk);
 
-   j1_wb dut(.wb(wbm), .*);
+   j1_wb cpu(.wb(wbm), .*);
 
    wb_rom wb_rom(.wb(wbs1)); // ROM 0000H...3FFFH
    wb_ram wb_ram(.wb(wbs2)); // RAM 4000H...4FFFH
