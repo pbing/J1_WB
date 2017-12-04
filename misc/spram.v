@@ -16,12 +16,13 @@ module spram
    reg [data_width - 1:0] mem[0:size - 1];
 
    always @(posedge clock)
-     if (cen && wren)
-       mem[address] <= data;
-
-   always @(posedge clock)
      if (cen)
-       q <= mem[address];
+       begin
+          if (wren)
+            mem[address] <= data;
+
+          q <= mem[address];
+       end
 endmodule
 
 `resetall
