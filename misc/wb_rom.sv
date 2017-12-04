@@ -10,7 +10,7 @@ module wb_rom
    wire        valid;
    wire        rom_cen;
 
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
    assign wb.dat_s = wb_dat_o;
 `else
    assign wb.dat_o = wb_dat_o;

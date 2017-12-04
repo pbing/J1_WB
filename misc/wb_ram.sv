@@ -11,7 +11,7 @@ module wb_ram
    wire        ram_cen;
    wire        ram_wen;
 
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
    assign wb_dat_i = wb.dat_m;
    assign wb.dat_s = wb_dat_o;
 `else

@@ -33,7 +33,7 @@ interface if_wb
       input  stall,
       output stb,
       output we,
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
       input  dat_s,
       output dat_m
 `else
@@ -51,7 +51,7 @@ interface if_wb
       output stall,
       input  stb,
       input  we,
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
       input  dat_m,
       output dat_s
 `else
@@ -96,7 +96,7 @@ interface if_dbus;
      (output adr,
       output re,
       output we,
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
       input  dat_s,
       output dat_m
 `else
@@ -109,7 +109,7 @@ interface if_dbus;
      (input  adr,
       input  re,
       input  we,
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
       input  dat_m,
       output dat_s
 `else

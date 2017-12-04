@@ -41,9 +41,9 @@ module j1_core
    wire  [15:0] dbus_dat_i;
    logic [15:0] dbus_dat_o;
 
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
    assign dbus_dat_i = dbus.dat_s;
-   assign dbus.dat_o = dbus_dat_m;
+   assign dbus.dat_m = dbus_dat_o;
 `else
    assign dbus_dat_i = dbus.dat_i;
    assign dbus.dat_o = dbus_dat_o;

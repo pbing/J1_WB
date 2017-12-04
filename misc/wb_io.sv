@@ -14,7 +14,7 @@ module wb_io
    wire  [15:0] wb_dat_i;
    logic [15:0] wb_dat_o;
 
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
    assign wb_dat_i = wb.dat_m;
    assign wb.dat_s = wb_dat_o;
 `else

@@ -8,11 +8,11 @@ module wb_j1_bridge
    wire  [15:0] dbus_dat_i, wb_dat_i;
    logic [15:0] dbus_dat_o, wb_dat_o;
 
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
    assign dbus_dat_i = dbus.dat_m;
    assign dbus.dat_s = dbus_dat_o;
-   assign wb_dat_i   = wb.dat_m;
-   assign wb.dat_s   = wb_dat_o;
+   assign wb_dat_i   = wb.dat_s;
+   assign wb.dat_m   = wb_dat_o;
 `else
    assign dbus_dat_i = dbus.dat_i;
    assign dbus.dat_o = dbus_dat_o;

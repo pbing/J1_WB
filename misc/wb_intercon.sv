@@ -20,7 +20,7 @@ module wb_intercon
                wbs4_dat_i, wbs4_dat_o,
                wbs5_dat_i, wbs5_dat_o;
 
-`ifdef SYNTHESIS
+`ifdef NO_MODPORT_EXPRESSIONS
    assign wbm_dat_i  = wbm.dat_m;
    assign wbm.dat_s  = wbm_dat_o;
    assign wbs1_dat_i = wbs1.dat_s;
