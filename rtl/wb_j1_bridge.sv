@@ -25,7 +25,7 @@ module wb_j1_bridge
      begin
         wb.adr     = ibus.re ? ibus.adr : dbus.adr;
         wb.stb     = ibus.re | dbus.re | dbus.we;
-        wb.cyc     = wb.stb;
+        wb.cyc     = wb.stb | wb.ack; // FIXME
         wb.we      = dbus.we;
         wb_dat_o   = dbus_dat_i;
         ibus.dat   = wb_dat_i;
