@@ -20,9 +20,25 @@ module tb2;
 
    wb_rom wb_rom(.wb(wbs1)); // ROM 0000H...3FFFH
    wb_ram wb_ram(.wb(wbs2)); // RAM 4000H...4FFFH
-   wb_io  wb_io1(.wb(wbs3)); // I/O 5000H...5FFFH
-   wb_io  wb_io2(.wb(wbs4)); // I/O 6000H...6FFFH
-   wb_io  wb_io3(.wb(wbs5)); // I/O 7000H...7FFFH
+
+
+   /* I/O 5000H...5FFFH */
+   wb_io  wb_io1
+     (.wb     (wbs3),
+      .io_out (/*open*/),
+      .io_in  (16'h0000));
+
+   /* I/O 6000H...6FFFH */
+   wb_io  wb_io2
+     (.wb     (wbs4),
+      .io_out (/*open*/),
+      .io_in  (16'h0000));
+
+   /*  I/O 7000H...7FFFH */
+   wb_io  wb_io3
+     (.wb     (wbs5),
+      .io_out (/*open*/),
+      .io_in  (16'h0000));
 
    wb_intercon wb_intercon (.*);
 
