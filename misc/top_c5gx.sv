@@ -174,7 +174,7 @@ module top_c5gx
    
    wb_intercon wb_intercon (.*);
 
-   assign reset = ~KEY[0];
+   assign reset = ~CPU_RESET_n;  // FIXME synchronize
    assign clk   = CLOCK_125_p;
 
 endmodule

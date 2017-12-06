@@ -149,18 +149,19 @@ module tb3;
    always #5ns CLOCK_125_p = ~CLOCK_125_p;
 
    initial
-     begin
+     begin:main
 	$timeformat(-9, 3, " ns");
 
         /* load ROM image */
 	$readmemh("j1.hex", tb3.dut.wb_rom.rom.mem);
 
-	repeat(2) @(negedge CLOCK_125_p);
-	KEY[0] = 1'b1;
+	CPU_RESET_n = 1'b0;
+	repeat(2) @(posedge CLOCK_125_p);
+	CPU_RESET_n = 1'b1;
 
-	repeat(350) @(negedge CLOCK_125_p);
+	repeat(350) @(posedge CLOCK_125_p);
 	$finish;
-     end
+     end:main
 endmodule
 
 `resetall
