@@ -7,6 +7,7 @@ module wb_j1_bridge
 
    wire  [15:0] dbus_dat_i, wb_dat_i;
    logic [15:0] dbus_dat_o, wb_dat_o;
+   logic        wb_stb_r;
 
 `ifdef NO_MODPORT_EXPRESSIONS
    assign dbus_dat_i = dbus.dat_m;
@@ -25,10 +26,16 @@ module wb_j1_bridge
      begin
         wb.adr     = ibus.re ? ibus.adr : dbus.adr;
         wb.stb     = ibus.re | dbus.re | dbus.we;
-        wb.cyc     = wb.stb | wb.ack; // FIXME
+        wb.cyc     = wb.stb | wb_stb_r;
         wb.we      = dbus.we;
         wb_dat_o   = dbus_dat_i;
         ibus.dat   = wb_dat_i;
         dbus_dat_o = wb_dat_i;
      end
+
+   always_ff @(wb.clk)
+     if (wb.rst)
+       wb_stb_r <= 1'b0;
+     else
+       wb_stb_r <= wb.stb;
 endmodule
