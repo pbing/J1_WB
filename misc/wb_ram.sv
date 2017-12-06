@@ -42,7 +42,7 @@ module wb_ram
      else
        wb.ack <= valid;
 
-   assign wb.stall = !wb.cyc ? 1'b0 : !wb.ack;
+   assign wb.stall = 1'b0;
 endmodule
 
 `resetall
