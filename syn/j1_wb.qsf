@@ -413,20 +413,6 @@ set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
 set_global_assignment -name BOARD "Cyclone V GX Starter Kit"
 set_global_assignment -name VERILOG_SHOW_LMF_MAPPING_MESSAGES OFF
 set_global_assignment -name VERILOG_MACRO "NO_UNION_SUPPORT=<None>"
-set_global_assignment -name SYSTEMVERILOG_FILE ../misc/wb_io.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../misc/top_c5gx.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/types.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/interfaces.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../misc/wb_intercon.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../misc/wb_rom.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../misc/wb_ram.sv
-set_global_assignment -name VERILOG_FILE ../misc/spram.v
-set_global_assignment -name VERILOG_FILE ../misc/rom.v
-set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/register_file.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/wb_j1_bridge.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/j1_core_qii.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/j1_wb.sv
-set_global_assignment -name SDC_FILE j1_wb.sdc
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -775,4 +761,17 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[3]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[4]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[5]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[6]
+set_global_assignment -name SYSTEMVERILOG_FILE ../misc/wb_io.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/types.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/interfaces.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/register_file.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/j1_wb_qii.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../misc/wb_intercon.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../misc/wb_rom.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../misc/wb_ram.sv
+set_global_assignment -name VERILOG_FILE ../misc/spram.v
+set_global_assignment -name VERILOG_FILE ../misc/rom.v
+set_global_assignment -name SYSTEMVERILOG_FILE ../misc/top_c5gx.sv
+set_global_assignment -name SDC_FILE j1_wb.sdc
+set_global_assignment -name OPTIMIZATION_MODE BALANCED
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

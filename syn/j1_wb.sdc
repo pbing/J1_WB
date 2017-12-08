@@ -38,7 +38,7 @@ set_time_format -unit ns -decimal_places 3
 # Create Clock
 #**************************************************************
 
-create_clock -name {CLK} -period [expr 1.0e9 / 90.0e6] [get_ports CLOCK_125_p]
+create_clock -name {CLK} -period [expr 1.0e9 / 100.0e6] [get_ports CLOCK_125_p]
 
 
 #**************************************************************
