@@ -142,24 +142,28 @@ module tb1;
    bit         UART_RX;
    wire        UART_TX;
 
+   wire \CLOCK_125_p(n) ; // added for j1_wb.vo
+
    top_c5gx dut(.*);
 
    assign GPIO[31:16] = $random;
 
-   always #5ns CLOCK_125_p = ~CLOCK_125_p;
+   always #10ns CLOCK_50_B5B = ~CLOCK_50_B5B;
 
    initial
      begin:main
 	$timeformat(-9, 3, " ns");
 
         /* load ROM image */
-	$readmemh("j1.hex", tb1.dut.wb_rom.rom.mem);
+//	$readmemh("j1.hex", tb1.dut.wb_rom.rom.mem); // comment when using j1_wb.vo
 
 	CPU_RESET_n = 1'b0;
-	repeat(2) @(posedge CLOCK_125_p);
+        KEY         = 4'b1111;
+        SW          = 10'h35a;
+        #30ns;
 	CPU_RESET_n = 1'b1;
 
-	repeat(350) @(posedge CLOCK_125_p);
+	#3.5us
 	$finish;
      end:main
 endmodule

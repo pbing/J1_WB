@@ -1,4 +1,4 @@
-## Generated SDC file "j1_wb.sdc"
+## Generated SDC file "j1_wb.out.sdc"
 
 ## Copyright (C) 2017  Intel Corporation. All rights reserved.
 ## Your use of Intel Corporation's design tools, logic functions 
@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus Prime"
 ## VERSION "Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition"
 
-## DATE    "Sat Dec 02 11:50:28 2017"
+## DATE    "Sat Dec 09 09:55:35 2017"
 
 ##
 ## DEVICE  "5CGXFC5C6F27C7"
@@ -38,14 +38,14 @@ set_time_format -unit ns -decimal_places 3
 # Create Clock
 #**************************************************************
 
-create_clock -name {CLK} -period [expr 1.0e9 / 50.0e6] [get_ports CLOCK_50_B5B]
+create_clock -name {CLK} -period 20.000 -waveform { 0.000 10.000 } [get_ports {CLOCK_50_B5B}]
 
 
 #**************************************************************
 # Create Generated Clock
 #**************************************************************
 
-create_generated_clock -name {pll_100mhz|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk} -source [get_pins {pll_100mhz|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|vco0ph[0]}] -multiply_by 2 -master_clock {CLK} [get_pins {pll_100mhz|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] 
+create_generated_clock -name {pll_100mhz|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk} -source [get_pins {pll_100mhz|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|vco0ph[0]}] -duty_cycle 50/1 -multiply_by 1 -divide_by 3 -master_clock {CLK} [get_pins {pll_100mhz|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] 
 
 
 #**************************************************************
@@ -73,6 +73,7 @@ set_clock_uncertainty -fall_from [get_clocks {CLK}] -fall_to [get_clocks {CLK}] 
 #**************************************************************
 
 
+
 #**************************************************************
 # Set Output Delay
 #**************************************************************
@@ -90,7 +91,7 @@ set_clock_uncertainty -fall_from [get_clocks {CLK}] -fall_to [get_clocks {CLK}] 
 #**************************************************************
 
 set_false_path -to [all_outputs]
-set_false_path -from [all_inputs]
+set_false_path -from [all_inputs] 
 
 
 #**************************************************************

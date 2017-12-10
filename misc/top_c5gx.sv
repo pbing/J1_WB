@@ -149,7 +149,7 @@ module top_c5gx
       .outclk_0 (clk),
       .locked   (pll_locked));
 
-   sync_reset sync_reset(.*);
+   sync_reset sync_reset(.clk, .reset_in_n, .reset);
 
    if_wb wbm (.rst(reset), .clk);
    if_wb wbs1(.rst(reset), .clk);

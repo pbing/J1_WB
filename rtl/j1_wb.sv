@@ -150,8 +150,8 @@ module j1_wb
 	  begin
 	     logic signed [4:0] dd, rd; // stack delta
 
-	     dd     = instr.alu.dstack;
-	     rd     = instr.alu.rstack;
+	     dd     = $signed(instr.alu.dstack); // explit, because signed info is lost when using j1_wb_qii.sv
+	     rd     = $signed(instr.alu.rstack);
 	     _dsp   = dsp + dd;
 	     _dstkW = instr.alu.t_to_n;
 	     _rsp   = rsp + rd;
@@ -203,7 +203,7 @@ module j1_wb
        end
 
    /* Wishbone */
-   always_ff @(posedge clk)
+   always_ff @(posedge clk or posedge reset)
      if (reset)
        is_ld_r <= 1'b0;
      else
@@ -212,7 +212,7 @@ module j1_wb
        else if (wb.ack)
          is_ld_r <= 1'b0;
 
-   always_ff @(posedge clk)
+   always_ff @(posedge clk or posedge reset)
      if (reset)
        is_st_r <= 1'b0;
      else

@@ -150,8 +150,8 @@ module j1_wb
 	  begin
 	     logic signed [4:0] dd, rd; // stack delta
 
-	     dd     = instr[1:0];
-	     rd     = instr[3:2];
+	     dd     = $signed(instr[1:0]); // explit, because signed info is lost when using j1_wb_qii.sv
+	     rd     = $signed(instr[3:2]);
 	     _dsp   = dsp + dd;
 	     _dstkW = instr[7];
 	     _rsp   = rsp + rd;
@@ -182,28 +182,28 @@ module j1_wb
        pc = rst0[13:1];
      else
        pc = npc;
-   
+
    always_comb _npc = is_mem ? pc : pc + 13'd1;
 
    /* update PC and stacks */
    always_ff @(posedge clk or posedge reset)
      if (reset)
        begin
-	  npc  <= 13'h0;
+	  npc <= 13'h0;
 	  dsp <=  5'd0;
 	  st0 <= 16'h0;
 	  rsp <=  5'd0;
        end
      else
        begin
-	  npc  <= _npc;
+	  npc <= _npc;
 	  dsp <= _dsp;
 	  st0 <= _st0;
 	  rsp <= _rsp;
        end
 
    /* Wishbone */
-   always_ff @(posedge clk)
+   always_ff @(posedge clk or posedge reset)
      if (reset)
        is_ld_r <= 1'b0;
      else
@@ -211,8 +211,8 @@ module j1_wb
          is_ld_r <= 1'b1;
        else if (wb.ack)
          is_ld_r <= 1'b0;
-   
-   always_ff @(posedge clk)
+
+   always_ff @(posedge clk or posedge reset)
      if (reset)
        is_st_r <= 1'b0;
      else
@@ -220,7 +220,7 @@ module j1_wb
          is_st_r <= 1'b1;
        else if (wb.ack)
          is_st_r <= 1'b0;
-   
+
    always_comb
      begin
         wb.cyc   = ~reset;
@@ -238,6 +238,7 @@ module j1_wb
              wb.we  = 1'b0;
           end
 
+        /* When bus is used for memory access insert bubble. */
         if (is_mem_r)
           instr = 16'h6000; // NOOP
         else
