@@ -150,7 +150,7 @@ module j1_wb
 	  begin
 	     logic signed [4:0] dd, rd; // stack delta
 
-	     dd     = $signed(instr[1:0]); // explit, because signed info is lost when using j1_wb_qii.sv
+	     dd     = $signed(instr[1:0]); // explicit, because signed info is lost when using j1_wb_qii.sv
 	     rd     = $signed(instr[3:2]);
 	     _dsp   = dsp + dd;
 	     _dstkW = instr[7];
