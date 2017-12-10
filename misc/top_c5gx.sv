@@ -26,9 +26,9 @@ module top_c5gx
    /* CLOCK */
    input  wire        CLOCK_125_p,    // LVDS
    input  wire        CLOCK_50_B5B,   // 3.3-V LVTTL
-   input  wire        CLOCK_50_B6A,
+   input  wire        CLOCK_50_B6A,   // 3.3-V LVTTL
    input  wire        CLOCK_50_B7A,   // 2.5 V
-   input  wire        CLOCK_50_B8A,
+   input  wire        CLOCK_50_B8A,   // 2.5 V
 
    /* CPU */
    input  wire        CPU_RESET_n,    // 3.3V LVTTL
@@ -139,8 +139,17 @@ module top_c5gx
    input  wire        UART_RX,
    output wire        UART_TX);
 
-   wire reset; // reset
-   wire clk;   // clock
+   wire pll_reset, reset_in_n, reset; // reset
+   wire pll_locked;                   // PLL lock
+   wire clk;                          // clock
+
+   pll pll_100mhz
+     (.refclk   (CLOCK_50_B5B),
+      .rst      (pll_reset),
+      .outclk_0 (clk),
+      .locked   (pll_locked));
+
+   sync_reset sync_reset(.*);
 
    if_wb wbm (.rst(reset), .clk);
    if_wb wbs1(.rst(reset), .clk);
@@ -152,6 +161,7 @@ module top_c5gx
    j1_wb cpu(.wb(wbm), .*);
 
    wb_rom wb_rom(.wb(wbs1)); // ROM 0000H...3FFFH
+
    wb_ram wb_ram(.wb(wbs2)); // RAM 4000H...4FFFH
 
    /* I/O 5000H...5FFFH */
@@ -164,19 +174,20 @@ module top_c5gx
    wb_io  wb_io2
      (.wb     (wbs4),
       .io_out (/*open*/),
-      .io_in  ({6'h00, SW}));
+      .io_in  ({SW[9:0], 2'h0, ~KEY[3:0]}));
 
    /*  I/O 7000H...7FFFH */
    wb_io  wb_io3
      (.wb     (wbs5),
-      .io_out ({LEDR[7:0], LEDG}),
+      .io_out ({LEDR[9:0], LEDG[7:2]}),
       .io_in  (16'h0000));
    
    wb_intercon wb_intercon (.*);
 
-   assign reset = ~CPU_RESET_n;  // FIXME synchronize
-   assign clk   = CLOCK_125_p;
-
+   assign pll_reset  = ~CPU_RESET_n;
+   assign reset_in_n = CPU_RESET_n & pll_locked;
+   assign LEDG[0]    = pll_reset;
+   assign LEDG[1]    = reset;
 endmodule
 
 `resetall
