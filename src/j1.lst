@@ -1,5 +1,5 @@
 \ 0jump
-0000 03E8           BRANCH main 
+0000 0436           BRANCH main 
 0002 FFFF           LIT $7FFF 
 \ depth
 0004 6E81           ALU $6E81 
@@ -1223,93 +1223,106 @@
 07CA 6103           ALU $6103 
 07CC 6B8D           ALU $6B8D 
 07CE 700C           ALU $700C 
-\ main
+\ >thermometer
 07D0 8001           LIT $1 
-07D2 C000           LIT $4000 
-07D4 6023           ALU $6023 
-07D6 6103           ALU $6103 
-07D8 8001           LIT $1 
-07DA C002           LIT $4002 
-07DC 6023           ALU $6023 
-07DE 6103           ALU $6103 
-07E0 8008           LIT $8 
-07E2 6147           ALU $6147 
-07E4 8000           LIT $0 
-07E6 6147           ALU $6147 
-\ (do)
-07E8 C000           LIT $4000 
-07EA 6C00           ALU $6C00 
-07EC C002           LIT $4002 
-07EE 6C00           ALU $6C00 
-07F0 4012           CALL tuck 
-07F2 6203           ALU $6203 
-07F4 C002           LIT $4002 
-07F6 6023           ALU $6023 
-07F8 6103           ALU $6103 
-07FA C000           LIT $4000 
-07FC 6023           ALU $6023 
-07FE 6103           ALU $6103 
-0800 4047           CALL looptest 
-0802 23F4           0BRANCH (do) 
-0804 C002           LIT $4002 
-0806 6C00           ALU $6C00 
+07D2 6180           ALU $6180 
+07D4 6D03           ALU $6D03 
+07D6 7A0C           ALU $7A0C 
+\ 1ms
+07D8 E1A8           LIT $61A8 
 \ (begin)
-0808 0404           BRANCH (begin) 
-080A 700C           ALU $700C 
-080C FFFF           LIT $7FFF 
-080E FFFF           LIT $7FFF 
-0810 FFFF           LIT $7FFF 
-0812 FFFF           LIT $7FFF 
-0814 FFFF           LIT $7FFF 
-0816 FFFF           LIT $7FFF 
-0818 FFFF           LIT $7FFF 
-081A FFFF           LIT $7FFF 
-081C FFFF           LIT $7FFF 
-081E FFFF           LIT $7FFF 
-0820 FFFF           LIT $7FFF 
-0822 FFFF           LIT $7FFF 
-0824 FFFF           LIT $7FFF 
-0826 FFFF           LIT $7FFF 
-0828 FFFF           LIT $7FFF 
-082A FFFF           LIT $7FFF 
-082C FFFF           LIT $7FFF 
-082E FFFF           LIT $7FFF 
-0830 FFFF           LIT $7FFF 
-0832 FFFF           LIT $7FFF 
-0834 FFFF           LIT $7FFF 
-0836 FFFF           LIT $7FFF 
-0838 FFFF           LIT $7FFF 
-083A FFFF           LIT $7FFF 
-083C FFFF           LIT $7FFF 
-083E FFFF           LIT $7FFF 
-0840 FFFF           LIT $7FFF 
-0842 FFFF           LIT $7FFF 
-0844 FFFF           LIT $7FFF 
-0846 FFFF           LIT $7FFF 
-0848 FFFF           LIT $7FFF 
-084A FFFF           LIT $7FFF 
-084C FFFF           LIT $7FFF 
-084E FFFF           LIT $7FFF 
-0850 FFFF           LIT $7FFF 
-0852 FFFF           LIT $7FFF 
-0854 FFFF           LIT $7FFF 
-0856 FFFF           LIT $7FFF 
-0858 FFFF           LIT $7FFF 
-085A FFFF           LIT $7FFF 
-085C FFFF           LIT $7FFF 
-085E FFFF           LIT $7FFF 
-0860 FFFF           LIT $7FFF 
-0862 FFFF           LIT $7FFF 
-0864 FFFF           LIT $7FFF 
-0866 FFFF           LIT $7FFF 
-0868 FFFF           LIT $7FFF 
-086A FFFF           LIT $7FFF 
-086C FFFF           LIT $7FFF 
-086E FFFF           LIT $7FFF 
-0870 FFFF           LIT $7FFF 
-0872 FFFF           LIT $7FFF 
-0874 FFFF           LIT $7FFF 
-0876 FFFF           LIT $7FFF 
+07DA 6081           ALU $6081 
+07DC 23F1           0BRANCH (repeat) 
+07DE 6A00           ALU $6A00 
+07E0 03ED           BRANCH (begin) 
+\ (repeat)
+07E2 710F           ALU $710F 
+\ ms
+07E4 6081           ALU $6081 
+07E6 23F7           0BRANCH (repeat) 
+07E8 6A00           ALU $6A00 
+07EA 43EC           CALL 1ms 
+07EC 03F2           BRANCH ms 
+\ (repeat)
+07EE 710F           ALU $710F 
+\ wait
+07F0 8032           LIT $32 
+07F2 03F2           BRANCH ms 
+\ blink-left+
+07F4 800F           LIT $F 
+07F6 6147           ALU $6147 
+07F8 8000           LIT $0 
+07FA 6147           ALU $6147 
+\ (do)
+07FC 43F8           CALL wait 
+07FE 6B81           ALU $6B81 
+0800 43E8           CALL >thermometer 
+0802 F000           LIT $7000 
+0804 6023           ALU $6023 
+0806 6103           ALU $6103 
+0808 4047           CALL looptest 
+080A 23FE           0BRANCH (do) 
+080C 700C           ALU $700C 
+\ blink-left-
+080E 800F           LIT $F 
+0810 6147           ALU $6147 
+0812 8000           LIT $0 
+0814 6147           ALU $6147 
+\ (do)
+0816 43F8           CALL wait 
+0818 6B81           ALU $6B81 
+081A 43E8           CALL >thermometer 
+081C 6600           ALU $6600 
+081E F000           LIT $7000 
+0820 6023           ALU $6023 
+0822 6103           ALU $6103 
+0824 4047           CALL looptest 
+0826 240B           0BRANCH (do) 
+0828 700C           ALU $700C 
+\ blink-right+
+082A 800F           LIT $F 
+082C 6147           ALU $6147 
+082E 8000           LIT $0 
+0830 6147           ALU $6147 
+\ (do)
+0832 43F8           CALL wait 
+0834 800F           LIT $F 
+0836 6A00           ALU $6A00 
+0838 6B81           ALU $6B81 
+083A 4080           CALL - 
+083C 43E8           CALL >thermometer 
+083E F000           LIT $7000 
+0840 6023           ALU $6023 
+0842 6103           ALU $6103 
+0844 4047           CALL looptest 
+0846 2419           0BRANCH (do) 
+0848 700C           ALU $700C 
+\ blink-right-
+084A 800F           LIT $F 
+084C 6147           ALU $6147 
+084E 8000           LIT $0 
+0850 6147           ALU $6147 
+\ (do)
+0852 43F8           CALL wait 
+0854 800F           LIT $F 
+0856 6A00           ALU $6A00 
+0858 6B81           ALU $6B81 
+085A 4080           CALL - 
+085C 43E8           CALL >thermometer 
+085E 6600           ALU $6600 
+0860 F000           LIT $7000 
+0862 6023           ALU $6023 
+0864 6103           ALU $6103 
+0866 4047           CALL looptest 
+0868 2429           0BRANCH (do) 
+086A 700C           ALU $700C 
+\ main
+086C 43FA           CALL blink-left+ 
+086E 4407           CALL blink-left- 
+0870 4425           CALL blink-right- 
+0872 4415           CALL blink-right+ 
+0874 0436           BRANCH main 
+0876 700C           ALU $700C 
 0878 FFFF           LIT $7FFF 
 087A FFFF           LIT $7FFF 
 087C FFFF           LIT $7FFF 

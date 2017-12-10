@@ -8,8 +8,8 @@ FORTH=/usr/local/opt/SwiftForth/bin/osx/sf
 j1.mif j1.hex j1.lst: *.fs Makefile
 	$(FORTH) main.fs
 
-sim: j1.hex
-	cp $< ../sim
+sim: j1.hex j1.mif
+	cp $^ ../sim
 
 syn: j1.mif
 	cp $< ../syn
