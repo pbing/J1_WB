@@ -1,0 +1,17 @@
+{signal: [
+  {name: "CLK_I", wave: "p..."},
+  {name: "ADR_O", wave: "2322", data: ["03f5", "2000", "3f6","03f7"]},
+  {name: "DAT_O", wave: "x...", data: ["0001"]},
+  {name: "CYC_O", wave: "1..."},
+  {name: "STB_O", wave: "1..."},
+  {name: "WE_O", wave: "0..."},
+  {name: "DAT_I", wave: "2332", data: ["c000", "6c00", "0001", "c002"]},
+  {name: "ACK_I", wave: "1..."},
+  {},
+  {name: "instruction", wave: "2342", data: ["lit 4000", "@", "noop", "lit 4002"]},
+  {name: "T", wave: "x2.2", data: ["4000", "0001"]},
+  {name: "N", wave: "x..."},
+],
+ config: {hscale: 2.5},
+ foot: {text: "memory read"}
+}
