@@ -1,0 +1,13 @@
+{signal: [
+  {name: 'CLK_I', wave: 'p......'},
+  {name: 'RST_I', wave: '010....'},
+  {name: 'ADR_O()', wave: 'xx=.===', data: ["0000", "main", "main + 1", "main + 2"]},
+  {name: 'CYC_O', wave: 'xx01...'},
+  {name: 'STB_O', wave: 'xx01...'},
+  {name: 'WE_O', wave: 'xx0....'},
+  {name: 'DAT_I', wave: 'xxxx===', data: ["BRANCH main", "LIT 0001", "LIT 4000"]},
+  {name: 'ACK_I', wave: 'xx0.1..'}
+],
+ config: {hscale: 2.5},
+ foot: {text: "startup sequence after reset"}
+}

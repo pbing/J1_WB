@@ -155,7 +155,7 @@ module tb1;
 	$timeformat(-9, 3, " ns");
 
         /* load ROM image */
-//	$readmemh("j1.hex", tb1.dut.wb_rom.rom.mem); // comment when using j1_wb.vo
+	$readmemh("j1.hex", tb1.dut.wb_rom.rom.mem); // comment when using j1_wb.vo
 
 	CPU_RESET_n = 1'b0;
         KEY         = 4'b1111;
