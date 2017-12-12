@@ -43,11 +43,29 @@ meta
 : exit      return ;
 
 \ Elided words
-: dup@      [T]   T->N          d+1 alu ;
-: dup>r     T     T->R          r+1 alu ;
-: 2dupxor   T^N   T->N          d+1 alu ;
+\ These words are supported by the hardware but are not
+\ part of ANS Forth.  They are named after the word-pair
+\ that matches their effect  
+\ Using these elided words instead of
+\ the pair saves one cycle and one instruction.
+: 2dupand   T&N   T->N          d+1 alu ;
+: 2dup<     N<T   T->N          d+1 alu ;
 : 2dup=     N==T  T->N          d+1 alu ;
-: !nip      T     N->[T]        d-1 alu ;
+: 2dupor    T|N   T->N          d+1 alu ;
+: 2dup+     T+N   T->N          d+1 alu ;
+: 2dupu<    Nu<T  T->N          d+1 alu ;
+: 2dupxor   T^N   T->N          d+1 alu ;
+: dup>r     T     T->R      r+1     alu ;
+: overand   T&N                     alu ;
+: over>     N<T                     alu ;
+: over=     N==T                    alu ;
+: overor    T|N                     alu ;
+: over+     T+N                     alu ;
+: overu>    Nu<T                    alu ;
+: overxor   T^N                     alu ;
+: rdrop     T                   r-1 alu ;
+: tuck!     T     N->[T]        d-1 alu ;
+: dup@      [T]   T->N          d+1 alu ;
 : 2dup!     T     N->[T]            alu ;
 
 \ Words used to implement pick
