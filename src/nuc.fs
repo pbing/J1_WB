@@ -88,8 +88,8 @@ code cell- end-code
 code addrcell- end-code
 : 2-        1- 1- ;
 code cell/ end-code
-code addrcell/ end-code
-: 2/        d# 1 rshift ;
+: addrcell/ d# 1 rshift ;
+: 2/        dup d# 1 rshift   swap h# 8000 and or ; \ FIXED
 : c+!       tuck c@ + swap c! ;
 
 : count     dup 1+ swap c@ ;
@@ -273,7 +273,7 @@ end-code
 : d0<> d0= invert ;
 : d<> d= invert ;
 : d2* 2dup d+ ;
-: d2/ dup d# 15 lshift >r 2/ swap 2/ r> or swap ;
+: d2/ dup d# 15 lshift >r   2/ swap   d# 1 rshift   r> or swap ; \ FIXED
 : dmax       2over 2over d< if 2swap then 2drop ;
 
 : d1- d# -1. d+ ;
