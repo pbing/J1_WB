@@ -4,7 +4,7 @@ module[ nuc"
 
 0 constant false ( 6.2.1485 )
 : depth dsp h# ff and ;
-65535 constant true  ( 6.2.2298 )
+-1 constant true  ( 6.2.2298 )
 : 1+    d# 1 + ;
 : rot   >r swap r> swap ;
 : -rot  swap >r swap r> ;
@@ -312,7 +312,7 @@ end-code
 \ Math
 
 1 [IF]
-create scratch d# 2 allot
+variable scratch
 : um*  ( u1 u2 -- ud )
     scratch !
     d# 0.
