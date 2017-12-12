@@ -9,7 +9,7 @@
   {name: "DAT_I", wave: "xxxx222", data: ["03e8", "8001", "c000"]},
   {name: "ACK_I", wave: "xx0.1.."},
   {},
-  {name: "instruction", wave: "xxxx222", data: ["BRANCH main", "lit 0001", "lit 4000"]},
+  {name: "instruction", wave: "xx2.222", data: ["noop", "BRANCH main", "lit 0001", "lit 4000"]},
   {name: "T", wave: "x.....2", data: ["0001"]},
   {name: "N", wave: "x......"},
 ],
