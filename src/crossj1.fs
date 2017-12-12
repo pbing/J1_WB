@@ -56,32 +56,27 @@ j1asm
 : tcell 2 ;
 : tcells tcell * ;
 : tcell+ tcell + ;
-65536 allocate throw constant tflash
-
-: h#
-    base @ >r 16 base !
-    0. bl word count >number throw 2drop postpone literal
-    r> base ! ; immediate
+$10000 allocate throw constant tflash
 
 variable tdp
 : there     tdp @ ;
-: islegal   dup h# 7fff u> abort" illegal address" ;
+: islegal   dup $7fff u> abort" illegal address" ;
 : tc!       islegal tflash + c! ;
 : tc@       islegal tflash + c@ ;
-: t!        islegal over h# ff and over tc! swap 8 rshift swap 1+ tc! ;
+: t!        islegal over $ff and over tc! swap 8 rshift swap 1+ tc! ;
 : t@        islegal dup tc@ swap 1+ tc@ 8 lshift or ;
-: talign    tdp @ 1 + h# fffe and tdp ! ;
+: talign    tdp @ 1 + $fffe and tdp ! ;
 : tc,       there tc! 1 tdp +! ;
 : t,        there t! tcell tdp +! ;
 : org       tdp ! ;
 
-tflash 65536 255 fill
+tflash $10000 $ff fill
 
-65536 cells allocate throw constant references
+$10000 cells allocate throw constant references
 : referenced cells references + 1 swap +! ;
 
-65536 cells allocate throw constant labels
-labels 65536 cells 0 fill
+$10000 cells allocate throw constant labels
+labels $10000 cells 0 fill
 : atlabel? ( -- f = are we at a label )
     labels there cells + @ 0<>
 ;
@@ -98,40 +93,40 @@ j1asm
 
 : hex-literal ( u -- c-addr u ) s>d <# bl hold #s [char] $ hold #> ;
 
-: imm h# 8000 or t, ;
+: imm $8000 or t, ;
 
-: T         h# 0000 ;
-: N         h# 0100 ;
-: T+N       h# 0200 ;
-: T&N       h# 0300 ;
-: T|N       h# 0400 ;
-: T^N       h# 0500 ;
-: ~T        h# 0600 ;
-: N==T      h# 0700 ;
-: N<T       h# 0800 ;
-: N>>T      h# 0900 ;
-: T-1       h# 0a00 ;
-: rT        h# 0b00 ;
-: [T]       h# 0c00 ;
-: N<<T      h# 0d00 ;
-: dsp       h# 0e00 ;
-: Nu<T      h# 0f00 ;
+: T         $0000 ;
+: N         $0100 ;
+: T+N       $0200 ;
+: T&N       $0300 ;
+: T|N       $0400 ;
+: T^N       $0500 ;
+: ~T        $0600 ;
+: N==T      $0700 ;
+: N<T       $0800 ;
+: N>>T      $0900 ;
+: T-1       $0a00 ;
+: rT        $0b00 ;
+: [T]       $0c00 ;
+: N<<T      $0d00 ;
+: dsp       $0e00 ;
+: Nu<T      $0f00 ;
 
-: T->N      h# 0080 or ;
-: T->R      h# 0040 or ;
-: N->[T]    h# 0020 or ;
-: d-1       h# 0003 or ;
-: d+1       h# 0001 or ;
-: r-1       h# 000c or ;
-: r-2       h# 0008 or ;
-: r+1       h# 0004 or ;
+: T->N      $0080 or ;
+: T->R      $0040 or ;
+: N->[T]    $0020 or ;
+: d-1       $0003 or ;
+: d+1       $0001 or ;
+: r-1       $000c or ;
+: r-2       $0008 or ;
+: r+1       $0004 or ;
 
-: alu       h# 6000 or t, ;
+: alu       $6000 or t, ;
 
-: return    T  h# 1000 or r-1 alu ;
-: ubranch   2/ h# 0000 or t, ;
-: 0branch   2/ h# 2000 or t, ;
-: scall     2/ h# 4000 or t, ;
+: return    T  $1000 or r-1 alu ;
+: ubranch   2/ $0000 or t, ;
+: 0branch   2/ $2000 or t, ;
+: scall     2/ $4000 or t, ;
 
 \ hide Swift-Forth's definition of N
 also forth definitions
@@ -166,25 +161,25 @@ variable padc
 
 : disassemble-j
     0 padc !
-    dup t@ h# 8000 and if
+    dup t@ $8000 and if
         s" LIT " pad+
-        dup t@ h# 7fff and hex-literal pad+ exit
+        dup t@ $7fff and hex-literal pad+ exit
     else
-        dup t@ h# e000 and h# 6000 = if
+        dup t@ $e000 and $6000 = if
             s" ALU " pad+
             dup t@ pad+loc exit
         else
-            dup t@ h# e000 and h# 4000 = if
+            dup t@ $e000 and $4000 = if
                 s" CALL "
             else
-                dup t@ h# 2000 and if 
+                dup t@ $2000 and if 
                     s" 0BRANCH "
                 else
                     s" BRANCH "
                 then
             then
             pad+
-            dup t@ h# 1fff and 2* pad+loc
+            dup t@ $1fff and 2* pad+loc
         then
     then
 ;
@@ -217,11 +212,11 @@ variable tcompile
 
 : (lit)
     \ dup $f rshift over $e rshift xor 1 and throw
-    dup h# 8000 and if
-        h# ffff xor recurse
+    dup $8000 and if
+        $ffff xor recurse
         ~T alu
     else
-        h# 8000 or t,
+        $8000 or t,
     then
 
 ;
@@ -261,12 +256,12 @@ meta
 ;
 
 : lookback ( offset -- v ) there swap - t@ ;
-: prevcall?  2 lookback h# e000 and h# 4000 = ;
-: call>goto dup t@ h# 1fff and swap t! ;
+: prevcall?  2 lookback $e000 and $4000 = ;
+: call>goto dup t@ $1fff and swap t! ;
 : prevsafe?
-    2 lookback h# e000 and h# 6000 =    \ is an ALU
-    2 lookback h# 004c and 0= and ;   \ does not touch RStack
-: alu>return dup t@ h# 1000 or r-1 swap t! ;
+    2 lookback $e000 and $6000 =    \ is an ALU
+    2 lookback $004c and 0= and ;   \ does not touch RStack
+: alu>return dup t@ $1000 or r-1 swap t! ;
 
 : t; 947947 <> if abort" Unstructured" then
     true if
