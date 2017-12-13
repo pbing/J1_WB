@@ -119,11 +119,11 @@ module j1_wb
             OP_INV_T     : _st0 = ~st0;
             OP_N_EQ_T    : _st0 = {16{(st1 == st0)}};
             OP_N_LS_T    : _st0 = {16{($signed(st1) < $signed(st0))}};
-            OP_N_RSHIFT_T: _st0 = st1 >> st0[3:0];
+            OP_N_RSHIFT_T: _st0 = (st0 > 15) ? 16'h0 : st1 >> st0[3:0];
             OP_T_MINUS_1 : _st0 = st0 - 16'd1;
             OP_R         : _st0 = rst0;
             OP_AT        : _st0 = st0; // delayed due to bus sharing
-            OP_N_LSHIFT_T: _st0 = st1 << st0[3:0];
+            OP_N_LSHIFT_T: _st0 = (st0 > 15) ? 16'h0 : st1 << st0[3:0];
             OP_DEPTH     : _st0 = {3'b0, rsp, 3'b0, dsp};
             OP_N_ULS_T   : _st0 = {16{(st1 < st0)}};
             default        _st0 = 'x;
