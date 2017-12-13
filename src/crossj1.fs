@@ -49,6 +49,18 @@ vocabulary j1target     \ actual target words
     metacompiler also
     j1target definitions ;
 
+: cdata ;
+: idata ;
+: udata ;
+: section ( low-addr high-addr -- )
+    create drop , does> drop ;
+
+\ low high  type          name
+$0000 $3fff cdata section rom  \ ROM
+$4000 $4fff udata section uram \ uninitalized RAM
+\ ... ...   idata section iram \ initalized RAM
+
+
 \ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 j1asm

@@ -18,8 +18,8 @@ module j1_wb
    import types::*;
 
    /* instruction fetch */
-   logic [15:0]  instr, instr_r;         // instruction
-   logic [12:0] _npc, npc,              // processor counter
+   logic [15:0]  instr;           // instruction
+   logic [12:0] _npc, npc,       // processor counter
                 pc;
 
    /* select instruction types */
@@ -27,16 +27,16 @@ module j1_wb
 
 
    /* data stack */
-   logic [4:0]  _dsp, dsp;            // data stack pointer
-   logic [15:0] _st0, st0;            // top of data stack
-   logic [15:0] st1;                  // next of data stack
-   logic        _dstkW;               // data stack write
+   logic [4:0]  _dsp, dsp;       // data stack pointer
+   logic [15:0] _st0, st0;       // top of data stack
+   logic [15:0] st1;             // next of data stack
+   logic        _dstkW;          // data stack write
 
    /* return stack */
-   logic [4:0]  _rsp, rsp;            // return stack pointer
-   logic [15:0] rst0;                 // top of return stack
-   logic [15:0] _rstkD;               // return stack data
-   logic        _rstkW;               // return stack write
+   logic [4:0]  _rsp, rsp;       // return stack pointer
+   logic [15:0] rst0;            // top of return stack
+   logic [15:0] _rstkD;          // return stack data
+   logic        _rstkW;          // return stack write
 
    /* memory access control */
    logic        is_ld, is_ld_r,
@@ -195,14 +195,27 @@ module j1_wb
 	  rsp <=  5'd0;
        end
      else
-       begin
-	  npc <= _npc;
-	  dsp <= _dsp;
-	  st0 <= _st0;
-	  rsp <= _rsp;
-       end
+       if (wb.cyc)
+         begin
+	    npc <= _npc;
+	    dsp <= _dsp;
+	    st0 <= _st0;
+	    rsp <= _rsp;
+         end
 
    /* Wishbone */
+   always_ff @(posedge clk or posedge reset)
+     if (reset)
+       begin
+          wb.cyc <= 1'b0;
+          wb.stb <= 1'b0;
+       end
+     else
+       begin
+          wb.cyc <= 1'b1;
+          wb.stb <= 1'b1;
+       end
+
    always_ff @(posedge clk or posedge reset)
      if (reset)
        is_ld_r <= 1'b0;
@@ -223,8 +236,6 @@ module j1_wb
 
    always_comb
      begin
-        wb.cyc   = ~reset;
-        wb.stb   = ~reset;
  	wb_dat_o = st1;
 
         if (is_mem)
@@ -239,7 +250,7 @@ module j1_wb
           end
 
         /* When bus is used for memory access insert bubble. */
-        if (is_mem_r)
+        if (!wb.ack || is_mem_r)
           instr = 16'h6000; // NOOP
         else
           instr = wb_dat_i;

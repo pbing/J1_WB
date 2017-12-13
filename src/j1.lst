@@ -1,5 +1,5 @@
 \ 0jump
-0000 0436           BRANCH main 
+0000 043F           BRANCH main 
 0002 FFFF           LIT $7FFF 
 \ depth
 0004 6E81           ALU $6E81 
@@ -199,643 +199,644 @@
 \ cell/
 012E 8001           LIT $1 
 0130 790F           ALU $790F 
-\ c+!
-0132 4012           CALL tuck 
-0134 4024           CALL c@ 
-0136 6203           ALU $6203 
+\ 2/
+0132 6081           ALU $6081 
+0134 8001           LIT $1 
+0136 6903           ALU $6903 
 0138 6180           ALU $6180 
-013A 002F           BRANCH c! 
-\ count
-013C 6081           ALU $6081 
-013E 4005           CALL 1+ 
-0140 6180           ALU $6180 
-0142 0024           BRANCH c@ 
-\ /string
-0144 6044           ALU $6044 
-0146 4080           CALL - 
+013A FFFF           LIT $7FFF 
+013C 6600           ALU $6600 
+013E 6303           ALU $6303 
+0140 740F           ALU $740F 
+\ c+!
+0142 4012           CALL tuck 
+0144 4024           CALL c@ 
+0146 6203           ALU $6203 
 0148 6180           ALU $6180 
-014A 6B8D           ALU $6B8D 
-014C 6203           ALU $6203 
-014E 718C           ALU $718C 
+014A 002F           BRANCH c! 
+\ count
+014C 6081           ALU $6081 
+014E 4005           CALL 1+ 
+0150 6180           ALU $6180 
+0152 0024           BRANCH c@ 
+\ /string
+0154 6044           ALU $6044 
+0156 4080           CALL - 
+0158 6180           ALU $6180 
+015A 6B8D           ALU $6B8D 
+015C 6203           ALU $6203 
+015E 718C           ALU $718C 
 \ aligned
-0150 4005           CALL 1+ 
-0152 8001           LIT $1 
-0154 6600           ALU $6600 
-0156 730F           ALU $730F 
+0160 4005           CALL 1+ 
+0162 8001           LIT $1 
+0164 6600           ALU $6600 
+0166 730F           ALU $730F 
 \ sliteral
-0158 6B8D           ALU $6B8D 
-015A 409E           CALL count 
-015C 4058           CALL 2dup 
-015E 6203           ALU $6203 
-0160 40A8           CALL aligned 
+0168 6B8D           ALU $6B8D 
+016A 40A6           CALL count 
+016C 4058           CALL 2dup 
+016E 6203           ALU $6203 
+0170 40B0           CALL aligned 
 \ execute
-0162 6147           ALU $6147 
-0164 700C           ALU $700C 
+0172 6147           ALU $6147 
+0174 700C           ALU $700C 
 \ 15down
-0166 6003           ALU $6003 
-\ 14down
-0168 6003           ALU $6003 
-\ 13down
-016A 6003           ALU $6003 
-\ 12down
-016C 6003           ALU $6003 
-\ 11down
-016E 6003           ALU $6003 
-\ 10down
-0170 6003           ALU $6003 
-\ 9down
-0172 6003           ALU $6003 
-\ 8down
-0174 6003           ALU $6003 
-\ 7down
 0176 6003           ALU $6003 
-\ 6down
+\ 14down
 0178 6003           ALU $6003 
-\ 5down
+\ 13down
 017A 6003           ALU $6003 
-\ 4down
+\ 12down
 017C 6003           ALU $6003 
-\ 3down
+\ 11down
 017E 6003           ALU $6003 
-\ 2down
+\ 10down
 0180 6003           ALU $6003 
-\ 1down
+\ 9down
 0182 6003           ALU $6003 
+\ 8down
+0184 6003           ALU $6003 
+\ 7down
+0186 6003           ALU $6003 
+\ 6down
+0188 6003           ALU $6003 
+\ 5down
+018A 6003           ALU $6003 
+\ 4down
+018C 6003           ALU $6003 
+\ 3down
+018E 6003           ALU $6003 
+\ 2down
+0190 6003           ALU $6003 
+\ 1down
+0192 6003           ALU $6003 
 \ 0down
-0184 710C           ALU $710C 
+0194 710C           ALU $710C 
 \ 15up
-0186 6001           ALU $6001 
-\ 14up
-0188 6001           ALU $6001 
-\ 13up
-018A 6001           ALU $6001 
-\ 12up
-018C 6001           ALU $6001 
-\ 11up
-018E 6001           ALU $6001 
-\ 10up
-0190 6001           ALU $6001 
-\ 9up
-0192 6001           ALU $6001 
-\ 8up
-0194 6001           ALU $6001 
-\ 7up
 0196 6001           ALU $6001 
-\ 6up
+\ 14up
 0198 6001           ALU $6001 
-\ 5up
+\ 13up
 019A 6001           ALU $6001 
-\ 4up
+\ 12up
 019C 6001           ALU $6001 
-\ 3up
+\ 11up
 019E 6001           ALU $6001 
-\ 2up
+\ 10up
 01A0 6001           ALU $6001 
-\ 1up
+\ 9up
 01A2 6001           ALU $6001 
+\ 8up
+01A4 6001           ALU $6001 
+\ 7up
+01A6 6001           ALU $6001 
+\ 6up
+01A8 6001           ALU $6001 
+\ 5up
+01AA 6001           ALU $6001 
+\ 4up
+01AC 6001           ALU $6001 
+\ 3up
+01AE 6001           ALU $6001 
+\ 2up
+01B0 6001           ALU $6001 
+\ 1up
+01B2 6001           ALU $6001 
 \ 0up
-01A4 700C           ALU $700C 
+01B4 700C           ALU $700C 
 \ pickbody
-01A6 6100           ALU $6100 
-01A8 700C           ALU $700C 
-01AA 40C1           CALL 1down 
-01AC 00D1           BRANCH 1up 
-01AE 40C0           CALL 2down 
-01B0 00D0           BRANCH 2up 
-01B2 40BF           CALL 3down 
-01B4 00CF           BRANCH 3up 
-01B6 40BE           CALL 4down 
-01B8 00CE           BRANCH 4up 
-01BA 40BD           CALL 5down 
-01BC 00CD           BRANCH 5up 
-01BE 40BC           CALL 6down 
-01C0 00CC           BRANCH 6up 
-01C2 40BB           CALL 7down 
-01C4 00CB           BRANCH 7up 
-01C6 40BA           CALL 8down 
-01C8 00CA           BRANCH 8up 
-01CA 40B9           CALL 9down 
-01CC 00C9           BRANCH 9up 
-01CE 40B8           CALL 10down 
-01D0 00C8           BRANCH 10up 
-01D2 40B7           CALL 11down 
-01D4 00C7           BRANCH 11up 
-01D6 40B6           CALL 12down 
-01D8 00C6           BRANCH 12up 
-01DA 40B5           CALL 13down 
-01DC 00C5           BRANCH 13up 
-01DE 40B4           CALL 14down 
-01E0 00C4           BRANCH 14up 
-01E2 40B3           CALL 15down 
-01E4 00C3           BRANCH 15up 
+01B6 6100           ALU $6100 
+01B8 700C           ALU $700C 
+01BA 40C9           CALL 1down 
+01BC 00D9           BRANCH 1up 
+01BE 40C8           CALL 2down 
+01C0 00D8           BRANCH 2up 
+01C2 40C7           CALL 3down 
+01C4 00D7           BRANCH 3up 
+01C6 40C6           CALL 4down 
+01C8 00D6           BRANCH 4up 
+01CA 40C5           CALL 5down 
+01CC 00D5           BRANCH 5up 
+01CE 40C4           CALL 6down 
+01D0 00D4           BRANCH 6up 
+01D2 40C3           CALL 7down 
+01D4 00D3           BRANCH 7up 
+01D6 40C2           CALL 8down 
+01D8 00D2           BRANCH 8up 
+01DA 40C1           CALL 9down 
+01DC 00D1           BRANCH 9up 
+01DE 40C0           CALL 10down 
+01E0 00D0           BRANCH 10up 
+01E2 40BF           CALL 11down 
+01E4 00CF           BRANCH 11up 
+01E6 40BE           CALL 12down 
+01E8 00CE           BRANCH 12up 
+01EA 40BD           CALL 13down 
+01EC 00CD           BRANCH 13up 
+01EE 40BC           CALL 14down 
+01F0 00CC           BRANCH 14up 
+01F2 40BB           CALL 15down 
+01F4 00CB           BRANCH 15up 
 \ pick
-01E6 6081           ALU $6081 
-01E8 4091           CALL cells 
-01EA 4091           CALL cells 
-01EC 81A6           LIT $1A6 
-01EE 6203           ALU $6203 
-01F0 00B1           BRANCH execute 
+01F6 6081           ALU $6081 
+01F8 4091           CALL cells 
+01FA 4091           CALL cells 
+01FC 81B6           LIT $1B6 
+01FE 6203           ALU $6203 
+0200 00B9           BRANCH execute 
 \ swapdown
-01F2 6180           ALU $6180 
-01F4 700F           ALU $700F 
+0202 6180           ALU $6180 
+0204 700F           ALU $700F 
 \ swapdowns
-01F6 40F9           CALL swapdown 
-01F8 40F9           CALL swapdown 
-01FA 40F9           CALL swapdown 
-01FC 40F9           CALL swapdown 
-01FE 40F9           CALL swapdown 
-0200 40F9           CALL swapdown 
-0202 40F9           CALL swapdown 
-0204 40F9           CALL swapdown 
-0206 40F9           CALL swapdown 
-0208 40F9           CALL swapdown 
-020A 40F9           CALL swapdown 
-020C 40F9           CALL swapdown 
-020E 40F9           CALL swapdown 
-0210 40F9           CALL swapdown 
-0212 40F9           CALL swapdown 
-0214 40F9           CALL swapdown 
+0206 4101           CALL swapdown 
+0208 4101           CALL swapdown 
+020A 4101           CALL swapdown 
+020C 4101           CALL swapdown 
+020E 4101           CALL swapdown 
+0210 4101           CALL swapdown 
+0212 4101           CALL swapdown 
+0214 4101           CALL swapdown 
+0216 4101           CALL swapdown 
+0218 4101           CALL swapdown 
+021A 4101           CALL swapdown 
+021C 4101           CALL swapdown 
+021E 4101           CALL swapdown 
+0220 4101           CALL swapdown 
+0222 4101           CALL swapdown 
+0224 4101           CALL swapdown 
 \ swapdown0
-0216 700C           ALU $700C 
+0226 700C           ALU $700C 
 \ roll
-0218 4091           CALL cells 
-021A 81A4           LIT $1A4 
-021C 6181           ALU $6181 
-021E 4080           CALL - 
-0220 6147           ALU $6147 
-0222 8216           LIT $216 
-0224 6180           ALU $6180 
-0226 4080           CALL - 
-0228 00B1           BRANCH execute 
+0228 4091           CALL cells 
+022A 81B4           LIT $1B4 
+022C 6181           ALU $6181 
+022E 4080           CALL - 
+0230 6147           ALU $6147 
+0232 8226           LIT $226 
+0234 6180           ALU $6180 
+0236 4080           CALL - 
+0238 00B9           BRANCH execute 
 \ d=
-022A 6147           ALU $6147 
-022C 4007           CALL rot 
-022E 6503           ALU $6503 
-0230 6180           ALU $6180 
-0232 6B8D           ALU $6B8D 
-0234 6503           ALU $6503 
-0236 6403           ALU $6403 
-0238 0010           BRANCH 0= 
+023A 6147           ALU $6147 
+023C 4007           CALL rot 
+023E 6503           ALU $6503 
+0240 6180           ALU $6180 
+0242 6B8D           ALU $6B8D 
+0244 6503           ALU $6503 
+0246 6403           ALU $6403 
+0248 0010           BRANCH 0= 
 \ 2@
-023A 6C81           ALU $6C81 
-023C 6180           ALU $6180 
-023E 4093           CALL cell+ 
-0240 7C0C           ALU $7C0C 
+024A 6C81           ALU $6C81 
+024C 6180           ALU $6180 
+024E 4093           CALL cell+ 
+0250 7C0C           ALU $7C0C 
 \ 2!
-0242 4007           CALL rot 
-0244 6181           ALU $6181 
-0246 6023           ALU $6023 
-0248 6103           ALU $6103 
-024A 4093           CALL cell+ 
-024C 6023           ALU $6023 
-024E 710F           ALU $710F 
+0252 4007           CALL rot 
+0254 6181           ALU $6181 
+0256 6023           ALU $6023 
+0258 6103           ALU $6103 
+025A 4093           CALL cell+ 
+025C 6023           ALU $6023 
+025E 710F           ALU $710F 
 \ 2over
-0250 6147           ALU $6147 
-0252 6147           ALU $6147 
-0254 4058           CALL 2dup 
-0256 6B8D           ALU $6B8D 
-0258 6B8D           ALU $6B8D 
+0260 6147           ALU $6147 
+0262 6147           ALU $6147 
+0264 4058           CALL 2dup 
+0266 6B8D           ALU $6B8D 
+0268 6B8D           ALU $6B8D 
 \ 2swap
-025A 4007           CALL rot 
-025C 6147           ALU $6147 
-025E 4007           CALL rot 
-0260 6B8D           ALU $6B8D 
-0262 700C           ALU $700C 
+026A 4007           CALL rot 
+026C 6147           ALU $6147 
+026E 4007           CALL rot 
+0270 6B8D           ALU $6B8D 
+0272 700C           ALU $700C 
 \ 2nip
-0264 4007           CALL rot 
-0266 6103           ALU $6103 
-0268 4007           CALL rot 
-026A 710F           ALU $710F 
+0274 4007           CALL rot 
+0276 6103           ALU $6103 
+0278 4007           CALL rot 
+027A 710F           ALU $710F 
 \ 2rot
-026C 6180           ALU $6180 
-026E 6147           ALU $6147 
-0270 6147           ALU $6147 
-0272 412D           CALL 2swap 
-0274 6B8D           ALU $6B8D 
-0276 6B8D           ALU $6B8D 
-0278 6180           ALU $6180 
-027A 012D           BRANCH 2swap 
+027C 6180           ALU $6180 
+027E 6147           ALU $6147 
+0280 6147           ALU $6147 
+0282 4135           CALL 2swap 
+0284 6B8D           ALU $6B8D 
+0286 6B8D           ALU $6B8D 
+0288 6180           ALU $6180 
+028A 0135           BRANCH 2swap 
 \ 2pick
-027C 4091           CALL cells 
-027E 4005           CALL 1+ 
-0280 6081           ALU $6081 
-0282 4005           CALL 1+ 
-0284 40F3           CALL pick 
-0286 6180           ALU $6180 
-0288 00F3           BRANCH pick 
+028C 4091           CALL cells 
+028E 4005           CALL 1+ 
+0290 6081           ALU $6081 
+0292 4005           CALL 1+ 
+0294 40FB           CALL pick 
+0296 6180           ALU $6180 
+0298 00FB           BRANCH pick 
 \ d+
-028A 4007           CALL rot 
-028C 6203           ALU $6203 
-028E 6147           ALU $6147 
-0290 6181           ALU $6181 
-0292 6203           ALU $6203 
-0294 6081           ALU $6081 
-0296 4007           CALL rot 
-0298 6F03           ALU $6F03 
-029A 2151           0BRANCH (else) 
-029C 6B8D           ALU $6B8D 
-029E 4005           CALL 1+ 
-02A0 0152           BRANCH (then) 
+029A 4007           CALL rot 
+029C 6203           ALU $6203 
+029E 6147           ALU $6147 
+02A0 6181           ALU $6181 
+02A2 6203           ALU $6203 
+02A4 6081           ALU $6081 
+02A6 4007           CALL rot 
+02A8 6F03           ALU $6F03 
+02AA 2159           0BRANCH (else) 
+02AC 6B8D           ALU $6B8D 
+02AE 4005           CALL 1+ 
+02B0 015A           BRANCH (then) 
 \ (else)
-02A2 6B8D           ALU $6B8D 
+02B2 6B8D           ALU $6B8D 
 \ (then)
-02A4 700C           ALU $700C 
+02B4 700C           ALU $700C 
 \ +h
-02A6 6181           ALU $6181 
-02A8 6203           ALU $6203 
-02AA 407C           CALL u> 
-02AC 8001           LIT $1 
-02AE 730F           ALU $730F 
-\ +1c
-02B0 4058           CALL 2dup 
-02B2 4153           CALL +h 
-02B4 6203           ALU $6203 
-02B6 720F           ALU $720F 
-\ s>d
-02B8 6081           ALU $6081 
-02BA 0073           BRANCH 0< 
-\ d1+
+02B6 6181           ALU $6181 
+02B8 6203           ALU $6203 
+02BA 407C           CALL u> 
 02BC 8001           LIT $1 
-02BE 8000           LIT $0 
-02C0 0145           BRANCH d+ 
+02BE 730F           ALU $730F 
+\ +1c
+02C0 4058           CALL 2dup 
+02C2 415B           CALL +h 
+02C4 6203           ALU $6203 
+02C6 720F           ALU $720F 
+\ s>d
+02C8 6081           ALU $6081 
+02CA 0073           BRANCH 0< 
+\ d1+
+02CC 8001           LIT $1 
+02CE 8000           LIT $0 
+02D0 014D           BRANCH d+ 
 \ dnegate
-02C2 6600           ALU $6600 
-02C4 6180           ALU $6180 
-02C6 6600           ALU $6600 
-02C8 6180           ALU $6180 
-02CA 015E           BRANCH d1+ 
+02D2 6600           ALU $6600 
+02D4 6180           ALU $6180 
+02D6 6600           ALU $6600 
+02D8 6180           ALU $6180 
+02DA 0166           BRANCH d1+ 
 \ DABS
-02CC 6081           ALU $6081 
-02CE 4073           CALL 0< 
-02D0 216A           0BRANCH (then) 
-02D2 4161           CALL dnegate 
-\ (then)
-02D4 700C           ALU $700C 
-\ d-
-02D6 4161           CALL dnegate 
-02D8 0145           BRANCH d+ 
-\ dz
-02DA 8000           LIT $0 
 02DC 6081           ALU $6081 
-02DE 4007           CALL rot 
-02E0 0121           BRANCH 2! 
-\ dxor
-02E2 4007           CALL rot 
-02E4 6503           ALU $6503 
-02E6 400B           CALL -rot 
-02E8 6503           ALU $6503 
-02EA 718C           ALU $718C 
-\ dand
-02EC 4007           CALL rot 
-02EE 6303           ALU $6303 
-02F0 400B           CALL -rot 
-02F2 6303           ALU $6303 
-02F4 718C           ALU $718C 
-\ dor
-02F6 4007           CALL rot 
-02F8 6403           ALU $6403 
-02FA 400B           CALL -rot 
-02FC 6403           ALU $6403 
-02FE 718C           ALU $718C 
-\ dinvert
-0300 6600           ALU $6600 
-0302 6180           ALU $6180 
-0304 6600           ALU $6600 
-0306 718C           ALU $718C 
-\ d<
-0308 4007           CALL rot 
-030A 6781           ALU $6781 
-030C 218A           0BRANCH (else) 
-030E 4014           CALL 2drop 
-0310 6F03           ALU $6F03 
-0312 018C           BRANCH (then) 
-\ (else)
-0314 4132           CALL 2nip 
-0316 4076           CALL > 
+02DE 4073           CALL 0< 
+02E0 2172           0BRANCH (then) 
+02E2 4169           CALL dnegate 
 \ (then)
-0318 700C           ALU $700C 
+02E4 700C           ALU $700C 
+\ d-
+02E6 4169           CALL dnegate 
+02E8 014D           BRANCH d+ 
+\ dz
+02EA 8000           LIT $0 
+02EC 6081           ALU $6081 
+02EE 4007           CALL rot 
+02F0 0129           BRANCH 2! 
+\ dxor
+02F2 4007           CALL rot 
+02F4 6503           ALU $6503 
+02F6 400B           CALL -rot 
+02F8 6503           ALU $6503 
+02FA 718C           ALU $718C 
+\ dand
+02FC 4007           CALL rot 
+02FE 6303           ALU $6303 
+0300 400B           CALL -rot 
+0302 6303           ALU $6303 
+0304 718C           ALU $718C 
+\ dor
+0306 4007           CALL rot 
+0308 6403           ALU $6403 
+030A 400B           CALL -rot 
+030C 6403           ALU $6403 
+030E 718C           ALU $718C 
+\ dinvert
+0310 6600           ALU $6600 
+0312 6180           ALU $6180 
+0314 6600           ALU $6600 
+0316 718C           ALU $718C 
+\ d<
+0318 4007           CALL rot 
+031A 6781           ALU $6781 
+031C 2192           0BRANCH (else) 
+031E 4014           CALL 2drop 
+0320 6F03           ALU $6F03 
+0322 0194           BRANCH (then) 
+\ (else)
+0324 413A           CALL 2nip 
+0326 4076           CALL > 
+\ (then)
+0328 700C           ALU $700C 
 \ d>
-031A 412D           CALL 2swap 
-031C 0184           BRANCH d< 
+032A 4135           CALL 2swap 
+032C 018C           BRANCH d< 
 \ d0<=
-031E 8000           LIT $0 
-0320 8000           LIT $0 
-\ d<=
-0322 418D           CALL d> 
-0324 760C           ALU $760C 
-\ d>=
-0326 4184           CALL d< 
-0328 760C           ALU $760C 
-\ d0=
-032A 6403           ALU $6403 
-032C 0010           BRANCH 0= 
-\ d0<
 032E 8000           LIT $0 
 0330 8000           LIT $0 
-0332 0184           BRANCH d< 
+\ d<=
+0332 4195           CALL d> 
+0334 760C           ALU $760C 
+\ d>=
+0336 418C           CALL d< 
+0338 760C           ALU $760C 
+\ d0=
+033A 6403           ALU $6403 
+033C 0010           BRANCH 0= 
+\ d0<
+033E 8000           LIT $0 
+0340 8000           LIT $0 
+0342 018C           BRANCH d< 
 \ d0<>
-0334 4195           CALL d0= 
-0336 760C           ALU $760C 
+0344 419D           CALL d0= 
+0346 760C           ALU $760C 
 \ d<>
-0338 4115           CALL d= 
-033A 760C           ALU $760C 
+0348 411D           CALL d= 
+034A 760C           ALU $760C 
 \ d2*
-033C 4058           CALL 2dup 
-033E 0145           BRANCH d+ 
+034C 4058           CALL 2dup 
+034E 014D           BRANCH d+ 
 \ d2/
-0340 6081           ALU $6081 
-0342 800F           LIT $F 
-0344 6D03           ALU $6D03 
-0346 6147           ALU $6147 
-0348 4097           CALL cell/ 
-034A 6180           ALU $6180 
-034C 4097           CALL cell/ 
-034E 6B8D           ALU $6B8D 
-0350 6403           ALU $6403 
-0352 718C           ALU $718C 
+0350 6081           ALU $6081 
+0352 800F           LIT $F 
+0354 6D03           ALU $6D03 
+0356 6147           ALU $6147 
+0358 4099           CALL 2/ 
+035A 6180           ALU $6180 
+035C 8001           LIT $1 
+035E 6903           ALU $6903 
+0360 6B8D           ALU $6B8D 
+0362 6403           ALU $6403 
+0364 718C           ALU $718C 
 \ dmax
-0354 4128           CALL 2over 
-0356 4128           CALL 2over 
-0358 4184           CALL d< 
-035A 21AF           0BRANCH (then) 
-035C 412D           CALL 2swap 
+0366 4130           CALL 2over 
+0368 4130           CALL 2over 
+036A 418C           CALL d< 
+036C 21B8           0BRANCH (then) 
+036E 4135           CALL 2swap 
 \ (then)
-035E 0014           BRANCH 2drop 
+0370 0014           BRANCH 2drop 
 \ d1-
-0360 8000           LIT $0 
-0362 6600           ALU $6600 
-0364 8000           LIT $0 
-0366 6600           ALU $6600 
-0368 0145           BRANCH d+ 
+0372 8000           LIT $0 
+0374 6600           ALU $6600 
+0376 8000           LIT $0 
+0378 6600           ALU $6600 
+037A 014D           BRANCH d+ 
 \ d+!
-036A 6044           ALU $6044 
-036C 411D           CALL 2@ 
-036E 4145           CALL d+ 
-0370 6B8D           ALU $6B8D 
-0372 0121           BRANCH 2! 
+037C 6044           ALU $6044 
+037E 4125           CALL 2@ 
+0380 414D           CALL d+ 
+0382 6B8D           ALU $6B8D 
+0384 0129           BRANCH 2! 
 \ move
-0374 8000           LIT $0 
-0376 6180           ALU $6180 
-0378 6147           ALU $6147 
-037A 6147           ALU $6147 
-\ (do)
-037C 6181           ALU $6181 
-037E 6C00           ALU $6C00 
-0380 6181           ALU $6181 
-0382 6023           ALU $6023 
-0384 6103           ALU $6103 
-0386 4093           CALL cell+ 
+0386 8000           LIT $0 
 0388 6180           ALU $6180 
-038A 4093           CALL cell+ 
-038C 6180           ALU $6180 
-038E 4047           CALL looptest 
-0390 21BE           0BRANCH (do) 
-0392 0014           BRANCH 2drop 
+038A 6147           ALU $6147 
+038C 6147           ALU $6147 
+\ (do)
+038E 6181           ALU $6181 
+0390 6C00           ALU $6C00 
+0392 6181           ALU $6181 
+0394 6023           ALU $6023 
+0396 6103           ALU $6103 
+0398 4093           CALL cell+ 
+039A 6180           ALU $6180 
+039C 4093           CALL cell+ 
+039E 6180           ALU $6180 
+03A0 4047           CALL looptest 
+03A2 21C7           0BRANCH (do) 
+03A4 0014           BRANCH 2drop 
 \ cmove
-0394 8000           LIT $0 
-0396 6180           ALU $6180 
-0398 6147           ALU $6147 
-039A 6147           ALU $6147 
+03A6 8000           LIT $0 
+03A8 6180           ALU $6180 
+03AA 6147           ALU $6147 
+03AC 6147           ALU $6147 
 \ (do)
-039C 6181           ALU $6181 
-039E 4024           CALL c@ 
-03A0 6181           ALU $6181 
-03A2 402F           CALL c! 
-03A4 4005           CALL 1+ 
-03A6 6180           ALU $6180 
-03A8 4005           CALL 1+ 
-03AA 6180           ALU $6180 
-03AC 4047           CALL looptest 
-03AE 21CE           0BRANCH (do) 
-03B0 0014           BRANCH 2drop 
-\ bounds
+03AE 6181           ALU $6181 
+03B0 4024           CALL c@ 
 03B2 6181           ALU $6181 
-03B4 6203           ALU $6203 
-03B6 718C           ALU $718C 
+03B4 402F           CALL c! 
+03B6 4005           CALL 1+ 
+03B8 6180           ALU $6180 
+03BA 4005           CALL 1+ 
+03BC 6180           ALU $6180 
+03BE 4047           CALL looptest 
+03C0 21D7           0BRANCH (do) 
+03C2 0014           BRANCH 2drop 
+\ bounds
+03C4 6181           ALU $6181 
+03C6 6203           ALU $6203 
+03C8 718C           ALU $718C 
 \ fill
-03B8 6147           ALU $6147 
-03BA 41D9           CALL bounds 
+03CA 6147           ALU $6147 
+03CC 41E2           CALL bounds 
 \ (begin)
-03BC 6581           ALU $6581 
-03BE 21E5           0BRANCH (repeat) 
-03C0 6B81           ALU $6B81 
-03C2 6181           ALU $6181 
-03C4 402F           CALL c! 
-03C6 4005           CALL 1+ 
-03C8 01DE           BRANCH (begin) 
+03CE 6581           ALU $6581 
+03D0 21EE           0BRANCH (repeat) 
+03D2 6B81           ALU $6B81 
+03D4 6181           ALU $6181 
+03D6 402F           CALL c! 
+03D8 4005           CALL 1+ 
+03DA 01E7           BRANCH (begin) 
 \ (repeat)
-03CA 6B8D           ALU $6B8D 
-03CC 6103           ALU $6103 
-03CE 0014           BRANCH 2drop 
+03DC 6B8D           ALU $6B8D 
+03DE 6103           ALU $6103 
+03E0 0014           BRANCH 2drop 
 \ scratch
-03D0 FFFF           LIT $7FFF 
+03E2 0000           BRANCH 0jump 
 \ um*
-03D2 83D0           LIT $3D0 
-03D4 6023           ALU $6023 
-03D6 6103           ALU $6103 
-03D8 8000           LIT $0 
-03DA 8000           LIT $0 
-03DC 8010           LIT $10 
-03DE 6147           ALU $6147 
-03E0 8000           LIT $0 
-03E2 6147           ALU $6147 
+03E4 83E2           LIT $3E2 
+03E6 6023           ALU $6023 
+03E8 6103           ALU $6103 
+03EA 8000           LIT $0 
+03EC 8000           LIT $0 
+03EE 8010           LIT $10 
+03F0 6147           ALU $6147 
+03F2 8000           LIT $0 
+03F4 6147           ALU $6147 
 \ (do)
-03E4 4058           CALL 2dup 
-03E6 4145           CALL d+ 
-03E8 4007           CALL rot 
-03EA 6081           ALU $6081 
-03EC 4073           CALL 0< 
-03EE 21FF           0BRANCH (else) 
-03F0 4091           CALL cells 
-03F2 400B           CALL -rot 
-03F4 83D0           LIT $3D0 
-03F6 6C00           ALU $6C00 
-03F8 8000           LIT $0 
-03FA 4145           CALL d+ 
-03FC 0201           BRANCH (then) 
+03F6 4058           CALL 2dup 
+03F8 414D           CALL d+ 
+03FA 4007           CALL rot 
+03FC 6081           ALU $6081 
+03FE 4073           CALL 0< 
+0400 2208           0BRANCH (else) 
+0402 4091           CALL cells 
+0404 400B           CALL -rot 
+0406 83E2           LIT $3E2 
+0408 6C00           ALU $6C00 
+040A 8000           LIT $0 
+040C 414D           CALL d+ 
+040E 020A           BRANCH (then) 
 \ (else)
-03FE 4091           CALL cells 
-0400 400B           CALL -rot 
+0410 4091           CALL cells 
+0412 400B           CALL -rot 
 \ (then)
-0402 4047           CALL looptest 
-0404 21F2           0BRANCH (do) 
-0406 4007           CALL rot 
-0408 710F           ALU $710F 
+0414 4047           CALL looptest 
+0416 21FB           0BRANCH (do) 
+0418 4007           CALL rot 
+041A 710F           ALU $710F 
 \ *
-040A 41E9           CALL um* 
-040C 710F           ALU $710F 
+041C 41F2           CALL um* 
+041E 710F           ALU $710F 
 \ abssgn
-040E 6581           ALU $6581 
-0410 4073           CALL 0< 
-0412 6147           ALU $6147 
-0414 4082           CALL abs 
-0416 6180           ALU $6180 
-0418 4082           CALL abs 
-041A 6180           ALU $6180 
-041C 6B8D           ALU $6B8D 
-041E 700C           ALU $700C 
+0420 6581           ALU $6581 
+0422 4073           CALL 0< 
+0424 6147           ALU $6147 
+0426 4082           CALL abs 
+0428 6180           ALU $6180 
+042A 4082           CALL abs 
+042C 6180           ALU $6180 
+042E 6B8D           ALU $6B8D 
+0430 700C           ALU $700C 
 \ m*
-0420 4207           CALL abssgn 
-0422 6147           ALU $6147 
-0424 41E9           CALL um* 
-0426 6B8D           ALU $6B8D 
-0428 2216           0BRANCH (then) 
-042A 4161           CALL dnegate 
+0432 4210           CALL abssgn 
+0434 6147           ALU $6147 
+0436 41F2           CALL um* 
+0438 6B8D           ALU $6B8D 
+043A 221F           0BRANCH (then) 
+043C 4169           CALL dnegate 
 \ (then)
-042C 700C           ALU $700C 
+043E 700C           ALU $700C 
 \ divstep
-042E 4091           CALL cells 
-0430 6181           ALU $6181 
-0432 4073           CALL 0< 
-0434 221C           0BRANCH (then) 
-0436 4005           CALL 1+ 
+0440 4091           CALL cells 
+0442 6181           ALU $6181 
+0444 4073           CALL 0< 
+0446 2225           0BRANCH (then) 
+0448 4005           CALL 1+ 
 \ (then)
-0438 6180           ALU $6180 
-043A 4091           CALL cells 
-043C 6180           ALU $6180 
-043E 4007           CALL rot 
-0440 4058           CALL 2dup 
-0442 4078           CALL >= 
-0444 222A           0BRANCH (else) 
-0446 4012           CALL tuck 
-0448 4080           CALL - 
 044A 6180           ALU $6180 
-044C 4007           CALL rot 
-044E 4005           CALL 1+ 
+044C 4091           CALL cells 
+044E 6180           ALU $6180 
 0450 4007           CALL rot 
-0452 022B           BRANCH (then) 
+0452 4058           CALL 2dup 
+0454 4078           CALL >= 
+0456 2233           0BRANCH (else) 
+0458 4012           CALL tuck 
+045A 4080           CALL - 
+045C 6180           ALU $6180 
+045E 4007           CALL rot 
+0460 4005           CALL 1+ 
+0462 4007           CALL rot 
+0464 0234           BRANCH (then) 
 \ (else)
-0454 400B           CALL -rot 
+0466 400B           CALL -rot 
 \ (then)
-0456 700C           ALU $700C 
+0468 700C           ALU $700C 
 \ um/mod
-0458 400B           CALL -rot 
-045A 4217           CALL divstep 
-045C 4217           CALL divstep 
-045E 4217           CALL divstep 
-0460 4217           CALL divstep 
-0462 4217           CALL divstep 
-0464 4217           CALL divstep 
-0466 4217           CALL divstep 
-0468 4217           CALL divstep 
-046A 4217           CALL divstep 
-046C 4217           CALL divstep 
-046E 4217           CALL divstep 
-0470 4217           CALL divstep 
-0472 4217           CALL divstep 
-0474 4217           CALL divstep 
-0476 4217           CALL divstep 
-0478 4217           CALL divstep 
-047A 4007           CALL rot 
-047C 6103           ALU $6103 
-047E 718C           ALU $718C 
+046A 400B           CALL -rot 
+046C 4220           CALL divstep 
+046E 4220           CALL divstep 
+0470 4220           CALL divstep 
+0472 4220           CALL divstep 
+0474 4220           CALL divstep 
+0476 4220           CALL divstep 
+0478 4220           CALL divstep 
+047A 4220           CALL divstep 
+047C 4220           CALL divstep 
+047E 4220           CALL divstep 
+0480 4220           CALL divstep 
+0482 4220           CALL divstep 
+0484 4220           CALL divstep 
+0486 4220           CALL divstep 
+0488 4220           CALL divstep 
+048A 4220           CALL divstep 
+048C 4007           CALL rot 
+048E 6103           ALU $6103 
+0490 718C           ALU $718C 
 \ /mod
-0480 6147           ALU $6147 
-0482 415C           CALL s>d 
-0484 6B8D           ALU $6B8D 
+0492 6147           ALU $6147 
+0494 4164           CALL s>d 
+0496 6B8D           ALU $6B8D 
 \ SM/REM
-0486 6181           ALU $6181 
-0488 6147           ALU $6147 
-048A 6147           ALU $6147 
-048C 4166           CALL DABS 
-048E 6B81           ALU $6B81 
-0490 4082           CALL abs 
-0492 422C           CALL um/mod 
-0494 6B8D           ALU $6B8D 
-0496 6B81           ALU $6B81 
-0498 6503           ALU $6503 
-049A 4073           CALL 0< 
-049C 2250           0BRANCH (then) 
-049E 407E           CALL negate 
+0498 6181           ALU $6181 
+049A 6147           ALU $6147 
+049C 6147           ALU $6147 
+049E 416E           CALL DABS 
+04A0 6B81           ALU $6B81 
+04A2 4082           CALL abs 
+04A4 4235           CALL um/mod 
+04A6 6B8D           ALU $6B8D 
+04A8 6B81           ALU $6B81 
+04AA 6503           ALU $6503 
+04AC 4073           CALL 0< 
+04AE 2259           0BRANCH (then) 
+04B0 407E           CALL negate 
 \ (then)
-04A0 6B8D           ALU $6B8D 
-04A2 4073           CALL 0< 
-04A4 2256           0BRANCH (then) 
-04A6 6147           ALU $6147 
-04A8 407E           CALL negate 
-04AA 6B8D           ALU $6B8D 
+04B2 6B8D           ALU $6B8D 
+04B4 4073           CALL 0< 
+04B6 225F           0BRANCH (then) 
+04B8 6147           ALU $6147 
+04BA 407E           CALL negate 
+04BC 6B8D           ALU $6B8D 
 \ (then)
-04AC 700C           ALU $700C 
+04BE 700C           ALU $700C 
 \ /
-04AE 4240           CALL /mod 
-04B0 700F           ALU $700F 
+04C0 4249           CALL /mod 
+04C2 700F           ALU $700F 
 \ mod
-04B2 4240           CALL /mod 
-04B4 710F           ALU $710F 
+04C4 4249           CALL /mod 
+04C6 710F           ALU $710F 
 \ */mod
-04B6 6147           ALU $6147 
-04B8 4210           CALL m* 
-04BA 6B8D           ALU $6B8D 
-04BC 0243           BRANCH SM/REM 
+04C8 6147           ALU $6147 
+04CA 4219           CALL m* 
+04CC 6B8D           ALU $6B8D 
+04CE 024C           BRANCH SM/REM 
 \ */
-04BE 425B           CALL */mod 
-04C0 700F           ALU $700F 
+04D0 4264           CALL */mod 
+04D2 700F           ALU $700F 
 \ t2*
-04C2 6181           ALU $6181 
-04C4 6147           ALU $6147 
-04C6 6147           ALU $6147 
-04C8 419E           CALL d2* 
-04CA 6B8D           ALU $6B8D 
-04CC 4091           CALL cells 
-04CE 6B8D           ALU $6B8D 
-04D0 4073           CALL 0< 
-04D2 8001           LIT $1 
-04D4 6303           ALU $6303 
-04D6 720F           ALU $720F 
+04D4 6181           ALU $6181 
+04D6 6147           ALU $6147 
+04D8 6147           ALU $6147 
+04DA 41A6           CALL d2* 
+04DC 6B8D           ALU $6B8D 
+04DE 4091           CALL cells 
+04E0 6B8D           ALU $6B8D 
+04E2 4073           CALL 0< 
+04E4 8001           LIT $1 
+04E6 6303           ALU $6303 
+04E8 720F           ALU $720F 
 \ divisor
-04D8 0000           BRANCH 0jump 
+04EA 0000           BRANCH 0jump 
 \ m*/mod
-04DA 84D8           LIT $4D8 
-04DC 6023           ALU $6023 
-04DE 6103           ALU $6103 
-04E0 4012           CALL tuck 
-04E2 41E9           CALL um* 
-04E4 412D           CALL 2swap 
-04E6 41E9           CALL um* 
-04E8 6180           ALU $6180 
-04EA 6147           ALU $6147 
-04EC 8000           LIT $0 
-04EE 4145           CALL d+ 
-04F0 6B8D           ALU $6B8D 
-04F2 400B           CALL -rot 
-04F4 8020           LIT $20 
-04F6 6147           ALU $6147 
-04F8 8000           LIT $0 
-04FA 6147           ALU $6147 
+04EC 84EA           LIT $4EA 
+04EE 6023           ALU $6023 
+04F0 6103           ALU $6103 
+04F2 4012           CALL tuck 
+04F4 41F2           CALL um* 
+04F6 4135           CALL 2swap 
+04F8 41F2           CALL um* 
+04FA 6180           ALU $6180 
+04FC 6147           ALU $6147 
+04FE 8000           LIT $0 
+0500 414D           CALL d+ 
+0502 6B8D           ALU $6B8D 
+0504 400B           CALL -rot 
+0506 8020           LIT $20 
+0508 6147           ALU $6147 
+050A 8000           LIT $0 
+050C 6147           ALU $6147 
 \ (do)
-04FC 4261           CALL t2* 
-04FE 6081           ALU $6081 
-0500 84D8           LIT $4D8 
-0502 6C00           ALU $6C00 
-0504 4078           CALL >= 
-0506 228A           0BRANCH (then) 
-0508 84D8           LIT $4D8 
-050A 6C00           ALU $6C00 
-050C 4080           CALL - 
-050E 4007           CALL rot 
-0510 4005           CALL 1+ 
-0512 400B           CALL -rot 
+050E 426A           CALL t2* 
+0510 6081           ALU $6081 
+0512 84EA           LIT $4EA 
+0514 6C00           ALU $6C00 
+0516 4078           CALL >= 
+0518 2293           0BRANCH (then) 
+051A 84EA           LIT $4EA 
+051C 6C00           ALU $6C00 
+051E 4080           CALL - 
+0520 4007           CALL rot 
+0522 4005           CALL 1+ 
+0524 400B           CALL -rot 
 \ (then)
-0514 4047           CALL looptest 
-0516 227E           0BRANCH (do) 
-0518 700C           ALU $700C 
+0526 4047           CALL looptest 
+0528 2287           0BRANCH (do) 
+052A 700C           ALU $700C 
 \ m*/
-051A 426D           CALL m*/mod 
-051C 710F           ALU $710F 
+052C 4276           CALL m*/mod 
+052E 710F           ALU $710F 
 \ base
-051E 0000           BRANCH 0jump 
+0530 0000           BRANCH 0jump 
 \ hld
-0520 0000           BRANCH 0jump 
+0532 0000           BRANCH 0jump 
 \ pad
-0522 FFFF           LIT $7FFF 
-0524 FFFF           LIT $7FFF 
-0526 FFFF           LIT $7FFF 
-0528 FFFF           LIT $7FFF 
-052A FFFF           LIT $7FFF 
-052C FFFF           LIT $7FFF 
-052E FFFF           LIT $7FFF 
-0530 FFFF           LIT $7FFF 
-0532 FFFF           LIT $7FFF 
 0534 FFFF           LIT $7FFF 
 0536 FFFF           LIT $7FFF 
 0538 FFFF           LIT $7FFF 
@@ -869,469 +870,469 @@
 0570 FFFF           LIT $7FFF 
 0572 FFFF           LIT $7FFF 
 0574 FFFF           LIT $7FFF 
+0576 FFFF           LIT $7FFF 
+0578 FFFF           LIT $7FFF 
+057A FFFF           LIT $7FFF 
+057C FFFF           LIT $7FFF 
+057E FFFF           LIT $7FFF 
+0580 FFFF           LIT $7FFF 
+0582 FFFF           LIT $7FFF 
+0584 FFFF           LIT $7FFF 
+0586 FFFF           LIT $7FFF 
 \ pad|
-0576 8576           LIT $576 
-0578 8520           LIT $520 
-057A 6023           ALU $6023 
-057C 710F           ALU $710F 
+0588 8588           LIT $588 
+058A 8532           LIT $532 
+058C 6023           ALU $6023 
+058E 710F           ALU $710F 
 \ DIGIT
-057E 8009           LIT $9 
-0580 6181           ALU $6181 
-0582 6803           ALU $6803 
-0584 8007           LIT $7 
-0586 6303           ALU $6303 
-0588 6203           ALU $6203 
-058A 8030           LIT $30 
-058C 720F           ALU $720F 
+0590 8009           LIT $9 
+0592 6181           ALU $6181 
+0594 6803           ALU $6803 
+0596 8007           LIT $7 
+0598 6303           ALU $6303 
+059A 6203           ALU $6203 
+059C 8030           LIT $30 
+059E 720F           ALU $720F 
 \ HOLD
-058E 8520           LIT $520 
-0590 6C00           ALU $6C00 
-0592 6A00           ALU $6A00 
-0594 6081           ALU $6081 
-0596 8520           LIT $520 
-0598 6023           ALU $6023 
-059A 6103           ALU $6103 
-059C 002F           BRANCH c! 
-\ #
-059E 8000           LIT $0 
-05A0 851E           LIT $51E 
+05A0 8532           LIT $532 
 05A2 6C00           ALU $6C00 
-05A4 422C           CALL um/mod 
-05A6 6147           ALU $6147 
-05A8 851E           LIT $51E 
-05AA 6C00           ALU $6C00 
-05AC 422C           CALL um/mod 
-05AE 6180           ALU $6180 
-05B0 42BF           CALL DIGIT 
-05B2 42C7           CALL HOLD 
-05B4 6B8D           ALU $6B8D 
-05B6 700C           ALU $700C 
+05A4 6A00           ALU $6A00 
+05A6 6081           ALU $6081 
+05A8 8532           LIT $532 
+05AA 6023           ALU $6023 
+05AC 6103           ALU $6103 
+05AE 002F           BRANCH c! 
+\ #
+05B0 8000           LIT $0 
+05B2 8530           LIT $530 
+05B4 6C00           ALU $6C00 
+05B6 4235           CALL um/mod 
+05B8 6147           ALU $6147 
+05BA 8530           LIT $530 
+05BC 6C00           ALU $6C00 
+05BE 4235           CALL um/mod 
+05C0 6180           ALU $6180 
+05C2 42C8           CALL DIGIT 
+05C4 42D0           CALL HOLD 
+05C6 6B8D           ALU $6B8D 
+05C8 700C           ALU $700C 
 \ #S
-05B8 42CF           CALL # 
-05BA 4058           CALL 2dup 
-05BC 6403           ALU $6403 
-05BE 4010           CALL 0= 
-05C0 22DC           0BRANCH #S 
-05C2 700C           ALU $700C 
+05CA 42D8           CALL # 
+05CC 4058           CALL 2dup 
+05CE 6403           ALU $6403 
+05D0 4010           CALL 0= 
+05D2 22E5           0BRANCH #S 
+05D4 700C           ALU $700C 
 \ #>
-05C4 4014           CALL 2drop 
-05C6 8520           LIT $520 
-05C8 6C00           ALU $6C00 
-05CA 8576           LIT $576 
-05CC 6181           ALU $6181 
-05CE 0080           BRANCH - 
+05D6 4014           CALL 2drop 
+05D8 8532           LIT $532 
+05DA 6C00           ALU $6C00 
+05DC 8588           LIT $588 
+05DE 6181           ALU $6181 
+05E0 0080           BRANCH - 
 \ SIGN
-05D0 4073           CALL 0< 
-05D2 22EC           0BRANCH (then) 
-05D4 802D           LIT $2D 
-05D6 42C7           CALL HOLD 
+05E2 4073           CALL 0< 
+05E4 22F5           0BRANCH (then) 
+05E6 802D           LIT $2D 
+05E8 42D0           CALL HOLD 
 \ (then)
-05D8 700C           ALU $700C 
+05EA 700C           ALU $700C 
 \ emit
-05DA 0000           BRANCH 0jump 
+05EC 0000           BRANCH 0jump 
 \ cr
-05DC 800D           LIT $D 
-05DE 85DA           LIT $5DA 
-05E0 6C00           ALU $6C00 
-05E2 40B1           CALL execute 
-05E4 800A           LIT $A 
-05E6 85DA           LIT $5DA 
-05E8 6C00           ALU $6C00 
-05EA 00B1           BRANCH execute 
+05EE 800D           LIT $D 
+05F0 85EC           LIT $5EC 
+05F2 6C00           ALU $6C00 
+05F4 40B9           CALL execute 
+05F6 800A           LIT $A 
+05F8 85EC           LIT $5EC 
+05FA 6C00           ALU $6C00 
+05FC 00B9           BRANCH execute 
 \ space
-05EC 8020           LIT $20 
-05EE 85DA           LIT $5DA 
-05F0 6C00           ALU $6C00 
-05F2 00B1           BRANCH execute 
+05FE 8020           LIT $20 
+0600 85EC           LIT $5EC 
+0602 6C00           ALU $6C00 
+0604 00B9           BRANCH execute 
 \ spaces
-05F4 6081           ALU $6081 
-05F6 4075           CALL 0> 
-05F8 2300           0BRANCH (repeat) 
-05FA 42F6           CALL space 
-05FC 6A00           ALU $6A00 
-05FE 02FA           BRANCH spaces 
-\ (repeat)
-0600 710F           ALU $710F 
-\ hex1
-0602 800F           LIT $F 
-0604 6303           ALU $6303 
 0606 6081           ALU $6081 
-0608 800A           LIT $A 
-060A 6803           ALU $6803 
-060C 2309           0BRANCH (else) 
-060E 8030           LIT $30 
-0610 030A           BRANCH (then) 
+0608 4075           CALL 0> 
+060A 2309           0BRANCH (repeat) 
+060C 42FF           CALL space 
+060E 6A00           ALU $6A00 
+0610 0303           BRANCH spaces 
+\ (repeat)
+0612 710F           ALU $710F 
+\ hex1
+0614 800F           LIT $F 
+0616 6303           ALU $6303 
+0618 6081           ALU $6081 
+061A 800A           LIT $A 
+061C 6803           ALU $6803 
+061E 2312           0BRANCH (else) 
+0620 8030           LIT $30 
+0622 0313           BRANCH (then) 
 \ (else)
-0612 8037           LIT $37 
+0624 8037           LIT $37 
 \ (then)
-0614 6203           ALU $6203 
-0616 85DA           LIT $5DA 
-0618 6C00           ALU $6C00 
-061A 00B1           BRANCH execute 
+0626 6203           ALU $6203 
+0628 85EC           LIT $5EC 
+062A 6C00           ALU $6C00 
+062C 00B9           BRANCH execute 
 \ hex2
-061C 6081           ALU $6081 
-061E 8004           LIT $4 
-0620 6903           ALU $6903 
-0622 4301           CALL hex1 
-0624 0301           BRANCH hex1 
+062E 6081           ALU $6081 
+0630 8004           LIT $4 
+0632 6903           ALU $6903 
+0634 430A           CALL hex1 
+0636 030A           BRANCH hex1 
 \ hex4
-0626 6081           ALU $6081 
-0628 8008           LIT $8 
-062A 6903           ALU $6903 
-062C 430E           CALL hex2 
-062E 030E           BRANCH hex2 
+0638 6081           ALU $6081 
+063A 8008           LIT $8 
+063C 6903           ALU $6903 
+063E 4317           CALL hex2 
+0640 0317           BRANCH hex2 
 \ hex8
-0630 4313           CALL hex4 
-0632 0313           BRANCH hex4 
+0642 431C           CALL hex4 
+0644 031C           BRANCH hex4 
 \ type
-0634 8000           LIT $0 
-0636 6180           ALU $6180 
-0638 6147           ALU $6147 
-063A 6147           ALU $6147 
+0646 8000           LIT $0 
+0648 6180           ALU $6180 
+064A 6147           ALU $6147 
+064C 6147           ALU $6147 
 \ (do)
-063C 6081           ALU $6081 
-063E 4024           CALL c@ 
-0640 85DA           LIT $5DA 
-0642 6C00           ALU $6C00 
-0644 40B1           CALL execute 
-0646 4005           CALL 1+ 
-0648 4047           CALL looptest 
-064A 231E           0BRANCH (do) 
-064C 710F           ALU $710F 
+064E 6081           ALU $6081 
+0650 4024           CALL c@ 
+0652 85EC           LIT $5EC 
+0654 6C00           ALU $6C00 
+0656 40B9           CALL execute 
+0658 4005           CALL 1+ 
+065A 4047           CALL looptest 
+065C 2327           0BRANCH (do) 
+065E 710F           ALU $710F 
 \ dump
-064E 6147           ALU $6147 
-0650 8000           LIT $0 
-0652 6147           ALU $6147 
+0660 6147           ALU $6147 
+0662 8000           LIT $0 
+0664 6147           ALU $6147 
 \ (do)
-0654 6081           ALU $6081 
-0656 800F           LIT $F 
-0658 6303           ALU $6303 
-065A 4010           CALL 0= 
-065C 2338           0BRANCH (then) 
-065E 6081           ALU $6081 
-0660 42EE           CALL cr 
-0662 4313           CALL hex4 
-0664 803A           LIT $3A 
-0666 85DA           LIT $5DA 
-0668 6C00           ALU $6C00 
-066A 40B1           CALL execute 
-066C 42F6           CALL space 
-066E 42F6           CALL space 
-\ (then)
+0666 6081           ALU $6081 
+0668 800F           LIT $F 
+066A 6303           ALU $6303 
+066C 4010           CALL 0= 
+066E 2341           0BRANCH (then) 
 0670 6081           ALU $6081 
-0672 4024           CALL c@ 
-0674 430E           CALL hex2 
-0676 42F6           CALL space 
-0678 4005           CALL 1+ 
-067A 4047           CALL looptest 
-067C 232A           0BRANCH (do) 
-067E 42EE           CALL cr 
-0680 710F           ALU $710F 
+0672 42F7           CALL cr 
+0674 431C           CALL hex4 
+0676 803A           LIT $3A 
+0678 85EC           LIT $5EC 
+067A 6C00           ALU $6C00 
+067C 40B9           CALL execute 
+067E 42FF           CALL space 
+0680 42FF           CALL space 
+\ (then)
+0682 6081           ALU $6081 
+0684 4024           CALL c@ 
+0686 4317           CALL hex2 
+0688 42FF           CALL space 
+068A 4005           CALL 1+ 
+068C 4047           CALL looptest 
+068E 2333           0BRANCH (do) 
+0690 42F7           CALL cr 
+0692 710F           ALU $710F 
 \ dump16
-0682 6147           ALU $6147 
-0684 8000           LIT $0 
-0686 6147           ALU $6147 
+0694 6147           ALU $6147 
+0696 8000           LIT $0 
+0698 6147           ALU $6147 
 \ (do)
-0688 6081           ALU $6081 
-068A 4313           CALL hex4 
-068C 803A           LIT $3A 
-068E 85DA           LIT $5DA 
-0690 6C00           ALU $6C00 
-0692 40B1           CALL execute 
-0694 42F6           CALL space 
-0696 6C81           ALU $6C81 
-0698 4313           CALL hex4 
-069A 42EE           CALL cr 
-069C 4093           CALL cell+ 
-069E 4047           CALL looptest 
-06A0 2344           0BRANCH (do) 
-06A2 710F           ALU $710F 
+069A 6081           ALU $6081 
+069C 431C           CALL hex4 
+069E 803A           LIT $3A 
+06A0 85EC           LIT $5EC 
+06A2 6C00           ALU $6C00 
+06A4 40B9           CALL execute 
+06A6 42FF           CALL space 
+06A8 6C81           ALU $6C81 
+06AA 431C           CALL hex4 
+06AC 42F7           CALL cr 
+06AE 4093           CALL cell+ 
+06B0 4047           CALL looptest 
+06B2 234D           0BRANCH (do) 
+06B4 710F           ALU $710F 
 \ decimal
-06A4 800A           LIT $A 
-06A6 851E           LIT $51E 
-06A8 6023           ALU $6023 
-06AA 710F           ALU $710F 
+06B6 800A           LIT $A 
+06B8 8530           LIT $530 
+06BA 6023           ALU $6023 
+06BC 710F           ALU $710F 
 \ hex
-06AC 8010           LIT $10 
-06AE 851E           LIT $51E 
-06B0 6023           ALU $6023 
-06B2 710F           ALU $710F 
+06BE 8010           LIT $10 
+06C0 8530           LIT $530 
+06C2 6023           ALU $6023 
+06C4 710F           ALU $710F 
 \ S.R
-06B4 6181           ALU $6181 
-06B6 4080           CALL - 
-06B8 42FA           CALL spaces 
-06BA 031A           BRANCH type 
+06C6 6181           ALU $6181 
+06C8 4080           CALL - 
+06CA 4303           CALL spaces 
+06CC 0323           BRANCH type 
 \ D.R
-06BC 6147           ALU $6147 
-06BE 6044           ALU $6044 
-06C0 4166           CALL DABS 
-06C2 42BB           CALL pad| 
-06C4 42DC           CALL #S 
-06C6 6B8D           ALU $6B8D 
-06C8 42E8           CALL SIGN 
-06CA 42E2           CALL #> 
-06CC 6B8D           ALU $6B8D 
-06CE 035A           BRANCH S.R 
+06CE 6147           ALU $6147 
+06D0 6044           ALU $6044 
+06D2 416E           CALL DABS 
+06D4 42C4           CALL pad| 
+06D6 42E5           CALL #S 
+06D8 6B8D           ALU $6B8D 
+06DA 42F1           CALL SIGN 
+06DC 42EB           CALL #> 
+06DE 6B8D           ALU $6B8D 
+06E0 0363           BRANCH S.R 
 \ U.R
-06D0 8000           LIT $0 
-06D2 6180           ALU $6180 
-06D4 035E           BRANCH D.R 
+06E2 8000           LIT $0 
+06E4 6180           ALU $6180 
+06E6 0367           BRANCH D.R 
 \ .R
-06D6 6147           ALU $6147 
-06D8 415C           CALL s>d 
-06DA 6B8D           ALU $6B8D 
-06DC 035E           BRANCH D.R 
+06E8 6147           ALU $6147 
+06EA 4164           CALL s>d 
+06EC 6B8D           ALU $6B8D 
+06EE 0367           BRANCH D.R 
 \ D.
-06DE 8000           LIT $0 
-06E0 435E           CALL D.R 
-06E2 02F6           BRANCH space 
+06F0 8000           LIT $0 
+06F2 4367           CALL D.R 
+06F4 02FF           BRANCH space 
 \ U.
-06E4 8000           LIT $0 
-06E6 036F           BRANCH D. 
+06F6 8000           LIT $0 
+06F8 0378           BRANCH D. 
 \ .
-06E8 851E           LIT $51E 
-06EA 6C00           ALU $6C00 
-06EC 800A           LIT $A 
-06EE 6503           ALU $6503 
-06F0 237B           0BRANCH (then) 
-06F2 4372           CALL U. 
-06F4 700C           ALU $700C 
+06FA 8530           LIT $530 
+06FC 6C00           ALU $6C00 
+06FE 800A           LIT $A 
+0700 6503           ALU $6503 
+0702 2384           0BRANCH (then) 
+0704 437B           CALL U. 
+0706 700C           ALU $700C 
 \ (then)
-06F6 415C           CALL s>d 
-06F8 036F           BRANCH D. 
+0708 4164           CALL s>d 
+070A 0378           BRANCH D. 
 \ ?
-06FA 6C00           ALU $6C00 
-06FC 0374           BRANCH . 
+070C 6C00           ALU $6C00 
+070E 037D           BRANCH . 
 \ DIGIT?
-06FE 6147           ALU $6147 
-0700 8030           LIT $30 
-0702 4080           CALL - 
-0704 8009           LIT $9 
-0706 6181           ALU $6181 
-0708 6803           ALU $6803 
-070A 238C           0BRANCH (then) 
-070C 8007           LIT $7 
-070E 4080           CALL - 
-0710 6081           ALU $6081 
-0712 800A           LIT $A 
-0714 6803           ALU $6803 
-0716 6403           ALU $6403 
+0710 6147           ALU $6147 
+0712 8030           LIT $30 
+0714 4080           CALL - 
+0716 8009           LIT $9 
+0718 6181           ALU $6181 
+071A 6803           ALU $6803 
+071C 2395           0BRANCH (then) 
+071E 8007           LIT $7 
+0720 4080           CALL - 
+0722 6081           ALU $6081 
+0724 800A           LIT $A 
+0726 6803           ALU $6803 
+0728 6403           ALU $6403 
 \ (then)
-0718 6081           ALU $6081 
-071A 6B8D           ALU $6B8D 
-071C 7F0F           ALU $7F0F 
+072A 6081           ALU $6081 
+072C 6B8D           ALU $6B8D 
+072E 7F0F           ALU $7F0F 
 \ >number
-071E 6081           ALU $6081 
-0720 4010           CALL 0= 
-0722 2393           0BRANCH (then) 
-0724 700C           ALU $700C 
+0730 6081           ALU $6081 
+0732 4010           CALL 0= 
+0734 239C           0BRANCH (then) 
+0736 700C           ALU $700C 
 \ (then)
-0726 6181           ALU $6181 
-0728 4024           CALL c@ 
-072A 851E           LIT $51E 
-072C 6C00           ALU $6C00 
-072E 437F           CALL DIGIT? 
-0730 23A7           0BRANCH (else) 
-0732 6147           ALU $6147 
-0734 412D           CALL 2swap 
-0736 6103           ALU $6103 
-0738 851E           LIT $51E 
-073A 6C00           ALU $6C00 
-073C 41E9           CALL um* 
-073E 6B8D           ALU $6B8D 
-0740 415C           CALL s>d 
-0742 4145           CALL d+ 
-0744 412D           CALL 2swap 
-0746 8001           LIT $1 
-0748 40A2           CALL /string 
-074A 438F           CALL >number 
-074C 03A9           BRANCH (then) 
+0738 6181           ALU $6181 
+073A 4024           CALL c@ 
+073C 8530           LIT $530 
+073E 6C00           ALU $6C00 
+0740 4388           CALL DIGIT? 
+0742 23B0           0BRANCH (else) 
+0744 6147           ALU $6147 
+0746 4135           CALL 2swap 
+0748 6103           ALU $6103 
+074A 8530           LIT $530 
+074C 6C00           ALU $6C00 
+074E 41F2           CALL um* 
+0750 6B8D           ALU $6B8D 
+0752 4164           CALL s>d 
+0754 414D           CALL d+ 
+0756 4135           CALL 2swap 
+0758 8001           LIT $1 
+075A 40AA           CALL /string 
+075C 4398           CALL >number 
+075E 03B2           BRANCH (then) 
 \ (else)
-074E 6103           ALU $6103 
-0750 700C           ALU $700C 
+0760 6103           ALU $6103 
+0762 700C           ALU $700C 
 \ (then)
-0752 038F           BRANCH >number 
-0754 700C           ALU $700C 
+0764 0398           BRANCH >number 
+0766 700C           ALU $700C 
 \ .s
-0756 803C           LIT $3C 
-0758 85DA           LIT $5DA 
-075A 6C00           ALU $6C00 
-075C 40B1           CALL execute 
-075E 4002           CALL depth 
-0760 6081           ALU $6081 
-0762 430E           CALL hex2 
-0764 803E           LIT $3E 
-0766 85DA           LIT $5DA 
-0768 6C00           ALU $6C00 
-076A 40B1           CALL execute 
-076C 8008           LIT $8 
-076E 4087           CALL min 
-0770 4016           CALL ?dup 
-0772 23C3           0BRANCH (then) 
-0774 6147           ALU $6147 
-0776 8000           LIT $0 
-0778 6147           ALU $6147 
+0768 803C           LIT $3C 
+076A 85EC           LIT $5EC 
+076C 6C00           ALU $6C00 
+076E 40B9           CALL execute 
+0770 4002           CALL depth 
+0772 6081           ALU $6081 
+0774 4317           CALL hex2 
+0776 803E           LIT $3E 
+0778 85EC           LIT $5EC 
+077A 6C00           ALU $6C00 
+077C 40B9           CALL execute 
+077E 8008           LIT $8 
+0780 4087           CALL min 
+0782 4016           CALL ?dup 
+0784 23CC           0BRANCH (then) 
+0786 6147           ALU $6147 
+0788 8000           LIT $0 
+078A 6147           ALU $6147 
 \ (do)
-077A 6B81           ALU $6B81 
-077C 40F3           CALL pick 
-077E 4313           CALL hex4 
-0780 42F6           CALL space 
-0782 4047           CALL looptest 
-0784 23BD           0BRANCH (do) 
+078C 6B81           ALU $6B81 
+078E 40FB           CALL pick 
+0790 431C           CALL hex4 
+0792 42FF           CALL space 
+0794 4047           CALL looptest 
+0796 23C6           0BRANCH (do) 
 \ (then)
-0786 700C           ALU $700C 
+0798 700C           ALU $700C 
 \ endian
-0788 6081           ALU $6081 
-078A 8008           LIT $8 
-078C 6D03           ALU $6D03 
-078E 6180           ALU $6180 
-0790 8008           LIT $8 
-0792 6903           ALU $6903 
-0794 740F           ALU $740F 
+079A 6081           ALU $6081 
+079C 8008           LIT $8 
+079E 6D03           ALU $6D03 
+07A0 6180           ALU $6180 
+07A2 8008           LIT $8 
+07A4 6903           ALU $6903 
+07A6 740F           ALU $740F 
 \ 2endian
-0796 43C4           CALL endian 
-0798 6180           ALU $6180 
-079A 03C4           BRANCH endian 
+07A8 43CD           CALL endian 
+07AA 6180           ALU $6180 
+07AC 03CD           BRANCH endian 
 \ swab
-079C 03C4           BRANCH endian 
+07AE 03CD           BRANCH endian 
 \ typepad
-079E 6181           ALU $6181 
-07A0 4080           CALL - 
-07A2 6147           ALU $6147 
-07A4 431A           CALL type 
-07A6 6B8D           ALU $6B8D 
-07A8 02FA           BRANCH spaces 
+07B0 6181           ALU $6181 
+07B2 4080           CALL - 
+07B4 6147           ALU $6147 
+07B6 4323           CALL type 
+07B8 6B8D           ALU $6B8D 
+07BA 0303           BRANCH spaces 
 \ even?
-07AA 8001           LIT $1 
-07AC 6303           ALU $6303 
-07AE 0010           BRANCH 0= 
+07BC 8001           LIT $1 
+07BE 6303           ALU $6303 
+07C0 0010           BRANCH 0= 
 \ rise?
-07B0 4058           CALL 2dup 
-07B2 6C00           ALU $6C00 
-07B4 407C           CALL u> 
-07B6 6147           ALU $6147 
-07B8 6023           ALU $6023 
-07BA 6103           ALU $6103 
-07BC 6B8D           ALU $6B8D 
-07BE 700C           ALU $700C 
+07C2 4058           CALL 2dup 
+07C4 6C00           ALU $6C00 
+07C6 407C           CALL u> 
+07C8 6147           ALU $6147 
+07CA 6023           ALU $6023 
+07CC 6103           ALU $6103 
+07CE 6B8D           ALU $6B8D 
+07D0 700C           ALU $700C 
 \ fall?
-07C0 4058           CALL 2dup 
-07C2 6C00           ALU $6C00 
-07C4 6F03           ALU $6F03 
-07C6 6147           ALU $6147 
-07C8 6023           ALU $6023 
-07CA 6103           ALU $6103 
-07CC 6B8D           ALU $6B8D 
-07CE 700C           ALU $700C 
+07D2 4058           CALL 2dup 
+07D4 6C00           ALU $6C00 
+07D6 6F03           ALU $6F03 
+07D8 6147           ALU $6147 
+07DA 6023           ALU $6023 
+07DC 6103           ALU $6103 
+07DE 6B8D           ALU $6B8D 
+07E0 700C           ALU $700C 
 \ >thermometer
-07D0 8001           LIT $1 
-07D2 6180           ALU $6180 
-07D4 6D03           ALU $6D03 
-07D6 7A0C           ALU $7A0C 
+07E2 8001           LIT $1 
+07E4 6180           ALU $6180 
+07E6 6D03           ALU $6D03 
+07E8 7A0C           ALU $7A0C 
 \ 1ms
-07D8 E1A8           LIT $61A8 
+07EA E1A8           LIT $61A8 
 \ (begin)
-07DA 6081           ALU $6081 
-07DC 23F1           0BRANCH (repeat) 
-07DE 6A00           ALU $6A00 
-07E0 03ED           BRANCH (begin) 
+07EC 6081           ALU $6081 
+07EE 23FA           0BRANCH (repeat) 
+07F0 6A00           ALU $6A00 
+07F2 03F6           BRANCH (begin) 
 \ (repeat)
-07E2 710F           ALU $710F 
+07F4 710F           ALU $710F 
 \ ms
-07E4 6081           ALU $6081 
-07E6 23F7           0BRANCH (repeat) 
-07E8 6A00           ALU $6A00 
-07EA 43EC           CALL 1ms 
-07EC 03F2           BRANCH ms 
+07F6 6081           ALU $6081 
+07F8 2400           0BRANCH (repeat) 
+07FA 6A00           ALU $6A00 
+07FC 43F5           CALL 1ms 
+07FE 03FB           BRANCH ms 
 \ (repeat)
-07EE 710F           ALU $710F 
+0800 710F           ALU $710F 
 \ wait
-07F0 8032           LIT $32 
-07F2 03F2           BRANCH ms 
+0802 8032           LIT $32 
+0804 03FB           BRANCH ms 
 \ blink-left+
-07F4 800F           LIT $F 
-07F6 6147           ALU $6147 
-07F8 8000           LIT $0 
-07FA 6147           ALU $6147 
+0806 800F           LIT $F 
+0808 6147           ALU $6147 
+080A 8000           LIT $0 
+080C 6147           ALU $6147 
 \ (do)
-07FC 43F8           CALL wait 
-07FE 6B81           ALU $6B81 
-0800 43E8           CALL >thermometer 
-0802 F000           LIT $7000 
-0804 6023           ALU $6023 
-0806 6103           ALU $6103 
-0808 4047           CALL looptest 
-080A 23FE           0BRANCH (do) 
-080C 700C           ALU $700C 
+080E 4401           CALL wait 
+0810 6B81           ALU $6B81 
+0812 43F1           CALL >thermometer 
+0814 F000           LIT $7000 
+0816 6023           ALU $6023 
+0818 6103           ALU $6103 
+081A 4047           CALL looptest 
+081C 2407           0BRANCH (do) 
+081E 700C           ALU $700C 
 \ blink-left-
-080E 800F           LIT $F 
-0810 6147           ALU $6147 
-0812 8000           LIT $0 
-0814 6147           ALU $6147 
+0820 800F           LIT $F 
+0822 6147           ALU $6147 
+0824 8000           LIT $0 
+0826 6147           ALU $6147 
 \ (do)
-0816 43F8           CALL wait 
-0818 6B81           ALU $6B81 
-081A 43E8           CALL >thermometer 
-081C 6600           ALU $6600 
-081E F000           LIT $7000 
-0820 6023           ALU $6023 
-0822 6103           ALU $6103 
-0824 4047           CALL looptest 
-0826 240B           0BRANCH (do) 
-0828 700C           ALU $700C 
+0828 4401           CALL wait 
+082A 6B81           ALU $6B81 
+082C 43F1           CALL >thermometer 
+082E 6600           ALU $6600 
+0830 F000           LIT $7000 
+0832 6023           ALU $6023 
+0834 6103           ALU $6103 
+0836 4047           CALL looptest 
+0838 2414           0BRANCH (do) 
+083A 700C           ALU $700C 
 \ blink-right+
-082A 800F           LIT $F 
-082C 6147           ALU $6147 
-082E 8000           LIT $0 
-0830 6147           ALU $6147 
+083C 800F           LIT $F 
+083E 6147           ALU $6147 
+0840 8000           LIT $0 
+0842 6147           ALU $6147 
 \ (do)
-0832 43F8           CALL wait 
-0834 800F           LIT $F 
-0836 6A00           ALU $6A00 
-0838 6B81           ALU $6B81 
-083A 4080           CALL - 
-083C 43E8           CALL >thermometer 
-083E F000           LIT $7000 
-0840 6023           ALU $6023 
-0842 6103           ALU $6103 
-0844 4047           CALL looptest 
-0846 2419           0BRANCH (do) 
-0848 700C           ALU $700C 
+0844 4401           CALL wait 
+0846 800F           LIT $F 
+0848 6A00           ALU $6A00 
+084A 6B81           ALU $6B81 
+084C 4080           CALL - 
+084E 43F1           CALL >thermometer 
+0850 F000           LIT $7000 
+0852 6023           ALU $6023 
+0854 6103           ALU $6103 
+0856 4047           CALL looptest 
+0858 2422           0BRANCH (do) 
+085A 700C           ALU $700C 
 \ blink-right-
-084A 800F           LIT $F 
-084C 6147           ALU $6147 
-084E 8000           LIT $0 
-0850 6147           ALU $6147 
+085C 800F           LIT $F 
+085E 6147           ALU $6147 
+0860 8000           LIT $0 
+0862 6147           ALU $6147 
 \ (do)
-0852 43F8           CALL wait 
-0854 800F           LIT $F 
-0856 6A00           ALU $6A00 
-0858 6B81           ALU $6B81 
-085A 4080           CALL - 
-085C 43E8           CALL >thermometer 
-085E 6600           ALU $6600 
-0860 F000           LIT $7000 
-0862 6023           ALU $6023 
-0864 6103           ALU $6103 
-0866 4047           CALL looptest 
-0868 2429           0BRANCH (do) 
-086A 700C           ALU $700C 
+0864 4401           CALL wait 
+0866 800F           LIT $F 
+0868 6A00           ALU $6A00 
+086A 6B81           ALU $6B81 
+086C 4080           CALL - 
+086E 43F1           CALL >thermometer 
+0870 6600           ALU $6600 
+0872 F000           LIT $7000 
+0874 6023           ALU $6023 
+0876 6103           ALU $6103 
+0878 4047           CALL looptest 
+087A 2432           0BRANCH (do) 
+087C 700C           ALU $700C 
 \ main
-086C 43FA           CALL blink-left+ 
-086E 4407           CALL blink-left- 
-0870 4425           CALL blink-right- 
-0872 4415           CALL blink-right+ 
-0874 0436           BRANCH main 
-0876 700C           ALU $700C 
-0878 FFFF           LIT $7FFF 
-087A FFFF           LIT $7FFF 
-087C FFFF           LIT $7FFF 
-087E FFFF           LIT $7FFF 
-0880 FFFF           LIT $7FFF 
-0882 FFFF           LIT $7FFF 
-0884 FFFF           LIT $7FFF 
-0886 FFFF           LIT $7FFF 
-0888 FFFF           LIT $7FFF 
+087E 4403           CALL blink-left+ 
+0880 4410           CALL blink-left- 
+0882 442E           CALL blink-right- 
+0884 441E           CALL blink-right+ 
+0886 043F           BRANCH main 
+0888 700C           ALU $700C 
 088A FFFF           LIT $7FFF 
 088C FFFF           LIT $7FFF 
 088E FFFF           LIT $7FFF 
