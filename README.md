@@ -1,18 +1,20 @@
 # Description
-J1 Forth CPU core with Wishbone interface adapted from [System Verilog source](https://github.com/pbing/J1).
+[J1: a small Forth CPU Core for FPGAs](http://excamera.com/sphinx/fpga-j1.html)
+
+Rewritten in SystemVerilog from [Verilog Source](https://github.com/ros-drivers/wge100_driver/tree/hydro-devel/wge100_camera_firmware/src/hardware/verilog/j1.v).
 
 Almost all instructions are performed in one clock cycle. Memory access needs two clock cycles.
 
 ## Memory Map
-| modules  | address range     |
-|----------|-------------------|
-| ROM      | 0x0000 ... 0x3fff |
-| RAM, I/O | 0x4000 ... 0x7fff |
+| modules  | type  | address range     |
+|----------+-------+-------------------|
+| ROM      | CDATA | 0x0000 ... 0x3fff |
+| RAM, I/O | UDATA | 0x4000 ... 0x7fff |
 
 ## FPGA synthesis
 [Cyclone V GX Starter Kit](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=830&PartNo=1)
 
-fclk ~ 100 MHz
+fclk = 100 MHz
 
 ## ASIC synthesis
 TSMC 90 nm Logic low-power
