@@ -312,7 +312,9 @@ end-code
 \ Math
 
 1 [IF]
+URAM
 variable scratch
+ROM
 : um*  ( u1 u2 -- ud )
     scratch !
     d# 0.
@@ -375,7 +377,9 @@ variable scratch
 : t2* over >r >r d2*
     r> 2* r> 0< d# 1 and + ;
 
+URAM
 variable divisor
+ROM
 : m*/mod
     divisor !
     tuck um* 2swap um*   ( hi. lo. )
@@ -396,10 +400,11 @@ variable divisor
 
 \ Numeric output - from eforth
 
+URAM
 variable base
 variable hld
 create pad 84 allot create pad|
-
+ROM
 : <# ( -- ) ( 6.1.0490 )( h# 96 ) pad| HLD ! ;
 : DIGIT ( u -- c ) d# 9 OVER < d# 7 AND + [CHAR] 0 + ;
 : HOLD ( c -- ) ( 6.1.1670 ) HLD @ 1- DUP HLD ! C! ;
