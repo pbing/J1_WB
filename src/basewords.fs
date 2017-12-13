@@ -37,8 +37,7 @@ meta
             N     T->R      r+1 d-1 alu
             N     T->R      r+1 d-1 alu
             N     T->N              alu ;
-: unloop
-            T               r-1     alu
+: unloop    T               r-1     alu
             T               r-1     alu ;
 : exit      return ;
 

@@ -1,5 +1,5 @@
 \ 0jump
-0000 043F           BRANCH main 
+0000 03F1           BRANCH main 
 0002 FFFF           LIT $7FFF 
 \ depth
 0004 6E81           ALU $6E81 
@@ -1233,106 +1233,93 @@
 07DC 6103           ALU $6103 
 07DE 6B8D           ALU $6B8D 
 07E0 700C           ALU $700C 
-\ >thermometer
-07E2 8001           LIT $1 
-07E4 6180           ALU $6180 
-07E6 6D03           ALU $6D03 
-07E8 7A0C           ALU $7A0C 
-\ 1ms
-07EA E1A8           LIT $61A8 
-\ (begin)
-07EC 6081           ALU $6081 
-07EE 23FA           0BRANCH (repeat) 
-07F0 6A00           ALU $6A00 
-07F2 03F6           BRANCH (begin) 
-\ (repeat)
-07F4 710F           ALU $710F 
-\ ms
-07F6 6081           ALU $6081 
-07F8 2400           0BRANCH (repeat) 
-07FA 6A00           ALU $6A00 
-07FC 43F5           CALL 1ms 
-07FE 03FB           BRANCH ms 
-\ (repeat)
-0800 710F           ALU $710F 
-\ wait
-0802 8032           LIT $32 
-0804 03FB           BRANCH ms 
-\ blink-left+
-0806 800F           LIT $F 
-0808 6147           ALU $6147 
-080A 8000           LIT $0 
-080C 6147           ALU $6147 
-\ (do)
-080E 4401           CALL wait 
-0810 6B81           ALU $6B81 
-0812 43F1           CALL >thermometer 
-0814 F000           LIT $7000 
-0816 6023           ALU $6023 
-0818 6103           ALU $6103 
-081A 4047           CALL looptest 
-081C 2407           0BRANCH (do) 
-081E 700C           ALU $700C 
-\ blink-left-
-0820 800F           LIT $F 
-0822 6147           ALU $6147 
-0824 8000           LIT $0 
-0826 6147           ALU $6147 
-\ (do)
-0828 4401           CALL wait 
-082A 6B81           ALU $6B81 
-082C 43F1           CALL >thermometer 
-082E 6600           ALU $6600 
-0830 F000           LIT $7000 
-0832 6023           ALU $6023 
-0834 6103           ALU $6103 
-0836 4047           CALL looptest 
-0838 2414           0BRANCH (do) 
-083A 700C           ALU $700C 
-\ blink-right+
-083C 800F           LIT $F 
-083E 6147           ALU $6147 
-0840 8000           LIT $0 
-0842 6147           ALU $6147 
-\ (do)
-0844 4401           CALL wait 
-0846 800F           LIT $F 
-0848 6A00           ALU $6A00 
-084A 6B81           ALU $6B81 
-084C 4080           CALL - 
-084E 43F1           CALL >thermometer 
-0850 F000           LIT $7000 
-0852 6023           ALU $6023 
-0854 6103           ALU $6103 
-0856 4047           CALL looptest 
-0858 2422           0BRANCH (do) 
-085A 700C           ALU $700C 
-\ blink-right-
-085C 800F           LIT $F 
-085E 6147           ALU $6147 
-0860 8000           LIT $0 
-0862 6147           ALU $6147 
-\ (do)
-0864 4401           CALL wait 
-0866 800F           LIT $F 
-0868 6A00           ALU $6A00 
-086A 6B81           ALU $6B81 
-086C 4080           CALL - 
-086E 43F1           CALL >thermometer 
-0870 6600           ALU $6600 
-0872 F000           LIT $7000 
-0874 6023           ALU $6023 
-0876 6103           ALU $6103 
-0878 4047           CALL looptest 
-087A 2432           0BRANCH (do) 
-087C 700C           ALU $700C 
 \ main
-087E 4403           CALL blink-left+ 
-0880 4410           CALL blink-left- 
-0882 442E           CALL blink-right- 
-0884 441E           CALL blink-right+ 
-0886 043F           BRANCH main 
-0888 700C           ALU $700C 
+07E2 8001           LIT $1 
+07E4 C000           LIT $4000 
+07E6 6023           ALU $6023 
+07E8 6103           ALU $6103 
+07EA 8001           LIT $1 
+07EC C002           LIT $4002 
+07EE 6023           ALU $6023 
+07F0 6103           ALU $6103 
+07F2 8008           LIT $8 
+07F4 6147           ALU $6147 
+07F6 8000           LIT $0 
+07F8 6147           ALU $6147 
+\ (do)
+07FA C000           LIT $4000 
+07FC 6C00           ALU $6C00 
+07FE C002           LIT $4002 
+0800 6C00           ALU $6C00 
+0802 4012           CALL tuck 
+0804 6203           ALU $6203 
+0806 C002           LIT $4002 
+0808 6023           ALU $6023 
+080A 6103           ALU $6103 
+080C C000           LIT $4000 
+080E 6023           ALU $6023 
+0810 6103           ALU $6103 
+0812 4047           CALL looptest 
+0814 23FD           0BRANCH (do) 
+0816 C002           LIT $4002 
+0818 6C00           ALU $6C00 
+\ (begin)
+081A 040D           BRANCH (begin) 
+081C 700C           ALU $700C 
+081E FFFF           LIT $7FFF 
+0820 FFFF           LIT $7FFF 
+0822 FFFF           LIT $7FFF 
+0824 FFFF           LIT $7FFF 
+0826 FFFF           LIT $7FFF 
+0828 FFFF           LIT $7FFF 
+082A FFFF           LIT $7FFF 
+082C FFFF           LIT $7FFF 
+082E FFFF           LIT $7FFF 
+0830 FFFF           LIT $7FFF 
+0832 FFFF           LIT $7FFF 
+0834 FFFF           LIT $7FFF 
+0836 FFFF           LIT $7FFF 
+0838 FFFF           LIT $7FFF 
+083A FFFF           LIT $7FFF 
+083C FFFF           LIT $7FFF 
+083E FFFF           LIT $7FFF 
+0840 FFFF           LIT $7FFF 
+0842 FFFF           LIT $7FFF 
+0844 FFFF           LIT $7FFF 
+0846 FFFF           LIT $7FFF 
+0848 FFFF           LIT $7FFF 
+084A FFFF           LIT $7FFF 
+084C FFFF           LIT $7FFF 
+084E FFFF           LIT $7FFF 
+0850 FFFF           LIT $7FFF 
+0852 FFFF           LIT $7FFF 
+0854 FFFF           LIT $7FFF 
+0856 FFFF           LIT $7FFF 
+0858 FFFF           LIT $7FFF 
+085A FFFF           LIT $7FFF 
+085C FFFF           LIT $7FFF 
+085E FFFF           LIT $7FFF 
+0860 FFFF           LIT $7FFF 
+0862 FFFF           LIT $7FFF 
+0864 FFFF           LIT $7FFF 
+0866 FFFF           LIT $7FFF 
+0868 FFFF           LIT $7FFF 
+086A FFFF           LIT $7FFF 
+086C FFFF           LIT $7FFF 
+086E FFFF           LIT $7FFF 
+0870 FFFF           LIT $7FFF 
+0872 FFFF           LIT $7FFF 
+0874 FFFF           LIT $7FFF 
+0876 FFFF           LIT $7FFF 
+0878 FFFF           LIT $7FFF 
+087A FFFF           LIT $7FFF 
+087C FFFF           LIT $7FFF 
+087E FFFF           LIT $7FFF 
+0880 FFFF           LIT $7FFF 
+0882 FFFF           LIT $7FFF 
+0884 FFFF           LIT $7FFF 
+0886 FFFF           LIT $7FFF 
+0888 FFFF           LIT $7FFF 
 088A FFFF           LIT $7FFF 
 088C FFFF           LIT $7FFF 
 088E FFFF           LIT $7FFF 

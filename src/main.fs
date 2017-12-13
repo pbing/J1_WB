@@ -4,6 +4,7 @@ include crossj1.fs
 include basewords.fs
 
 target
+ROM
 4 org
 
 module[ everything"
@@ -56,4 +57,5 @@ s" j1.mif" create-output-file
 s" j1.lst" create-output-file
 0 2000 disassemble-block
 
+.s
 bye

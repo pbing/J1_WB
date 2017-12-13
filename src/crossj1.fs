@@ -5,6 +5,7 @@ decimal
 
 0 value outfile
 
+warning off
 : type ( c-addr u )
     outfile if
         outfile write-file throw
@@ -28,40 +29,44 @@ decimal
 ;
 : space bl emit ;
 : spaces dup 0> if 0 do space loop then ;
+warning on
 
 vocabulary j1assembler  \ assembly storage and instructions
 vocabulary metacompiler \ the cross-compiling words
 vocabulary j1target     \ actual target words
 
 : j1asm
-    only
-    metacompiler
+    only metacompiler
     also j1assembler definitions
     also forth ;
 : meta
-    only
-    j1target also
-    j1assembler also
-    metacompiler definitions also
-    forth ;
+    only j1target
+    also j1assembler
+    also metacompiler definitions
+    also forth ;
 : target
-    only
-    metacompiler also
-    j1target definitions ;
-
-: cdata ;
-: idata ;
-: udata ;
-: section ( low-addr high-addr -- )
-    create drop , does> drop ;
-
-\ low high  type          name
-$0000 $3fff cdata section rom  \ ROM
-$4000 $4fff udata section uram \ uninitalized RAM
-\ ... ...   idata section iram \ initalized RAM
-
+    only metacompiler
+    also j1target definitions ;
 
 \ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+meta
+
+\ Very rudimentary implementation of crosscompiler words
+\ CDATA, IDATA and UDATA are ignored.
+\ High address is ignored and no range checking is performed.
+variable 'tdp
+
+: section ( low-addr high-addr -- )
+    create drop , does> 'tdp ! ;
+
+: cdata ;
+: udata ;
+\ : idata ;
+
+\ low high  type          name
+$0000 $3fff cdata section ROM  \ ROM
+$4000 $4fff udata section URAM \ uninitalized RAM
+\ ... ...   idata section IRAM \ initalized RAM
 
 j1asm
 
@@ -70,7 +75,7 @@ j1asm
 : tcell+ tcell + ;
 $10000 allocate throw constant tflash
 
-variable tdp
+: tdp       'tdp @ ;
 : there     tdp @ ;
 : islegal   dup $7fff u> abort" illegal address" ;
 : tc!       islegal tflash + c! ;
@@ -102,8 +107,6 @@ labels $10000 cells 0 fill
     atlabel? if 2drop else preserve labels there cells + ! then ;
 
 j1asm
-
-: hex-literal ( u -- c-addr u ) s>d <# bl hold #s [char] $ hold #> ;
 
 : imm $8000 or t, ;
 
@@ -140,10 +143,13 @@ j1asm
 : 0branch   2/ $2000 or t, ;
 : scall     2/ $4000 or t, ;
 
-\ hide Swift-Forth's definition of N
-also forth definitions
-: N ( -- n ) [ j1assembler ] N ;
-meta
+\ \ hide Swift-Forth's definition of N
+\ warning off
+\ also forth definitions
+\ : N ( -- n ) [ j1assembler ] N ;
+\ warning on
+
+ meta
 
 : dump-words ( c-addr n -- ) \ Write n/2 words from c-addr
     dup 6 > abort" invalid byte count"
@@ -170,6 +176,7 @@ variable padc
     s"  " pad+
 ;
 
+: hex-literal ( u -- c-addr u ) s>d <# bl hold #s [char] $ hold #> ;
 
 : disassemble-j
     0 padc !
@@ -517,12 +524,10 @@ decimal
     s" (repeat)" setlabel
 ;
 
-: 0do    s" >r d# 0 >r"     evaluate there s" (do)" setlabel ;
+: 0do    s" >r d# 0 >r"  evaluate there s" (do)" setlabel ; \ save one clock cycle and one word
 : do     s" 2>r"         evaluate there s" (do)" setlabel ;
-: loop
-    s" looptest" evaluate 0branch
-;
-: i     s" r@" evaluate ;
+: loop   s" looptest"    evaluate 0branch ;
+: i      s" r@"          evaluate ;
 
 [undefined] sourceline [IF]
     77 constant sourceline#
@@ -544,3 +549,9 @@ variable currfilename#
     then ;
 : snap line# getfilename s" (snap)" evaluate ; immediate
 : assert 0= if line# sourcefilename (sliteral) s" (assert)" evaluate then ; immediate
+
+\ hide Swift-Forth's definition of N
+warning off
+also forth definitions
+: N ( -- n ) [ j1assembler ] N ;
+warning on

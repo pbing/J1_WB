@@ -14,13 +14,15 @@ module[ application"
     begin again ;
 [THEN]
 
-0 [IF]
+1 [IF]
 \ 10th fibonacci
 \ with memory access
 \ 301 cycles
-h# 4000 constant a
-h# 4002 constant b
+URAM
+variable a
+variable b
 
+ROM
 : main ( -- 55 )
     d# 1 a !  d# 1 b !
     d# 8 0do
@@ -40,7 +42,7 @@ h# 7000 constant led
     again ;
 [THEN]
 
-1 [IF]
+0 [IF]
 h# 6000 constant sw
 h# 7000 constant led
 d# 15 constant #leds
