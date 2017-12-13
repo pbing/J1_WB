@@ -163,8 +163,7 @@ module tb1;
         #30ns;
 	CPU_RESET_n = 1'b1;
 
-	#3.5us
-	$finish;
+	#30us $finish;
      end:main
 endmodule
 

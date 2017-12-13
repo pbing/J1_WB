@@ -11,8 +11,8 @@ $4000 $4fff udata section URAM \ uninitalized RAM
 \ ... ...   idata section IRAM \ initalized RAM
 
 \ I/O addresses
-h# 6000 constant sw
-h# 7000 constant led
+$6000 constant sw
+$7000 constant led
 
 ROM
 4 org
@@ -22,9 +22,11 @@ module[ everything"
 include ../j1_forth/nuc.fs
 
 \ include application001.fs
-include application002.fs
+\ include application002.fs
 \ include application003.fs
 \ include application004.fs
+\ include application005.fs
+include application006.fs
 
 ]module
 
@@ -71,5 +73,4 @@ s" j1.mif" create-output-file
 s" j1.lst" create-output-file
 0 2000 disassemble-block
 
-.s
 bye

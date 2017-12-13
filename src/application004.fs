@@ -1,6 +1,6 @@
 module[ application"
 
-d# 15 constant #leds
+16 constant #leds
 
 : >thermometer  ( u1 -- u2 )  d# 1 swap lshift  1- ;
 
@@ -8,52 +8,36 @@ d# 15 constant #leds
 : ms ( u -- )   begin dup while 1- 1ms repeat drop ;
 : wait ( -- )   d# 50 ms ;
 
-\ ----
-\ ---*
-\ --**
-\ -***
-\ ****
+\ ---- ---* --** -*** ****
 : blink-left+ ( -- )
-    #leds 0do
+    #leds 1+ 0do
        wait       
        i >thermometer
        led !
     loop ;
 
 
-\ ****
-\ ***-
-\ **--
-\ *---
-\ ----
+\ **** ***- **-- *--- ----
 : blink-left- ( -- )
-    #leds 0do
+    #leds 1+ 0do
        wait
        i >thermometer invert
        led !
     loop ;
 
-\ ----
-\ *---
-\ **--
-\ ***-
-\ ****
+\ ---- *--- **-- ***- ****
 : blink-right+ ( -- )
-    #leds 0do
+    #leds 1+ 0do
        wait
-       #leds 1- i -  >thermometer
+       #leds i -  >thermometer invert
        led !
     loop ;
 
-\ ****
-\ -***
-\ --**
-\ ---*
-\ ----
+\ **** -*** --** ---* ----
 : blink-right- ( -- )
-    #leds 0do
+    #leds 1+ 0do
        wait
-       #leds 1- i -  >thermometer invert
+       #leds i -  >thermometer
        led !
     loop ;
 
@@ -61,8 +45,8 @@ d# 15 constant #leds
     begin
         blink-left+
         blink-left-
-        blink-right-
         blink-right+
+        blink-right-
     again ;
 
 ]module
