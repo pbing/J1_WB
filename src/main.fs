@@ -4,10 +4,15 @@ include ../j1_forth/crossj1.fs
 include ../j1_forth/basewords.fs
 
 target
+
 \ low high  type          name
 $0000 $3fff cdata section ROM  \ ROM
 $4000 $4fff udata section URAM \ uninitalized RAM
 \ ... ...   idata section IRAM \ initalized RAM
+
+\ I/O addresses
+h# 6000 constant sw
+h# 7000 constant led
 
 ROM
 4 org
@@ -15,7 +20,11 @@ ROM
 module[ everything"
 
 include ../j1_forth/nuc.fs
-include application.fs
+
+\ include application001.fs
+include application002.fs
+\ include application003.fs
+\ include application004.fs
 
 ]module
 

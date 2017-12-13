@@ -1,50 +1,5 @@
-\ Application
-
 module[ application"
 
-
-0 [IF]
-\ 10th fibonacci
-\ with no memory access
-\ 179 cycles
-: main ( --- 55 )
-    d# 1 d# 1
-    d# 8 0do  tuck +  loop
-    nip
-    begin again ;
-[THEN]
-
-1 [IF]
-\ 10th fibonacci
-\ with memory access
-\ 301 cycles
-URAM
-variable a
-variable b
-
-ROM
-: main ( -- 55 )
-    d# 1 a !  d# 1 b !
-    d# 8 0do
-       a @  b @  tuck +  b !  a !
-    loop
-    b @
-    begin again ;
-[THEN]
-
-0 [IF]
-h# 6000 constant sw
-h# 7000 constant led
-
-: main ( --- )
-    begin
-        sw @  led !
-    again ;
-[THEN]
-
-0 [IF]
-h# 6000 constant sw
-h# 7000 constant led
 d# 15 constant #leds
 
 : >thermometer  ( u1 -- u2 )  d# 1 swap lshift  1- ;
@@ -109,6 +64,5 @@ d# 15 constant #leds
         blink-right-
         blink-right+
     again ;
-[THEN]
 
 ]module
