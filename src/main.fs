@@ -4,6 +4,11 @@ include crossj1.fs
 include basewords.fs
 
 target
+\ low high  type          name
+$0000 $3fff cdata section ROM  \ ROM
+$4000 $4fff udata section URAM \ uninitalized RAM
+\ ... ...   idata section IRAM \ initalized RAM
+
 ROM
 4 org
 

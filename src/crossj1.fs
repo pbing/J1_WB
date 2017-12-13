@@ -63,11 +63,6 @@ variable 'tdp
 : udata ;
 \ : idata ;
 
-\ low high  type          name
-$0000 $3fff cdata section ROM  \ ROM
-$4000 $4fff udata section URAM \ uninitalized RAM
-\ ... ...   idata section IRAM \ initalized RAM
-
 j1asm
 
 : tcell 2 ;
