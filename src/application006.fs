@@ -1,6 +1,7 @@
 module[ application"
 
-\ calculate
+\ number to string conversion
+\ lots of division
 : main ( --- )
     decimal
     d# 89. <# # # #>
