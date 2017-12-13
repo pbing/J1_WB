@@ -1,7 +1,7 @@
 \ Compile the firmware
 
-include crossj1.fs
-include basewords.fs
+include ../j1_forth/crossj1.fs
+include ../j1_forth/basewords.fs
 
 target
 \ low high  type          name
@@ -14,7 +14,7 @@ ROM
 
 module[ everything"
 
-include nuc.fs
+include ../j1_forth/nuc.fs
 include application.fs
 
 ]module
