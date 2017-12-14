@@ -7,7 +7,7 @@ Almost all instructions are performed in one clock cycle. Memory access needs tw
 
 ## Memory Map
 | modules  | type  | address range     |
-|----------+-------+-------------------|
+|----------|-------|-------------------|
 | ROM      | CDATA | 0x0000 ... 0x3fff |
 | RAM, I/O | UDATA | 0x4000 ... 0x7fff |
 
