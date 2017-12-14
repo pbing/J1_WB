@@ -1,0 +1,23 @@
+##############################################################
+# Reference methodology option settings selected by the user.
+#
+# Copyright (C) 2017 Synopsys, Inc. All rights reserved.
+##############################################################
+ 
+Option Name:  Setting
+=====================
+RTL Source Format:  SCRIPT
+Physical Guidance:  FALSE
+Hierarchical Flow:  FALSE
+MCMM Flow:  FALSE
+Synopsys Logic Libraries:  FALSE
+Multi-Voltage UPF:  FALSE
+Clock Gating:  TRUE
+XOR Self-Gating:  FALSE
+Clock-Gating Interaction:  INSERT
+DFT Synthesis:  TRUE
+Test Compression:  NONE
+On-Chip Clocking:  FALSE
+DC Explorer Compatible:  FALSE
+Lynx Compatible:  FALSE
+

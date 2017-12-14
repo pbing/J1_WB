@@ -1,0 +1,121 @@
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : j1_wb
+Version: N-2017.09-SP2
+Date   : Thu Dec 14 10:10:33 2017
+****************************************
+
+
+Library(s) Used:
+
+    tcbn90lphpwc_ccs (File: /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h/tcbn90lphpwc_ccs.db)
+
+
+Operating Conditions: WCCOM   Library: tcbn90lphpwc_ccs
+Wire Load Model Mode: segmented
+
+Design        Wire Load Model            Library
+------------------------------------------------
+j1_wb                  TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_j1_wb TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_31 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_30 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_31 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_30 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_0 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_1 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_2 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_3 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_4 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_5 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_6 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_7 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_8 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_9 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_10 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_11 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_12 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_13 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_14 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_15 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_16 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_17 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_18 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_19 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_20 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_21 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_22 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_23 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_24 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_25 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_26 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_27 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_28 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_0_29 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_0 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_1 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_2 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_3 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_4 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_5 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_6 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_7 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_8 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_9 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_10 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_11 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_12 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_13 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_14 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_15 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_16 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_17 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_18 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_19 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_20 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_21 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_22 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_23 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_24 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_25 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_26 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_27 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_28 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+SNPS_CLOCK_GATE_HIGH_register_file_1_1_29 TSMC8K_Lowk_Conservative tcbn90lphpwc_ccs
+
+
+Global Operating Voltage = 1.08 
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1nW
+
+
+  Cell Internal Power  = 711.9083 uW   (74%)
+  Net Switching Power  = 245.0329 uW   (26%)
+                         ---------
+Total Dynamic Power    = 956.9412 uW  (100%)
+
+Cell Leakage Power     =  13.1071 uW
+
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      0.2582        4.1582e-02          358.9321            0.3001  (  30.94%)
+register           0.3669        1.2562e-02        7.7139e+03            0.3872  (  39.92%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational  8.6774e-02            0.1909        5.0342e+03            0.2827  (  29.14%)
+--------------------------------------------------------------------------------------------------
+Total              0.7119 mW         0.2450 mW     1.3107e+04 nW         0.9700 mW
+1

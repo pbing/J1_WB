@@ -1,0 +1,30 @@
+ 
+****************************************
+Report : area
+Design : j1_wb
+Version: N-2017.09-SP2
+Date   : Thu Dec 14 10:10:32 2017
+****************************************
+
+Library(s) Used:
+
+    tcbn90lphpwc_ccs (File: /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h/tcbn90lphpwc_ccs.db)
+
+Number of ports:                          317
+Number of nets:                          3404
+Number of cells:                         3182
+Number of combinational cells:           1986
+Number of sequential cells:              1131
+Number of macros/black boxes:               0
+Number of buf/inv:                        231
+Number of references:                     232
+
+Combinational area:               8846.813019
+Buf/Inv area:                      727.473618
+Noncombinational area:           18411.221059
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                 27258.034078
+Total area:                 undefined
+1
