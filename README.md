@@ -9,7 +9,7 @@ Almost all instructions are performed in one clock cycle. Memory access needs tw
 | modules  | type       | address range     |
 |----------|------------|-------------------|
 | ROM, RAM | code, data | 0x0000 ... 0x3fff |
-| RAM, I/O | data       | 0x4000 ... 0x7fff |
+| RAM, I/O | data       | 0x4000 ... 0xffff |
 
 ## FPGA synthesis
 [Cyclone V GX Starter Kit](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=830&PartNo=1)
