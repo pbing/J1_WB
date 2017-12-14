@@ -3,13 +3,13 @@
 
 Rewritten in SystemVerilog from [Verilog Source](https://github.com/ros-drivers/wge100_driver/tree/hydro-devel/wge100_camera_firmware/src/hardware/verilog/j1.v).
 
-Almost all instructions are performed in one clock cycle. Memory access needs two clock cycles.
+Almost all instructions are performed in one clock cycle. Memory access needs two clock cycles. Program size can be as large as 16 kB (8192 instructions).
 
 ## Memory Map
-| modules  | type  | address range     |
-|----------|-------|-------------------|
-| ROM      | CDATA | 0x0000 ... 0x3fff |
-| RAM, I/O | UDATA | 0x4000 ... 0x7fff |
+| modules  | type       | address range     |
+|----------|------------|-------------------|
+| ROM, RAM | code, data | 0x0000 ... 0x3fff |
+| RAM, I/O | data       | 0x4000 ... 0x7fff |
 
 ## FPGA synthesis
 [Cyclone V GX Starter Kit](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=830&PartNo=1)
@@ -27,7 +27,7 @@ dc_shell> get_lib_attribute tcbn90lphpwc_ccs/ND2D1 area
 2.822400
 ```
 
-|dstack_depth | rstack-depth |  area [µm²] | gates
+|dstack_depth | rstack_depth |  area [µm²] | gates
 |-------------|--------------|------------|------
 | 8           | 8            | 10841      |  3841 
 | 12          | 12           | 13572      |  4808 
