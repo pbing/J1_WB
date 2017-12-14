@@ -1,0 +1,11 @@
+-sverilog
+-debug_all
+-timescale=1ns/1ps
++libext+.v+.sv
+-y ../rtl/
+-y ../misc/
+-y .
+../rtl/types.sv
+../rtl/interfaces.sv
++vcs+initreg+random
++warn=noUII-L

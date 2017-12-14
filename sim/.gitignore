@@ -1,0 +1,7 @@
+*.vpd
+DVEfiles/
+csrc/
+debug*.tcl
+simv
+simv.daidir/
+ucli.key
