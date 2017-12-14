@@ -17,9 +17,9 @@ Almost all instructions are performed in one clock cycle. Memory access needs tw
 fclk = 100 MHz
 
 ## ASIC synthesis
-TSMC 90 nm Logic low-power
+TSMC 90 nm Logic low-power (SVT/LVT/HVT)
 
-fclk = 400 MHz
+fclk = 120 MHz
 
 Area of module `j1_wb` dependent on stack depth:
 ```

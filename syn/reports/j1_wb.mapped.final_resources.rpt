@@ -3,7 +3,7 @@
 Report : resources
 Design : j1_wb
 Version: N-2017.09-SP2
-Date   : Thu Dec 14 10:10:32 2017
+Date   : Thu Dec 14 13:27:28 2017
 ****************************************
 
 
@@ -81,8 +81,8 @@ Implementation Report
 | add_x_13           | DW01_inc         | apparch (area)     |                |
 | add_x_20           | DW01_inc         | pparch (area,speed)                 |
 | gt_x_31            | DW_cmp           | apparch (area)     |                |
-| DP_OP_63_126_5416  | DP_OP_63_126_5416 | str (area,speed)  |                |
-| DP_OP_64_127_1161  | DP_OP_64_127_1161 | str (area,speed)  |                |
+| DP_OP_63_126_5416  | DP_OP_63_126_5416 | str (area)        |                |
+| DP_OP_64_127_1161  | DP_OP_64_127_1161 | str (area)        |                |
 ===============================================================================
 
 1

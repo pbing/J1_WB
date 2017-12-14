@@ -8,7 +8,7 @@ Report : timing
         -transition_time
 Design : j1_wb
 Version: N-2017.09-SP2
-Date   : Thu Dec 14 10:10:32 2017
+Date   : Thu Dec 14 13:27:28 2017
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -18,7 +18,7 @@ Wire Load Model Mode: segmented
 
   Startpoint: wb_dat_s[15]
               (input port clocked by clk)
-  Endpoint: wb_adr[0] (output port clocked by clk)
+  Endpoint: wb_adr[3] (output port clocked by clk)
   Path Group: FEEDTHROUGH
   Path Type: max
 
@@ -38,43 +38,45 @@ Attributes:
   ------------------------------------------------------------------------------------------
   clock clk (rise edge)                              0.00       0.00
   clock network delay (ideal)                        0.00       0.00
-  input external delay                               1.00       1.00 r
-  wb_dat_s[15] (in)                        0.00      0.00       1.00 r
-  wb_dat_s[15] (net)             7                   0.00       1.00 r
-  U3340/ZN (INVD2)                         0.04      0.03       1.03 f
-  n2450 (net)                    2                   0.00       1.03 f
-  U2688/ZN (ND2D1P5)                       0.12      0.08       1.11 r
-  n3328 (net)                    3                   0.00       1.11 r
-  U2563/ZN (INVD1)                         0.06      0.07       1.18 f
-  n4318 (net)                    1                   0.00       1.18 f
-  U4200/ZN (ND2D2)                         0.09      0.07       1.25 r
-  n2364 (net)                    3                   0.00       1.25 r
-  U2558/ZN (INVD3)                         0.07      0.07       1.33 f
-  n2365 (net)                    6                   0.00       1.33 f
-  U2513/ZN (IINR4D0)                       0.17      0.16       1.49 f
-  n4152 (net)                    2                   0.00       1.49 f
-  U2505/ZN (NR2D0)                         0.29      0.22       1.71 r
-  n4218 (net)                    1                   0.00       1.71 r
-  U2720/Z (BUFFD6)                         0.25      0.25       1.97 r
-  n2356 (net)                   28                   0.00       1.97 r
-  U4507/ZN (MUX2ND0)                       0.17      0.16       2.13 f
-  wb_adr[0] (net)                1                   0.00       2.13 f
-  wb_adr[0] (out)                          0.17      0.00       2.13 f
-  data arrival time                                             2.13
+  input external delay                               7.33       7.33 f
+  wb_dat_s[15] (in)                        0.00      0.00       7.33 f
+  wb_dat_s[15] (net)            16                   0.00       7.33 f
+  U2610/ZN (INVLVTD16)                     0.02      0.02       7.35 r
+  n3284 (net)                    1                   0.00       7.35 r
+  U4219/ZN (ND2LVTD8)                      0.08      0.06       7.41 f
+  n3585 (net)                    5                   0.00       7.41 f
+  U4161/ZN (NR2LVTD2P5)                    0.14      0.10       7.51 r
+  n3575 (net)                    4                   0.00       7.51 r
+  U2573/ZN (ND2HVTD2)                      0.19      0.18       7.69 f
+  n3576 (net)                    3                   0.00       7.69 f
+  U3859/ZN (ND2LVTD8)                      0.13      0.12       7.81 r
+  n4335 (net)                   10                   0.00       7.81 r
+  U3141/ZN (INVLVTD10)                     0.06      0.07       7.87 f
+  n2353 (net)                   13                   0.00       7.87 f
+  U2516/ZN (INVHVTD3)                      0.19      0.14       8.01 r
+  n2358 (net)                    9                   0.00       8.01 r
+  U2549/ZN (ND2HVTD1)                      0.12      0.13       8.14 f
+  n2678 (net)                    1                   0.00       8.14 f
+  U2513/ZN (OAI21HVTD0)                    0.16      0.11       8.25 r
+  wb_adr[3] (net)                1                   0.00       8.25 r
+  wb_adr[3] (out)                          0.16      0.00       8.25 r
+  data arrival time                                             8.25
 
-  clock clk (rise edge)                              2.50       2.50
-  clock network delay (ideal)                        0.00       2.50
-  output external delay                              0.00       2.50
-  data required time                                            2.50
+  clock clk (rise edge)                              8.33       8.33
+  clock network delay (ideal)                        0.00       8.33
+  output external delay                              0.00       8.33
+  data required time                                            8.33
   ------------------------------------------------------------------------------------------
-  data required time                                            2.50
-  data arrival time                                            -2.13
+  data required time                                            8.33
+  data arrival time                                            -8.25
   ------------------------------------------------------------------------------------------
-  slack (MET)                                                   0.37
+  slack (MET)                                                   0.08
 
 
-  Startpoint: wb_ack (input port clocked by clk)
-  Endpoint: st0_reg_6_ (rising edge-triggered flip-flop clocked by clk)
+  Startpoint: wb_dat_s[14]
+              (input port clocked by clk)
+  Endpoint: st0_reg_14_
+            (rising edge-triggered flip-flop clocked by clk)
   Path Group: REGIN
   Path Type: max
 
@@ -94,46 +96,50 @@ Attributes:
   ------------------------------------------------------------------------------------------
   clock clk (rise edge)                              0.00       0.00
   clock network delay (ideal)                        0.00       0.00
-  input external delay                               1.00       1.00 f
-  wb_ack (in)                              0.00      0.00       1.00 f
-  wb_ack (net)                   6                   0.00       1.00 f
-  U3360/ZN (IND2D4)                        0.20      0.11       1.11 r
-  n2617 (net)                   11                   0.00       1.11 r
-  U3431/ZN (IND2D4)                        0.12      0.15       1.26 r
-  n4020 (net)                    7                   0.00       1.26 r
-  U3345/ZN (ND2D2)                         0.24      0.18       1.44 f
-  n4203 (net)                   10                   0.00       1.44 f
-  U2730/ZN (INVD5)                         0.20      0.18       1.62 r
-  n2359 (net)                   23                   0.00       1.62 r
-  U4361/ZN (OAI21D0)                       0.10      0.12       1.74 f
-  n3894 (net)                    1                   0.00       1.74 f
-  U2958/ZN (AOI21D0)                       0.21      0.14       1.88 r
-  n3896 (net)                    1                   0.00       1.88 r
-  U4362/ZN (OAI211D1)                      0.12      0.15       2.03 f
-  n3903 (net)                    1                   0.00       2.03 f
-  U3304/ZN (OAI22D1)                       0.15      0.11       2.14 r
-  n3912 (net)                    1                   0.00       2.14 r
-  U3302/ZN (ND3D1)                         0.10      0.10       2.24 f
-  n3913 (net)                    1                   0.00       2.24 f
-  U4366/ZN (IND2D1)                        0.07      0.14       2.37 f
-  n4255 (net)                    1                   0.00       2.37 f
-  st0_reg_6_/D (SDFCNQD1)                  0.07      0.00       2.37 f
-  data arrival time                                             2.37
+  input external delay                               7.33       7.33 f
+  wb_dat_s[14] (in)                        0.00      0.00       7.33 f
+  wb_dat_s[14] (net)            13                   0.00       7.33 f
+  U4220/ZN (ND2LVTD8)                      0.09      0.05       7.38 r
+  n3584 (net)                    5                   0.00       7.38 r
+  U3781/ZN (INVLVTD2)                      0.05      0.05       7.43 f
+  n2430 (net)                    1                   0.00       7.43 f
+  U3209/ZN (ND2D4)                         0.09      0.07       7.50 r
+  n3391 (net)                    3                   0.00       7.50 r
+  U2982/ZN (INVD2)                         0.05      0.05       7.55 f
+  n2408 (net)                    1                   0.00       7.55 f
+  U2580/ZN (NR2LVTD4)                      0.10      0.08       7.63 r
+  n3335 (net)                    1                   0.00       7.63 r
+  U2568/ZN (ND2LVTD6)                      0.11      0.10       7.74 f
+  n4304 (net)                   12                   0.00       7.74 f
+  U4076/Z (OR2XD1)                         0.06      0.13       7.87 f
+  n2548 (net)                    1                   0.00       7.87 f
+  U3787/ZN (ND2D1)                         0.06      0.05       7.92 r
+  n2451 (net)                    1                   0.00       7.92 r
+  U2790/ZN (INVHVTD1)                      0.04      0.06       7.98 f
+  n2450 (net)                    1                   0.00       7.98 f
+  U2908/ZN (ND2D1)                         0.09      0.06       8.04 r
+  n2449 (net)                    1                   0.00       8.04 r
+  U2898/ZN (NR2D1P5)                       0.05      0.06       8.10 f
+  n2448 (net)                    1                   0.00       8.10 f
+  U3389/ZN (AOI31LVTD2)                    0.13      0.09       8.20 r
+  n_st0[14] (net)                1                   0.00       8.20 r
+  st0_reg_14_/D (SDFCNLVTD1)               0.13      0.00       8.20 r
+  data arrival time                                             8.20
 
-  clock clk (rise edge)                              2.50       2.50
-  clock network delay (ideal)                        0.00       2.50
-  st0_reg_6_/CP (SDFCNQD1)                           0.00       2.50 r
-  library setup time                                -0.13       2.37
-  data required time                                            2.37
+  clock clk (rise edge)                              8.33       8.33
+  clock network delay (ideal)                        0.00       8.33
+  st0_reg_14_/CP (SDFCNLVTD1)                        0.00       8.33 r
+  library setup time                                -0.14       8.20
+  data required time                                            8.20
   ------------------------------------------------------------------------------------------
-  data required time                                            2.37
-  data arrival time                                            -2.37
+  data required time                                            8.20
+  data arrival time                                            -8.20
   ------------------------------------------------------------------------------------------
   slack (MET)                                                   0.00
 
 
   Startpoint: rsp_reg_2_ (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: wb_adr[9] (output port clocked by clk)
+  Endpoint: wb_adr[8] (output port clocked by clk)
   Path Group: REGOUT
   Path Type: max
 
@@ -154,49 +160,52 @@ Attributes:
   ------------------------------------------------------------------------------------------
   clock clk (rise edge)                              0.00       0.00
   clock network delay (ideal)                        0.00       0.00
-  rsp_reg_2_/CP (SDFCNQD4)                 0.00      0.00       0.00 r
-  rsp_reg_2_/Q (SDFCNQD4)                  0.13      0.32       0.32 r
-  rsp[2] (net)                   8                   0.00       0.32 r
-  U3104/ZN (INVD1)                         0.17      0.15       0.47 f
-  n3660 (net)                    4                   0.00       0.47 f
-  U3353/ZN (ND2D2)                         0.14      0.13       0.60 r
-  n3116 (net)                    4                   0.00       0.60 r
-  U2586/ZN (NR2D0)                         0.10      0.08       0.68 f
-  n4030 (net)                    1                   0.00       0.68 f
-  U2637/Z (BUFFD2)                         0.16      0.18       0.87 f
-  n2370 (net)                   16                   0.00       0.87 f
-  U4291/ZN (AOI22D0)                       0.17      0.14       1.01 r
-  n3746 (net)                    1                   0.00       1.01 r
-  U4293/ZN (ND4D1)                         0.12      0.14       1.14 f
-  n3754 (net)                    1                   0.00       1.14 f
-  U2659/ZN (NR2D0)                         0.16      0.13       1.28 r
-  n3768 (net)                    1                   0.00       1.28 r
-  U3432/ZN (ND3D0)                         0.27      0.21       1.49 f
-  n3997 (net)                    2                   0.00       1.49 f
-  U4409/ZN (AOI22D1)                       0.17      0.15       1.64 r
-  n3998 (net)                    1                   0.00       1.64 r
-  U4410/ZN (OAI31D2)                       0.13      0.14       1.78 f
-  n4080 (net)                    3                   0.00       1.78 f
-  U3274/ZN (INVD0)                         0.17      0.14       1.92 r
-  n4222 (net)                    2                   0.00       1.92 r
-  U4516/ZN (MUX2ND0)                       0.21      0.08       2.00 f
-  wb_adr[9] (net)                1                   0.00       2.00 f
-  wb_adr[9] (out)                          0.21      0.00       2.00 f
-  data arrival time                                             2.00
+  rsp_reg_2_/CP (SDFCNQHVTD0)              0.00      0.00       0.00 r
+  rsp_reg_2_/Q (SDFCNQHVTD0)               0.23      0.47       0.47 r
+  rsp[2] (net)                   2                   0.00       0.47 r
+  U2630/ZN (INVHVTD1)                      0.19      0.21       0.69 f
+  n3803 (net)                    6                   0.00       0.69 f
+  U2712/ZN (INVHVTD0)                      1.08      0.68       1.37 r
+  n4010 (net)                   10                   0.00       1.37 r
+  U3666/ZN (ND3HVTD1)                      0.52      0.60       1.97 f
+  n3367 (net)                    4                   0.00       1.97 f
+  U3928/ZN (NR2HVTD1)                      1.49      1.04       3.01 r
+  n4194 (net)                   16                   0.00       3.01 r
+  U4287/ZN (AOI22HVTD0)                    0.39      0.51       3.53 f
+  n3448 (net)                    1                   0.00       3.53 f
+  U2687/ZN (ND4HVTD0)                      0.21      0.24       3.76 r
+  n3449 (net)                    1                   0.00       3.76 r
+  U2974/Z (OR2XHVTD1)                      0.07      0.17       3.93 r
+  n3461 (net)                    1                   0.00       3.93 r
+  U2961/ZN (NR3HVTD0)                      0.17      0.12       4.05 f
+  n4146 (net)                    2                   0.00       4.05 f
+  U2585/ZN (NR2XHVTD0)                     0.18      0.18       4.23 r
+  n4148 (net)                    1                   0.00       4.23 r
+  U3758/ZN (AOI22LVTD2)                    0.09      0.10       4.33 f
+  n4150 (net)                    1                   0.00       4.33 f
+  U3709/ZN (IOA21LVTD2)                    0.12      0.09       4.42 r
+  n4250 (net)                    4                   0.00       4.42 r
+  U3644/ZN (INVHVTD0)                      0.11      0.12       4.55 f
+  n4329 (net)                    2                   0.00       4.55 f
+  U2923/ZN (MUX2ND0)                       0.14      0.11       4.66 r
+  wb_adr[8] (net)                1                   0.00       4.66 r
+  wb_adr[8] (out)                          0.14      0.00       4.66 r
+  data arrival time                                             4.66
 
-  clock clk (rise edge)                              2.50       2.50
-  clock network delay (ideal)                        0.00       2.50
-  output external delay                              0.00       2.50
-  data required time                                            2.50
+  clock clk (rise edge)                              8.33       8.33
+  clock network delay (ideal)                        0.00       8.33
+  output external delay                              0.00       8.33
+  data required time                                            8.33
   ------------------------------------------------------------------------------------------
-  data required time                                            2.50
-  data arrival time                                            -2.00
+  data required time                                            8.33
+  data arrival time                                            -4.66
   ------------------------------------------------------------------------------------------
-  slack (MET)                                                   0.50
+  slack (MET)                                                   3.68
 
 
-  Startpoint: dsp_reg_4_ (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: st0_reg_2_ (rising edge-triggered flip-flop clocked by clk)
+  Startpoint: dsp_reg_2_ (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: st0_reg_14_
+            (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
 
@@ -217,62 +226,84 @@ Attributes:
   ------------------------------------------------------------------------------------------
   clock clk (rise edge)                              0.00       0.00
   clock network delay (ideal)                        0.00       0.00
-  dsp_reg_4_/CP (SDFCNQD4)                 0.00      0.00       0.00 r
-  dsp_reg_4_/Q (SDFCNQD4)                  0.14      0.33       0.33 r
-  dsp[4] (net)                   5                   0.00       0.33 r
-  U2646/ZN (INVD5)                         0.09      0.09       0.42 f
-  n2684 (net)                    7                   0.00       0.42 f
-  U3461/ZN (IND2D4)                        0.11      0.15       0.57 f
-  n2696 (net)                    4                   0.00       0.57 f
-  U2909/ZN (NR2D2)                         0.14      0.11       0.68 r
-  n3011 (net)                    1                   0.00       0.68 r
-  U2908/Z (BUFFD10)                        0.08      0.12       0.80 r
-  n2378 (net)                   16                   0.00       0.80 r
-  U2953/ZN (AOI22D0)                       0.15      0.12       0.92 f
-  n2856 (net)                    1                   0.00       0.92 f
-  U3663/ZN (ND4D1)                         0.10      0.10       1.02 r
-  n2864 (net)                    1                   0.00       1.02 r
-  U3667/ZN (NR2XD0)                        0.12      0.10       1.12 f
-  n2875 (net)                    1                   0.00       1.12 f
-  U2782/ZN (ND2D3)                         0.18      0.14       1.25 r
-  wb_dat_m[14] (net)            13                   0.00       1.25 r
-  U3780/ZN (IND2D4)                        0.11      0.11       1.37 r
-  n3097 (net)                    2                   0.00       1.37 r
-  U2549/ZN (INVD1)                         0.05      0.06       1.43 f
-  n2510 (net)                    1                   0.00       1.43 f
-  U2704/ZN (NR2D2)                         0.19      0.13       1.56 r
-  n3074 (net)                    4                   0.00       1.56 r
-  U3795/ZN (ND2D1)                         0.08      0.09       1.64 f
-  n3071 (net)                    1                   0.00       1.64 f
-  U2530/ZN (IND2D1)                        0.10      0.15       1.79 f
-  n2492 (net)                    1                   0.00       1.79 f
-  U3397/ZN (ND4D3)                         0.08      0.08       1.87 r
-  n2479 (net)                    1                   0.00       1.87 r
-  U3394/ZN (ND2D2)                         0.05      0.06       1.93 f
-  n2475 (net)                    1                   0.00       1.93 f
-  U3393/ZN (ND2D1P5)                       0.08      0.06       2.00 r
-  n2474 (net)                    1                   0.00       2.00 r
-  U3391/ZN (AOI22D4)                       0.14      0.10       2.09 f
-  n4096 (net)                    6                   0.00       2.09 f
-  U3078/Z (BUFFD2)                         0.06      0.13       2.22 f
-  n2628 (net)                    3                   0.00       2.22 f
-  U2491/ZN (NR2D1)                         0.11      0.08       2.30 r
-  n3870 (net)                    1                   0.00       2.30 r
-  U2754/ZN (IND2D1)                        0.07      0.07       2.37 f
-  n_st0[2] (net)                 1                   0.00       2.37 f
-  st0_reg_2_/D (SDFCNQD1)                  0.07      0.00       2.37 f
-  data arrival time                                             2.37
+  dsp_reg_2_/CP (SDFCNHVTD0)               0.00      0.00       0.00 r
+  dsp_reg_2_/Q (SDFCNHVTD0)                1.04      0.93       0.93 r
+  dsp[2] (net)                  10                   0.00       0.93 r
+  U2694/ZN (ND3HVTD0)                      0.74      0.77       1.71 f
+  n2826 (net)                    4                   0.00       1.71 f
+  U2673/ZN (NR2XLVTD0)                     1.05      0.74       2.45 r
+  n3267 (net)                   16                   0.00       2.45 r
+  U3947/ZN (AOI22HVTD0)                    0.33      0.45       2.90 f
+  n3041 (net)                    1                   0.00       2.90 f
+  U2865/ZN (ND2HVTD1)                      0.13      0.17       3.07 r
+  n3043 (net)                    1                   0.00       3.07 r
+  U2987/ZN (NR2HVTD1)                      0.06      0.08       3.15 f
+  n3045 (net)                    1                   0.00       3.15 f
+  U3617/ZN (ND2HVTD0)                      0.11      0.10       3.25 r
+  n3058 (net)                    1                   0.00       3.25 r
+  U4033/ZN (IND2HVTD1)                     0.47      0.37       3.62 r
+  wb_dat_m[0] (net)              9                   0.00       3.62 r
+  U3482/ZN (INVD1)                         0.15      0.15       3.77 f
+  n3968 (net)                    3                   0.00       3.77 f
+  U2678/ZN (ND2HVTD0)                      0.18      0.13       3.91 r
+  n3293 (net)                    1                   0.00       3.91 r
+  U2644/ZN (MAOI222HVTD0)                  0.32      0.21       4.11 f
+  n3294 (net)                    1                   0.00       4.11 f
+  U2642/ZN (MAOI222HVTD0)                  0.33      0.37       4.48 r
+  n3295 (net)                    1                   0.00       4.48 r
+  U2637/ZN (MAOI222HVTD0)                  0.31      0.26       4.74 f
+  n3296 (net)                    1                   0.00       4.74 f
+  U2530/ZN (MAOI222D0)                     0.26      0.26       5.00 r
+  n3298 (net)                    1                   0.00       5.00 r
+  U2632/ZN (MAOI222HVTD0)                  0.19      0.24       5.24 f
+  n3299 (net)                    1                   0.00       5.24 f
+  U2533/ZN (MAOI222D0)                     0.26      0.24       5.48 r
+  n3300 (net)                    1                   0.00       5.48 r
+  U2624/ZN (MAOI222HVTD0)                  0.32      0.23       5.71 f
+  n3301 (net)                    1                   0.00       5.71 f
+  U2621/ZN (MAOI222HVTD0)                  0.33      0.37       6.08 r
+  n3302 (net)                    1                   0.00       6.08 r
+  U2616/ZN (MAOI222HVTD0)                  0.33      0.26       6.34 f
+  n3305 (net)                    1                   0.00       6.34 f
+  U2612/ZN (OAI22HVTD0)                    0.27      0.30       6.64 r
+  n3308 (net)                    1                   0.00       6.64 r
+  U2752/ZN (OAI22LVTD0)                    0.20      0.14       6.78 f
+  n3314 (net)                    1                   0.00       6.78 f
+  U2689/ZN (IOA21HVTD0)                    0.23      0.36       7.13 f
+  n3323 (net)                    2                   0.00       7.13 f
+  U2843/ZN (OAI22D0)                       0.22      0.17       7.30 r
+  n4398 (net)                    1                   0.00       7.30 r
+  U2837/ZN (ND2D0)                         0.12      0.13       7.43 f
+  n3321 (net)                    1                   0.00       7.43 f
+  U4221/Z (AN4XLVTD1)                      0.05      0.14       7.56 f
+  n3330 (net)                    1                   0.00       7.56 f
+  U4119/Z (MUX2LVTD4)                      0.11      0.18       7.74 f
+  n4300 (net)                    6                   0.00       7.74 f
+  U3869/ZN (INVLVTD10)                     0.08      0.08       7.82 r
+  n4229 (net)                   12                   0.00       7.82 r
+  U3790/ZN (INVLVTD2)                      0.03      0.04       7.85 f
+  n2461 (net)                    1                   0.00       7.85 f
+  U3182/ZN (IAO21LVTD1)                    0.10      0.07       7.93 r
+  n2460 (net)                    1                   0.00       7.93 r
+  U2510/ZN (ND2D1)                         0.07      0.07       8.00 f
+  n2459 (net)                    1                   0.00       8.00 f
+  U3607/ZN (NR2XLVTD0)                     0.13      0.10       8.10 r
+  n2458 (net)                    1                   0.00       8.10 r
+  U3389/ZN (AOI31LVTD2)                    0.10      0.09       8.19 f
+  n_st0[14] (net)                1                   0.00       8.19 f
+  st0_reg_14_/D (SDFCNLVTD1)               0.10      0.00       8.19 f
+  data arrival time                                             8.19
 
-  clock clk (rise edge)                              2.50       2.50
-  clock network delay (ideal)                        0.00       2.50
-  st0_reg_2_/CP (SDFCNQD1)                           0.00       2.50 r
-  library setup time                                -0.13       2.37
-  data required time                                            2.37
+  clock clk (rise edge)                              8.33       8.33
+  clock network delay (ideal)                        0.00       8.33
+  st0_reg_14_/CP (SDFCNLVTD1)                        0.00       8.33 r
+  library setup time                                -0.13       8.20
+  data required time                                            8.20
   ------------------------------------------------------------------------------------------
-  data required time                                            2.37
-  data arrival time                                            -2.37
+  data required time                                            8.20
+  data arrival time                                            -8.19
   ------------------------------------------------------------------------------------------
-  slack (MET)                                                   0.00
+  slack (MET)                                                   0.01
 
 
 1

@@ -31,9 +31,12 @@ set HIERARCHICAL_CELLS             "" ;# List of hierarchical block cell instanc
 
 set ADDITIONAL_SEARCH_PATH [list scripts \
 				../rtl \
-				/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h] ;#  Additional search path to be added to the default search path
+				/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h \
+				/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h \
+				/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h \
+                               ] ;#  Additional search path to be added to the default search path
 
-set TARGET_LIBRARY_FILES          "tcbn90lphpwc_ccs.db"  ;#  Target technology logical libraries
+set TARGET_LIBRARY_FILES          "tcbn90lphpwc_ccs.db tcbn90lphphvtwc_ccs.db tcbn90lphplvtwc_ccs.db"  ;#  Target technology logical libraries
 set ADDITIONAL_LINK_LIB_FILES     ""  ;#  Extra link logical libraries not included in TARGET_LIBRARY_FILES
 
 set MIN_LIBRARY_FILES             ""  ;#  List of max min library pairs "max1 min1 max2 min2 max3 min3"...

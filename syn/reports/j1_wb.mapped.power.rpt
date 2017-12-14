@@ -7,13 +7,15 @@ Report : power
         -analysis_effort low
 Design : j1_wb
 Version: N-2017.09-SP2
-Date   : Thu Dec 14 10:10:33 2017
+Date   : Thu Dec 14 13:27:29 2017
 ****************************************
 
 
 Library(s) Used:
 
     tcbn90lphpwc_ccs (File: /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h/tcbn90lphpwc_ccs.db)
+    tcbn90lphplvtwc_ccs (File: /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h/tcbn90lphplvtwc_ccs.db)
+    tcbn90lphphvtwc_ccs (File: /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h/tcbn90lphphvtwc_ccs.db)
 
 
 Operating Conditions: WCCOM   Library: tcbn90lphpwc_ccs
@@ -98,12 +100,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  = 711.9083 uW   (74%)
-  Net Switching Power  = 245.0329 uW   (26%)
+  Cell Internal Power  = 216.2155 uW   (73%)
+  Net Switching Power  =  81.9989 uW   (27%)
                          ---------
-Total Dynamic Power    = 956.9412 uW  (100%)
+Total Dynamic Power    = 298.2144 uW  (100%)
 
-Cell Leakage Power     =  13.1071 uW
+Cell Leakage Power     =   6.1051 uW
 
 
                  Internal         Switching           Leakage            Total
@@ -112,10 +114,10 @@ Power Group      Power            Power               Power              Power  
 io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
-clock_network      0.2582        4.1582e-02          358.9321            0.3001  (  30.94%)
-register           0.3669        1.2562e-02        7.7139e+03            0.3872  (  39.92%)
+clock_network  7.5342e-02        1.1673e-02          463.3289        8.7478e-02  (  28.75%)
+register           0.1065        5.1027e-03        1.2369e+03            0.1129  (  37.09%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational  8.6774e-02            0.1909        5.0342e+03            0.2827  (  29.14%)
+combinational  3.4329e-02        6.5224e-02        4.4049e+03            0.1040  (  34.16%)
 --------------------------------------------------------------------------------------------------
-Total              0.7119 mW         0.2450 mW     1.3107e+04 nW         0.9700 mW
+Total              0.2162 mW     8.1999e-02 mW     6.1051e+03 nW         0.3043 mW
 1

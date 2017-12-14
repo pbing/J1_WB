@@ -48,10 +48,10 @@ set HIERARCHICAL_CELLS             "" ;# List of hierarchical block cell instanc
 ##########################################################################################
 # For the following variables, use a blank space to separate multiple entries.
 # Example: set TARGET_LIBRARY_FILES "lib1.db lib2.db lib3.db"
-set ADDITIONAL_SEARCH_PATH [list scripts 				../rtl 				/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h] ;#  Additional search path to be added to the default search path
-scripts ../rtl /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h
-set TARGET_LIBRARY_FILES          "tcbn90lphpwc_ccs.db"  ;#  Target technology logical libraries
-tcbn90lphpwc_ccs.db
+set ADDITIONAL_SEARCH_PATH [list scripts 				../rtl 				/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h 				/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h 				/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h                                ] ;#  Additional search path to be added to the default search path
+scripts ../rtl /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h
+set TARGET_LIBRARY_FILES          "tcbn90lphpwc_ccs.db tcbn90lphphvtwc_ccs.db tcbn90lphplvtwc_ccs.db"  ;#  Target technology logical libraries
+tcbn90lphpwc_ccs.db tcbn90lphphvtwc_ccs.db tcbn90lphplvtwc_ccs.db
 set ADDITIONAL_LINK_LIB_FILES     ""  ;#  Extra link logical libraries not included in TARGET_LIBRARY_FILES
 set MIN_LIBRARY_FILES             ""  ;#  List of max min library pairs "max1 min1 max2 min2 max3 min3"...
 set MW_REFERENCE_LIB_DIRS         ""  ;#  Milkyway reference libraries (include IC Compiler ILMs here)
@@ -379,7 +379,7 @@ hplp
 # Set up the search path to find the libraries and design files.
 #################################################################################
 set_app_var search_path ". ${ADDITIONAL_SEARCH_PATH} $search_path"
-. scripts ../rtl /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h . /cae/synopsys/syn/N-2017.09-SP2/libraries/syn /cae/synopsys/syn/N-2017.09-SP2/minpower/syn /cae/synopsys/syn/N-2017.09-SP2/dw/syn_ver /cae/synopsys/syn/N-2017.09-SP2/dw/sim_ver
+. scripts ../rtl /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h . /cae/synopsys/syn/N-2017.09-SP2/libraries/syn /cae/synopsys/syn/N-2017.09-SP2/minpower/syn /cae/synopsys/syn/N-2017.09-SP2/dw/syn_ver /cae/synopsys/syn/N-2017.09-SP2/dw/sim_ver
 #################################################################################
 # Library Setup
 #
@@ -459,6 +459,8 @@ RM-Info: Sourcing script file /home/CC/bbeuster/Projects/github.com/pbing/J1_WB/
 set_dont_use [get_lib_cells {tcbn90lphp*/CKB* tcbn90lphp*/CKN*}]
 Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h/tcbn90lphpwc_ccs.db'
 Information: Using CCS timing libraries. (TIM-024)
+Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h/tcbn90lphphvtwc_ccs.db'
+Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h/tcbn90lphplvtwc_ccs.db'
 Loading db file '/cae/synopsys/syn/N-2017.09-SP2/libraries/syn/dw_foundation.sldb'
 1
 1
@@ -660,6 +662,8 @@ link
   --------------------------------------------------------------------------
   * (2 designs)               /home/CC/bbeuster/Projects/github.com/pbing/J1_WB/syn/j1_wb.db, etc
   tcbn90lphpwc_ccs (library)  /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h/tcbn90lphpwc_ccs.db
+  tcbn90lphphvtwc_ccs (library) /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h/tcbn90lphphvtwc_ccs.db
+  tcbn90lphplvtwc_ccs (library) /project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h/tcbn90lphplvtwc_ccs.db
   dw_foundation.sldb (library) /cae/synopsys/syn/N-2017.09-SP2/libraries/syn/dw_foundation.sldb
 
 1
@@ -698,11 +702,13 @@ if {[file exists [which ${DCRM_CONSTRAINTS_INPUT_FILE}]]} {
 RM-Info: Sourcing script file /home/CC/bbeuster/Projects/github.com/pbing/J1_WB/syn/scripts/j1_wb.constraints.tcl
 
 # Constraints
-set clk_period [expr 1.0e9/400.0e6]
-2.5
+set clk_period [expr 1.0e9/120.0e6]
+8.33333333333
 create_clock -period $clk_period [get_ports clk]
 1
-set_input_delay  -clock [get_clocks clk] 1.0 [remove_from_collection [all_inputs] [get_clocks clk]]
+set_input_delay  -clock [get_clocks clk] 1.0 [remove_from_collection [all_inputs] [get_ports {clk wb.dat_s}]]
+1
+set_input_delay  -clock [get_clocks clk] 7.33 [get_ports wb.dat_s]
 1
 set_output_delay -clock [get_clocks clk] 0.0 [all_outputs]
 1
@@ -934,7 +940,7 @@ check_design -summary
 ****************************************
 check_design summary:
 Version:     N-2017.09-SP2
-Date:        Thu Dec 14 10:09:39 2017
+Date:        Thu Dec 14 13:25:15 2017
 ****************************************
 
                    Name                                            Total
@@ -1113,7 +1119,9 @@ Information: There are 16 potential problems in your design. Please run 'check_d
 Information: Uniquified 2 instances of design 'register_file_1'. (OPT-1056)
   Simplifying Design 'j1_wb'
 
-Loaded alib file '/project/design/CCE4600/lib/alib-52/tcbn90lphpwc_ccs.db.alib'
+Loaded alib file '/project/design/CCE4600/lib/alib-52/tcbn90lphpwc_ccs.db.alib' (placeholder)
+Loaded alib file '/project/design/CCE4600/lib/alib-52/tcbn90lphphvtwc_ccs.db.alib'
+Loaded alib file '/project/design/CCE4600/lib/alib-52/tcbn90lphplvtwc_ccs.db.alib' (placeholder)
   Building model 'DW01_NAND2'
 Information: Ungrouping hierarchy dstack before Pass 1 (OPT-776)
 Information: Ungrouping hierarchy rstack before Pass 1 (OPT-776)
@@ -1137,6 +1145,10 @@ Information: In design 'j1_wb', the register 'wb.stb_reg' is removed because it 
 Information: Updating design information... (UID-85)
 Information: The library cell 'TIEL' in the library 'tcbn90lphpwc_ccs' is not characterized for internal power. (PWR-536)
 Information: The library cell 'TIEH' in the library 'tcbn90lphpwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIELHVT' in the library 'tcbn90lphphvtwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIEHHVT' in the library 'tcbn90lphphvtwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIELLVT' in the library 'tcbn90lphplvtwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIEHLVT' in the library 'tcbn90lphplvtwc_ccs' is not characterized for internal power. (PWR-536)
 Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
 Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_j1_wb, since there are no registers. (PWR-806)
 Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_register_file_1_1_31, since there are no registers. (PWR-806)
@@ -1214,6 +1226,11 @@ Information: Automatic shift-register identification is enabled for scan. Not al
   Beginning Mapping Optimizations  (Ultra High effort)
   -------------------------------
   Mapping Optimization (Phase 1)
+  Mapping Optimization (Phase 2)
+  Mapping Optimization (Phase 3)
+  Mapping Optimization (Phase 4)
+  Mapping Optimization (Phase 5)
+  Mapping Optimization (Phase 6)
 
   Beginning Constant Register Removal
   -----------------------------------
@@ -1264,35 +1281,50 @@ Information: Automatic shift-register identification is enabled for scan. Not al
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:22   26301.9      0.94      50.4       0.0                           10739.1553
-    0:00:24   28531.6      0.00       0.0       0.0                           13145.8613
-    0:00:24   28531.6      0.00       0.0       0.0                           13145.8613
-    0:00:25   28530.9      0.01       0.0       0.0                           13145.3770
+    0:00:39   25791.1      1.07      91.1       0.1                           5890.6636
+    0:00:41   28302.3      0.05       4.5       0.2                           9122.3545
+    0:00:41   28302.3      0.05       4.5       0.2                           9122.3545
+    0:00:43   28302.3      0.06       4.6       0.2                           9088.7432
+    0:00:45   28304.4      0.06       4.7       0.2                           9104.7607
+    0:00:46   28304.4      0.06       4.8       0.2                           9104.7607
 
   Beginning WLM Backend Optimization
   --------------------------------------
-    0:00:26   28286.1      0.00       0.0       0.0                           12854.3057
-    0:00:27   28009.5      0.01       0.0       0.0                           12460.5576
-    0:00:27   28009.5      0.01       0.0       0.0                           12460.5576
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
+    0:00:48   28196.5      0.05       3.2       0.2                           8576.9277
+    0:00:49   28154.1      0.05       3.4       0.1                           7673.1519
+    0:00:49   28154.1      0.05       3.4       0.1                           7673.1519
+    0:00:50   28874.6      0.04       2.7       0.1                           8598.7910
+    0:00:50   28874.6      0.04       2.7       0.1                           8598.7910
+    0:00:50   28936.0      0.03       2.5       0.1                           8717.4600
+    0:00:50   28936.0      0.03       2.5       0.1                           8717.4600
+    0:00:52   29829.9      0.02       1.0       1.0                           9701.5586
+    0:00:52   29829.9      0.02       1.0       1.0                           9701.5586
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+
+
+  Beginning Design Rule Fixing  (max_transition)  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:52   29921.7      0.00       0.0       1.0                           9893.7275
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+    0:00:53   29777.7      0.00       0.0       0.0                           9663.6367
+    0:00:53   29777.7      0.00       0.0       0.0                           9664.5293
 
 
   Beginning Leakage Power Optimization  (max_leakage_power 0)
@@ -1302,10 +1334,7 @@ Information: Automatic shift-register identification is enabled for scan. Not al
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:29   28846.3      0.00       0.0       0.0                           13197.8877
-  Global Optimization (Phase 32)
-  Global Optimization (Phase 33)
-  Global Optimization (Phase 34)
+    0:00:53   29777.7      0.00       0.0       0.0                           9664.5293
   Global Optimization (Phase 35)
   Global Optimization (Phase 36)
   Global Optimization (Phase 37)
@@ -1319,44 +1348,56 @@ Information: Automatic shift-register identification is enabled for scan. Not al
   Global Optimization (Phase 45)
   Global Optimization (Phase 46)
   Global Optimization (Phase 47)
-    0:00:30   28506.2      0.00       0.0       0.0                           12612.6211
-    0:00:30   28506.2      0.00       0.0       0.0                           12612.6211
-    0:00:30   28506.2      0.00       0.0       0.0                           12612.6211
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
-    0:00:31   28346.1      0.00       0.0       0.0                           12418.0332
+  Global Optimization (Phase 48)
+  Global Optimization (Phase 49)
+    0:00:55   28982.5      0.02       2.0       0.0 st0_reg[8]/D              7088.0942
+    0:00:55   28999.5      0.01       1.0       0.0                           7130.5547
+    0:00:56   29015.0      0.01       1.0       0.0                           7154.6929
+    0:00:56   29015.0      0.01       1.0       0.0                           7154.6929
+    0:00:56   28854.8      0.02       1.0       0.0                           6851.8159
+    0:00:56   28854.8      0.02       1.0       0.0                           6851.8159
+    0:00:57   29335.3      0.02       1.2       0.0                           7478.3076
+    0:00:57   29335.3      0.02       1.2       0.0                           7478.3076
+    0:00:57   29358.6      0.02       1.1       0.0                           7516.3799
+    0:00:57   29358.6      0.02       1.1       0.0                           7516.3799
+    0:00:57   29509.6      0.02       0.2       0.0                           7718.9263
+    0:00:57   29509.6      0.02       0.2       0.0                           7718.9263
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
+    0:00:58   29542.8      0.00       0.0       0.0                           7842.8760
 
                                   TOTAL                                                
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:31   28339.7      0.00       0.0       0.0                           12418.5830
-    0:00:31   28129.5      0.00       0.0       0.0                           12279.1963
-    0:00:31   28134.4      0.00       0.0       0.0                           12280.0898
-    0:00:31   28134.4      0.00       0.0       0.0                           12280.0898
-    0:00:31   28094.9      0.00       0.0       0.0                           12244.6221
-    0:00:32   28055.4      0.00       0.0       0.0                           12157.7471
-    0:00:32   28055.4      0.00       0.0       0.0                           12157.7471
-    0:00:32   28055.4      0.00       0.0       0.0                           12157.7471
-    0:00:32   28055.4      0.00       0.0       0.0                           12157.7471
-    0:00:32   27692.0      0.00       0.0       0.0                           11730.4365
+    0:00:58   29506.8      0.05       0.2       0.0                           7842.9375
+    0:00:59   28614.9      0.00       0.0       0.0                           7019.2471
+    0:00:59   28602.2      0.00       0.0       0.0                           7002.4805
+    0:00:59   28602.2      0.00       0.0       0.0                           7002.4805
+    0:01:00   28504.8      0.00       0.0       0.0                           6694.8877
+
+  Beginning Delay Optimization HSVT Pass
+  --------------------------------------
+    0:01:03   28504.8      0.00       0.0       0.0                           6694.8877
+    0:01:03   28504.8      0.00       0.0       0.0                           6694.8877
+    0:01:03   28504.8      0.00       0.0       0.0                           6694.8877
+    0:01:03   28504.8      0.00       0.0       0.0                           6694.8877
+    0:01:08   28466.0      0.00       0.0       0.0                           6525.2881
+    0:01:08   28466.0      0.00       0.0       0.0                           6525.2881
+    0:01:08   28466.0      0.00       0.0       0.0                           6525.2881
+    0:01:08   28466.0      0.00       0.0       0.0                           6525.2881
+    0:01:09   28073.0      0.00       0.0       0.0                           6191.8228
 Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h/tcbn90lphpwc_ccs.db'
+Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h/tcbn90lphphvtwc_ccs.db'
+Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h/tcbn90lphplvtwc_ccs.db'
 
 
 Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
@@ -1718,6 +1759,7 @@ INFO:    Saving user path groups to auto_path_groups.user_path_groups.tcl...
 INFO:    User path groups saved
 INFO:    set allRegisters [all_registers]
 INFO:    Collecting hierarchies with timing violations...
+Information: Changed wire load model for 'j1_wb' from 'TSMC16K_Lowk_Conservative' to 'TSMC8K_Lowk_Conservative'. (OPT-170)
 Information: Updating design information... (UID-85)
 INFO:    Collected 0 hierarchies with timing violations
 INFO:    Creating path groups for hierarchies with timing violations...
@@ -1743,6 +1785,8 @@ Information: There are 3 potential problems in your design. Please run 'check_de
 
 
 Loaded alib file '/project/design/CCE4600/lib/alib-52/tcbn90lphpwc_ccs.db.alib'
+Loaded alib file '/project/design/CCE4600/lib/alib-52/tcbn90lphphvtwc_ccs.db.alib'
+Loaded alib file '/project/design/CCE4600/lib/alib-52/tcbn90lphplvtwc_ccs.db.alib'
 Information: State dependent leakage is now switched from on to off.
 
   Beginning Pass 1 Mapping  (Incremental)
@@ -1752,6 +1796,10 @@ Information: State dependent leakage is now switched from on to off.
 Information: Updating design information... (UID-85)
 Information: The library cell 'TIEL' in the library 'tcbn90lphpwc_ccs' is not characterized for internal power. (PWR-536)
 Information: The library cell 'TIEH' in the library 'tcbn90lphpwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIELHVT' in the library 'tcbn90lphphvtwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIEHHVT' in the library 'tcbn90lphphvtwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIELLVT' in the library 'tcbn90lphplvtwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIEHLVT' in the library 'tcbn90lphplvtwc_ccs' is not characterized for internal power. (PWR-536)
 Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
 Information: Automatic shift-register identification is enabled for scan. Not all registers will be scan-replaced. (OPT-467)
 
@@ -1759,8 +1807,8 @@ Information: Automatic shift-register identification is enabled for scan. Not al
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:02   27692.0      0.00       0.0       0.0                           11730.4365
-    0:00:02   27692.0      0.00       0.0       0.0                           11730.4365
+    0:00:07   28073.0      0.00       0.0       0.0                           6191.8228
+    0:00:07   28073.0      0.00       0.0       0.0                           6191.8228
 
   Beginning Mapping Optimizations  (Ultra High effort)  (Incremental)
   -------------------------------
@@ -1775,54 +1823,64 @@ Information: Automatic shift-register identification is enabled for scan. Not al
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:02   27689.9      0.00       0.0       0.0                           11729.8828
-    0:00:02   27682.1      0.10       2.3       0.0                           11719.9268
-    0:00:03   27701.9      0.10       2.4       0.0                           11772.3203
-    0:00:03   27701.9      0.10       2.4       0.0                           11772.3203
-    0:00:03   27852.9      0.06       1.1       0.0                           11981.0928
-    0:00:03   27852.9      0.06       1.1       0.0                           11981.0928
-    0:00:03   27907.9      0.00       0.0       0.0                           12071.4570
+    0:00:08   28070.9      0.00       0.0       0.0                           6191.7432
+    0:00:08   28024.3      0.10       3.8       0.0                           6144.6621
+    0:00:08   28018.7      0.10       3.2       0.0                           6300.6709
+    0:00:09   28018.7      0.10       3.2       0.0                           6300.6709
+    0:00:09   28182.4      0.00       0.0       0.0                           6598.2993
+    0:00:09   28182.4      0.00       0.0       0.0                           6598.2993
+    0:00:09   28183.8      0.00       0.0       0.0                           6610.5146
 
   Beginning Delay Optimization
   ----------------------------
-    0:00:03   27907.9      0.00       0.0       0.0                           12071.4570
-    0:00:03   27907.9      0.00       0.0       0.0                           12071.4570
-    0:00:03   27907.9      0.00       0.0       0.0                           12071.4570
-    0:00:03   27907.9      0.00       0.0       0.0                           12071.4570
-    0:00:03   27907.9      0.00       0.0       0.0                           12071.4570
-    0:00:04   27917.1      0.01       0.0       0.0                           12071.2510
-    0:00:04   27917.1      0.01       0.0       0.0                           12071.2510
-    0:00:04   27809.1      0.01       0.0       0.0                           11957.6543
-    0:00:04   27809.1      0.01       0.0       0.0                           11957.6543
-    0:00:04   27838.7      0.00       0.0       0.0                           11997.7539
-    0:00:04   27838.7      0.00       0.0       0.0                           11997.7539
-    0:00:04   27838.7      0.00       0.0       0.0                           11997.7539
-    0:00:04   27838.7      0.00       0.0       0.0                           11997.7539
-    0:00:04   27838.7      0.00       0.0       0.0                           11997.7539
-    0:00:04   27838.7      0.00       0.0       0.0                           11997.7539
-    0:00:04   27838.7      0.00       0.0       0.0                           11997.7539
-    0:00:04   27838.7      0.00       0.0       0.0                           11997.7539
-    0:00:05   27823.9      0.00       0.0       0.0                           11977.8291
-    0:00:05   27823.9      0.00       0.0       0.0                           11977.8291
-    0:00:05   27823.9      0.00       0.0       0.0                           11977.8291
-    0:00:05   27823.9      0.00       0.0       0.0                           11977.8291
-    0:00:05   27823.9      0.00       0.0       0.0                           11977.8291
-    0:00:05   27823.9      0.00       0.0       0.0                           11977.8291
-    0:00:05   27823.9      0.00       0.0       0.0                           11977.8291
-    0:00:05   27823.9      0.00       0.0       0.0                           11977.8291
-    0:00:05   27823.9      0.00       0.0       0.0                           11977.8291
-    0:00:05   27823.9      0.00       0.0       0.0                           11978.3828
+    0:00:09   28183.8      0.00       0.0       0.0                           6610.5146
+    0:00:09   28183.8      0.00       0.0       0.0                           6610.5146
+    0:00:09   28183.8      0.00       0.0       0.0                           6610.5146
+    0:00:09   28183.8      0.00       0.0       0.0                           6610.5146
+    0:00:09   28183.8      0.00       0.0       0.0                           6610.5146
+    0:00:11   28192.2      0.02       0.0       0.0                           6597.1772
+    0:00:12   28192.2      0.00       0.0       0.0                           6587.1577
+    0:00:12   28192.2      0.00       0.0       0.0                           6587.1577
+    0:00:12   28166.1      0.00       0.0       0.0                           6471.8955
+    0:00:12   28166.1      0.00       0.0       0.0                           6471.8955
+    0:00:12   28168.3      0.00       0.0       0.0                           6492.2183
+    0:00:12   28168.3      0.00       0.0       0.0                           6492.2183
+    0:00:12   28168.3      0.00       0.0       0.0                           6492.2183
+    0:00:12   28168.3      0.00       0.0       0.0                           6492.2183
+    0:00:12   28168.3      0.00       0.0       0.0                           6492.2183
+    0:00:12   28168.3      0.00       0.0       0.0                           6492.2183
+    0:00:12   28168.3      0.00       0.0       0.0                           6492.2183
+    0:00:12   28168.3      0.00       0.0       0.0                           6492.2183
+    0:00:13   28154.1      0.00       0.0       0.0                           6447.9839
+    0:00:13   28154.1      0.00       0.0       0.0                           6447.9839
+    0:00:13   28154.1      0.00       0.0       0.0                           6447.9839
+    0:00:13   28154.1      0.00       0.0       0.0                           6447.9839
+    0:00:13   28154.1      0.00       0.0       0.0                           6447.9839
+    0:00:13   28154.1      0.00       0.0       0.0                           6447.9839
+    0:00:13   28154.1      0.00       0.0       0.0                           6447.9839
+    0:00:13   28154.1      0.00       0.0       0.0                           6447.9839
+    0:00:13   28154.1      0.00       0.0       0.0                           6447.9839
+    0:00:13   28154.1      0.00       0.0       0.0                           6448.0625
 
                                   TOTAL                                                
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:05   27823.9      0.00       0.0       0.0                           11978.3828
-    0:00:05   27819.0      0.00       0.0       0.0                           11971.9844
-    0:00:06   27497.9      0.00       0.0       0.0                           11545.9102
-    0:00:06   27497.9      0.00       0.0       0.0                           11545.9102
-    0:00:06   27462.0      0.00       0.0       0.0                           11508.0205
+    0:00:13   28154.1      0.00       0.0       0.0                           6448.0625
+    0:00:13   28152.7      0.00       0.0       0.0                           6443.4805
+
+  Beginning Delay Optimization HSVT Pass
+  --------------------------------------
+    0:00:17   28152.7      0.00       0.0       0.0                           6443.4805
+    0:00:17   28152.7      0.00       0.0       0.0                           6443.4805
+    0:00:17   28152.7      0.00       0.0       0.0                           6443.4805
+    0:00:17   28152.7      0.00       0.0       0.0                           6443.4805
+    0:00:22   27907.9      0.00       0.0       0.0                           6034.8740
+    0:00:22   27907.9      0.00       0.0       0.0                           6034.8740
+    0:00:23   27843.7      0.00       0.0       0.0                           5966.1006
 Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h/tcbn90lphpwc_ccs.db'
+Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h/tcbn90lphphvtwc_ccs.db'
+Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h/tcbn90lphplvtwc_ccs.db'
 
 
 Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
@@ -1851,6 +1909,10 @@ Information: There are 3 potential problems in your design. Please run 'check_de
   Updating timing information
 Information: The library cell 'TIEL' in the library 'tcbn90lphpwc_ccs' is not characterized for internal power. (PWR-536)
 Information: The library cell 'TIEH' in the library 'tcbn90lphpwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIELHVT' in the library 'tcbn90lphphvtwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIEHHVT' in the library 'tcbn90lphphvtwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIELLVT' in the library 'tcbn90lphplvtwc_ccs' is not characterized for internal power. (PWR-536)
+Information: The library cell 'TIEHLVT' in the library 'tcbn90lphplvtwc_ccs' is not characterized for internal power. (PWR-536)
 Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
 
 
@@ -1861,9 +1923,11 @@ Information: The target library(s) contains cell(s), other than black boxes, tha
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:01   27462.0      0.00       0.0       0.0                           11508.0205
-    0:00:03   27258.0      0.00       0.0       0.0                           11352.9902
+    0:00:04   27843.7      0.00       0.0       0.0                           5966.1006
+    0:00:06   27540.3      0.00       0.0       0.0                           5815.0254
 Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphp_150h/tcbn90lphpwc_ccs.db'
+Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphphvt_150h/tcbn90lphphvtwc_ccs.db'
+Loading db file '/project/design/CCE4600/lib/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn90lphplvt_150h/tcbn90lphplvtwc_ccs.db'
 
 
 Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
