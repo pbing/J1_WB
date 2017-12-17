@@ -1,5 +1,6 @@
+
 /* Type definitions */
-package types;
+package j1_types;
 
    typedef enum logic [2:0] 
                 {TAG_UBRANCH, TAG_ZBRANCH, TAG_CALL, TAG_ALU} tag_t;

@@ -15,7 +15,7 @@ module j1_wb
     input wire   reset,          // reset
     if_wb.master wb);            // Wishbone bus
 
-   import types::*;
+   import j1_types::*;
 
    /* instruction fetch */
    var instr_t  instr;           // instruction
