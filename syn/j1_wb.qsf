@@ -42,7 +42,7 @@ set_global_assignment -name DEVICE 5CGXFC5C6F27C7
 set_global_assignment -name TOP_LEVEL_ENTITY top_c5gx
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 12
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "TUE JUN  4 20:41:15 2013"
-set_global_assignment -name LAST_QUARTUS_VERSION "17.1.0 Lite Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.0.0 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
 set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
@@ -761,8 +761,17 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[3]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[4]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[5]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[6]
+set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (Verilog)"
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_BOARD_DESIGN_TIMING_TOOL "<None>"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT NONE -section_id eda_board_design_timing
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+
+
 set_global_assignment -name SYSTEMVERILOG_FILE ../misc/wb_io.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/types.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/j1_types.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/interfaces.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/register_file.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/j1_wb_qii.sv
@@ -774,15 +783,6 @@ set_global_assignment -name VERILOG_FILE ../misc/rom.v
 set_global_assignment -name SYSTEMVERILOG_FILE ../misc/sync_reset.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../misc/top_c5gx.sv
 set_global_assignment -name SDC_FILE j1_wb.sdc
-set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
 set_global_assignment -name QIP_FILE MegaWizard/pll.qip
 set_global_assignment -name SIP_FILE MegaWizard/pll.sip
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (Verilog)"
-set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
-set_global_assignment -name EDA_BOARD_DESIGN_TIMING_TOOL "<None>"
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT NONE -section_id eda_board_design_timing
-set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
-
-
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
