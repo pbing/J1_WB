@@ -1,0 +1,2 @@
+bsub -Is vcs -file vcs.args tb1.sv
+bsub -Is ./simv -ucli -do run1.do
