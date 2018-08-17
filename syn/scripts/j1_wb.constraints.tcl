@@ -1,6 +1,6 @@
 # Constraints
 
-set clk_period [expr 1.0e9/120.0e6]
+set clk_period [expr 1.0e9/120e6]
 
 create_clock -period $clk_period [get_ports clk]
 

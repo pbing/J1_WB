@@ -41,17 +41,19 @@ set ADDITIONAL_LINK_LIB_FILES     ""  ;#  Extra link logical libraries not inclu
 
 set MIN_LIBRARY_FILES             ""  ;#  List of max min library pairs "max1 min1 max2 min2 max3 min3"...
 
-set MW_REFERENCE_LIB_DIRS         ""  ;#  Milkyway reference libraries (include IC Compiler ILMs here)
+set MW_REFERENCE_LIB_DIRS [list /project/design/CCE4600/lib/TSMCHOME/digital/Back_End/milkyway/tcbn90lphp_150e/frame_only/tcbn90lphp \
+			       /project/design/CCE4600/lib/TSMCHOME/digital/Back_End/milkyway/tcbn90lphphvt_150e/frame_only/tcbn90lphphvt \
+			       /project/design/CCE4600/lib/TSMCHOME/digital/Back_End/milkyway/tcbn90lphplvt_150e/frame_only/tcbn90lphplvt] ;#  Milkyway reference libraries 
 
 set MW_REFERENCE_CONTROL_FILE     ""  ;#  Reference Control file to define the Milkyway reference libs
 
-set TECH_FILE                     ""  ;#  Milkyway technology file
-set MAP_FILE                      ""  ;#  Mapping file for TLUplus
-set TLUPLUS_MAX_FILE              ""  ;#  Max TLUplus file
-set TLUPLUS_MIN_FILE              ""  ;#  Min TLUplus file
+set TECH_FILE                     "/project/design/CCE4600/lib/TSMCHOME/digital/Back_End/milkyway/tcbn90lphp_150e/techfiles/tsmcn90_6lmT1_6x6.tf"  ;#  Milkyway technology file
+set MAP_FILE                      "scripts/tluplus.map"  ;#  Mapping file for TLUplus
+set TLUPLUS_MAX_FILE              "/project/design/CCE4600/lib/TSMCHOME/digital/Back_End/milkyway/tcbn90lphp_150e/techfiles/cln90_1p6m_top1_cworst.itf.tlu" ;#  Max TLUplus file
+set TLUPLUS_MIN_FILE              "/project/design/CCE4600/lib/TSMCHOME/digital/Back_End/milkyway/tcbn90lphp_150e/techfiles/cln90_1p6m_top1_cbest.itf.tlu"  ;#  Min TLUplus file
 
-set MIN_ROUTING_LAYER            ""   ;# Min routing layer
-set MAX_ROUTING_LAYER            ""   ;# Max routing layer
+set MIN_ROUTING_LAYER            "M1"   ;# Min routing layer
+set MAX_ROUTING_LAYER            "M6"   ;# Max routing layer
 
 set LIBRARY_DONT_USE_FILE        "dont_use.tcl"   ;# Tcl file with library modifications for dont_use
 set LIBRARY_DONT_USE_PRE_COMPILE_LIST ""; #Tcl file for customized don't use list before first compile

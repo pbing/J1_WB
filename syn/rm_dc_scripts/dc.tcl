@@ -544,7 +544,7 @@ if {$OPTIMIZATION_FLOW != "rtm_exp"} {
 ################################################################################
 ## RM+ Variable and Command Settings before incremental compile
 ################################################################################
-if { $OPTIMIZATION_FLOW == "hplp" } {
+if { false && $OPTIMIZATION_FLOW == "hplp" } {
     if {[shell_is_in_topographical_mode]} {
 	# You can use placement aware multibit banking to group single-bit register cells that 
 	# are physically near each other into a multibit registers
@@ -1031,7 +1031,7 @@ report_clock_gating -nosplit > ${REPORTS_DIR}/${DCRM_FINAL_CLOCK_GATING_REPORT}
 # for each threshold voltage group in the design.
 # report_threshold_voltage_group -nosplit > ${REPORTS_DIR}/${DCRM_THRESHOLD_VOLTAGE_GROUP_REPORT}
 
-if {[shell_is_in_topographical_mode]} {
+if {false && [shell_is_in_topographical_mode]} {
   # report_congestion (topographical mode only) uses zroute for estimating and reporting 
   # routing related congestion which improves the congestion correlation with IC Compiler.
   # Design Compiler Topographical supports create_route_guide command to be consistent with IC

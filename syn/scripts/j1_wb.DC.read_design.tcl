@@ -13,7 +13,7 @@ set hdlin_force_template_style true
 
 analyze -format sverilog \
         -define NO_MODPORT_EXPRESSIONS \
-    [list types.sv \
+    [list j1_types.sv \
          interfaces.sv \
          register_file.sv \
          j1_wb.sv]

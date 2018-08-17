@@ -1,2 +1,6 @@
-work/
 *.log
+*_LIB/
+logs/
+reports/
+results/
+work/

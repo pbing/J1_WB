@@ -2,11 +2,11 @@
 
 # wire load mode
 #  Design  WNS: ?  TNS: ? Number of Violating Paths: ?
-./clean.sh; dc_shell -f rm_dc_scripts/dc.tcl | tee logs/dc.log
+#./clean.sh; dc_shell -f rm_dc_scripts/dc.tcl | tee logs/dc.log
 
 # topographical mode
 #  Design  WNS: ?  TNS: ?  Number of Violating Paths: ?
-#./clean.sh; dc_shell -topographical_mode -f rm_dc_scripts/dc.tcl | tee logs/dc-topographical.log
+./clean.sh; dc_shell -topographical_mode -f rm_dc_scripts/dc.tcl | tee logs/dc-topographical.log
 
 # Error checking
 grep '^Error:' logs/* reports/*
@@ -15,7 +15,7 @@ grep '^Error:' logs/* reports/*
 # dc_shell> get_lib_attribute tcbn90lphpwc_ccs/ND2D1 area
 # 2.822400
 # 
-#  | dstack_depth | rstack-depth |  area | gates |
+#  | dstack_depth | rstack_depth |  area | gates |
 #  |--------------+--------------+-------+-------|
 #  |            8 |            8 | 10841 |  3841 |
 #  |           12 |           12 | 13572 |  4808 |
@@ -26,4 +26,3 @@ grep '^Error:' logs/* reports/*
 #  |           32 |           32 | 27071 |  9591 |
 #
 # gates = 240 * depth + 1957
-
