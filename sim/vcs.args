@@ -5,7 +5,7 @@
 -y ../rtl/
 -y ../misc/
 -y .
-../rtl/types.sv
+../rtl/j1_types.sv
 ../rtl/interfaces.sv
 +vcs+initreg+random
 +warn=noUII-L
