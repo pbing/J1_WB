@@ -21,12 +21,13 @@ module wb_ram
 
    spram
      #(.size(size))
-   ram(.clock   (wb.clk),
-       .address (wb.adr[$clog2(size) - 1:0]),
-       .data    (wb_dat_i),
-       .q       (wb_dat_o),
-       .cen     (ram_cen),
-       .wren    (ram_wen));
+   ram
+     (.clock   (wb.clk),
+      .address (wb.adr[$clog2(size) - 1:0]),
+      .data    (wb_dat_i),
+      .q       (wb_dat_o),
+      .cen     (ram_cen),
+      .wren    (ram_wen));
 
    assign ram_cen = valid;
    assign ram_wen = ram_cen & wb.we;
