@@ -1,0 +1,22 @@
+{signal: [
+  {name: "CLK_I", wave: "p........"},
+  {name: "ADR_O", wave: "223...222", data: ["03e9", "3ea", "2000", "3eb","03ec", "03ed"]},
+  {name: "DAT_O", wave: "x.3...x..", data: ["0001"]},
+  {name: "CYC_O", wave: "1........"},
+  {name: "STB_O", wave: "1........"},
+  {name: "STALL_I", wave: "0.1..0..."},
+  {name: "WE_O", wave: "0.1...0.."},
+  {name: "DAT_I", wave: "222x...22", data: ["8001", "c000", "6023", "6103", "8001"]},
+  {name: "ACK_I", wave: "1..0..1.."},
+  {},
+  {name: "is_ld", wave: "0........"},
+  {name: "is_st", wave: "0.1...0.."},
+  {name: "state", wave: "2..2..22.", data: ["START", "ST0", "ST1", "START"]},
+  {},
+  {name: "instruction", wave: "222...422", data: ["lit 0001", "lit 4000", "store", "noop", "drop", "lit 0001"]},
+  {name: "T", wave: "x22.....x", data: ["0001", "4000"]},
+  {name: "N", wave: "x.2...x..", data: ["0001"]},
+],
+ config: {hscale: 2.5},
+ foot: {text: "memory write with three wait cycles"}
+}
