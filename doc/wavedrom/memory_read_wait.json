@@ -13,7 +13,7 @@
   {name: "is_st", wave: "0......"},
   {name: "state", wave: "2.2..22", data: ["START", "LD0", "LD1", "START"]},
   {},
-  {name: "instruction", wave: "22...42", data: ["lit 4000", "@", "noop", "lit 4002"]},
+  {name: "instruction", wave: "224...2", data: ["lit 4000", "@", "noop", "lit 4002"]},
   {name: "T", wave: "x2....3", data: ["4000", "0001"]},
   {name: "N", wave: "x......"},
 ],

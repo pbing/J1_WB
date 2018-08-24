@@ -13,6 +13,8 @@ module wb_intercon
    wire        valid;
    wire        sel1, sel2, sel3, sel4, sel5;
    logic       sel1_r, sel2_r, sel3_r, sel4_r, sel5_r;
+
+   /* work around missing modport expressions */
    wire [15:0] wbm_dat_i, wbm_dat_o,
                wbs1_dat_i, wbs1_dat_o,
                wbs2_dat_i, wbs2_dat_o,
@@ -49,11 +51,11 @@ module wb_intercon
 `endif
 
    assign valid = wbm.cyc & wbm.stb;
-   assign sel1     = valid && (wbm.adr[15:13] == 3'b000);   // ROM 0000H...3FFFH
-   assign sel2     = valid && (wbm.adr[15:11] == 5'b00100); // RAM 4000H...4FFFH
-   assign sel3     = valid && (wbm.adr[15:11] == 5'b00101); // I/O 5000H...5FFFH
-   assign sel4     = valid && (wbm.adr[15:11] == 5'b00110); // I/O 6000H...6FFFH
-   assign sel5     = valid && (wbm.adr[15:11] == 5'b00111); // I/O 7000H...7FFFH
+   assign sel1  = valid && (wbm.adr[15:13] == 3'b000);   // ROM 0000H...3FFFH
+   assign sel2  = valid && (wbm.adr[15:11] == 5'b00100); // RAM 4000H...4FFFH
+   assign sel3  = valid && (wbm.adr[15:11] == 5'b00101); // I/O 5000H...5FFFH
+   assign sel4  = valid && (wbm.adr[15:11] == 5'b00110); // I/O 6000H...6FFFH
+   assign sel5  = valid && (wbm.adr[15:11] == 5'b00111); // I/O 7000H...7FFFH
 
    always_ff @(posedge wbm.clk)
      if (wbm.rst)

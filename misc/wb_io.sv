@@ -3,16 +3,19 @@
 `default_nettype none
 
 module wb_io
-  (if_wb.slave         wb,
-   output logic [15:0] io_out,
-   input  wire  [15:0] io_in);
+  #(parameter waitcycles = 0)
+   (if_wb.slave         wb,
+    output logic [15:0] io_out,
+    input  wire  [15:0] io_in);
 
-   wire valid;
-   wire io_ren;
-   wire io_wen;
+   wire                 valid;
+   wire                 io_ren;
+   wire                 io_wen;
+   logic [1:waitcycles] stall;   // optimized away when no waitcycles
 
-   wire  [15:0] wb_dat_i;
-   logic [15:0] wb_dat_o;
+   /* work around missing modport expressions */
+   wire  [15:0]         wb_dat_i;
+   logic [15:0]         wb_dat_o;
 
 `ifdef NO_MODPORT_EXPRESSIONS
    assign wb_dat_i = wb.dat_m;
@@ -28,7 +31,7 @@ module wb_io
 
    always_ff @(posedge wb.clk)
      if (io_ren)
-       wb_dat_o <= io_in; // FIXME add synchronizers
+       wb_dat_o <= io_in;
 
    assign io_ren = valid & ~wb.we;
    assign io_wen = valid &  wb.we;
@@ -42,9 +45,26 @@ module wb_io
      if (wb.rst)
        wb.ack <= 1'b0;
      else
-       wb.ack <= valid;
+       wb.ack <= valid & ~wb.stall;
 
-   assign wb.stall = 1'b0;
+   always_ff @(posedge wb.clk)
+     if (wb.rst)
+       stall <= '1;
+     else
+       if (stall == '0)
+         stall <= '1;
+       else
+         if (valid)
+           if (waitcycles < 2)
+             stall <= '0;
+           else
+             stall <= {1'b0, stall[$left(stall):$right(stall) - 1]};
+
+   always_comb
+     if (waitcycles == 0)
+       wb.stall = 1'b0;
+     else
+       wb.stall = valid & stall[$right(stall)];
 endmodule
 
 `resetall
