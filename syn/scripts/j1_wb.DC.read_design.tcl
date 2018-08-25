@@ -11,6 +11,11 @@ set_app_var template_parameter_style "%s"
 #set_app_var hdlin_module_name_limit 32
 set hdlin_force_template_style true
 
+# FSM variables
+set_app_var hdlin_reporting_level comprehensive
+set_app_var fsm_auto_inferring true
+#set_app_var fsm_enable_state_minimization true
+
 analyze -format sverilog \
         -define NO_MODPORT_EXPRESSIONS \
     [list j1_types.sv \
@@ -25,4 +30,3 @@ analyze -format sverilog \
 #elaborate $DESIGN_NAME -param "dstack_depth => 24, rstack_depth => 24"
 #elaborate $DESIGN_NAME -param "dstack_depth => 28, rstack_depth => 28"
 elaborate $DESIGN_NAME
-

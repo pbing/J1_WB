@@ -1,5 +1,6 @@
 *.log
 *_LIB/
+default.svf
 logs/
 reports/
 results/
