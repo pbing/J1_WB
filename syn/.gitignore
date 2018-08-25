@@ -1,0 +1,7 @@
+*
+!.gitignore
+!*.qdf
+!*.qpf
+!*.qsf
+!*.sdc
+!MegaWizard/*
