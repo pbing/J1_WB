@@ -1,0 +1,20 @@
+{signal: [
+  {name: "CLK_I", wave: "p......."},
+  {name: "ADR_O", wave: "22..2..2", data: ["adr<n>", "adr<n+1>", "adr<n+2>", "adr<n+3>"]},
+  {name: "DAT_O", wave: "x......."},
+  {name: "CYC_O", wave: "1......."},
+  {name: "STB_O", wave: "1......."},
+  {name: "STALL_I", wave: "01.01.01"},
+  {name: "WE_O", wave: "0......."},
+  {name: "DAT_I", wave: "x2xx2xx2", data: ["instr<n>", "instr<n+1>", "instr<n+2>"]},
+  {name: "ACK_I", wave: "010.10.1"},
+  {},
+  {name: "is_ld", wave: "0......."},
+  {name: "is_st", wave: "0......."},
+  {name: "state", wave: "2.......", data: ["START"]},
+  {},
+  {name: "instruction", wave: "424.24.2", data: ["noop", "instr<n>", "noop", "instr<n+1>", "noop", "instr<n+2>"]},
+],
+ config: {hscale: 2.5},
+ foot: {text: "instruction fetch with 2 wait cycles"}
+}

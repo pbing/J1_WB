@@ -18,7 +18,7 @@ module j1_wb
    import j1_types::*;
 
    /* instruction fetch */
-   var instr_t  instr;           // instruction
+   var instr_t  instr;  // instruction
    logic [12:0] _npc, npc,       // processor counter
                 pc;
 
@@ -39,9 +39,12 @@ module j1_wb
    logic        _rstkW;          // return stack write
 
    /* memory access control */
-   logic        is_ld, is_ld_r,
-                is_st, is_st_r,
-                is_mem, is_mem_r;
+   logic        is_ld, is_st;
+   wire         instr_bubble;
+   wire         mem_addr_sel;
+   wire         ld_st0;
+   logic        we_l;
+   logic [15:0] dat_o_l;
 
    /* work around missing modport expressions */
    wire  [15:0] wb_dat_i;
@@ -80,36 +83,34 @@ module j1_wb
    /* select instruction types */
    always_comb
      begin
-	is_lit     = instr.lit.tag;
-	is_ubranch = instr.bra.tag == TAG_UBRANCH;
-	is_zbranch = instr.bra.tag == TAG_ZBRANCH;
-	is_call    = instr.bra.tag == TAG_CALL;
-	is_alu     = instr.bra.tag == TAG_ALU;
+        is_lit     = instr.lit.tag;
+        is_ubranch = instr.bra.tag == TAG_UBRANCH;
+        is_zbranch = instr.bra.tag == TAG_ZBRANCH;
+        is_call    = instr.bra.tag == TAG_CALL;
+        is_alu     = instr.bra.tag == TAG_ALU;
         is_ld      = is_alu && instr.alu.op == OP_AT;
         is_st      = is_alu & instr.alu.n_to_mem;
-        is_mem     = is_ld | is_st;
-        is_mem_r   = is_ld_r | is_st_r;
      end
 
    /* calculate next TOS value */
    always_comb
      if (is_lit)
        _st0 = {1'b0, instr.lit.immediate};
-     else if (is_ld_r && wb.ack)
+     else if (ld_st0)
        _st0 = wb_dat_i;
      else
        begin
-	  var op_t op;
+          var op_t op;
 
-	  unique case (1'b1)
-	    is_ubranch:  op = OP_T;
-	    is_zbranch:  op = OP_N;
-	    is_call   :  op = OP_T;
-	    is_alu    :  op = instr.alu.op;
-	    default      op = op_t'('x);
-	  endcase
+          unique case (1'b1)
+            is_ubranch:  op = OP_T;
+            is_zbranch:  op = OP_N;
+            is_call   :  op = OP_T;
+            is_alu    :  op = instr.alu.op;
+            default      op = op_t'('x);
+          endcase
 
-	  case (op)
+          case (op)
             OP_T         : _st0 = st0;
             OP_N         : _st0 = st1;
             OP_T_PLUS_N  : _st0 = st0 + st1;
@@ -127,51 +128,51 @@ module j1_wb
             OP_DEPTH     : _st0 = {3'b0, rsp, 3'b0, dsp};
             OP_N_ULS_T   : _st0 = {16{(st1 < st0)}};
             default        _st0 = 'x;
-	  endcase
+          endcase
        end
 
    /* data and return stack control */
    always_comb
      begin
-	_dsp   = dsp;
-	_dstkW = 1'b0;
-	_rsp   = rsp;
-	_rstkW = 1'b0;
-	_rstkD = 16'hx;
+        _dsp   = dsp;
+        _dstkW = 1'b0;
+        _rsp   = rsp;
+        _rstkW = 1'b0;
+        _rstkD = 16'hx;
 
-	/* literals */
-	if (is_lit)
-	  begin
-	     _dsp   = dsp + 5'd1;
-	     _dstkW = 1'b1;
-	  end
-	/* ALU operations */
-	else if (is_alu)
-	  begin
-	     logic signed [4:0] dd, rd; // stack delta
+        /* literals */
+        if (is_lit)
+          begin
+             _dsp   = dsp + 5'd1;
+             _dstkW = 1'b1;
+          end
+        /* ALU operations */
+        else if (is_alu)
+          begin
+             logic signed [4:0] dd, rd; // stack delta
 
-	     dd     = $signed(instr.alu.dstack); // explicit, because signed info is lost when using j1_wb_qii.sv
-	     rd     = $signed(instr.alu.rstack);
-	     _dsp   = dsp + dd;
-	     _dstkW = instr.alu.t_to_n;
-	     _rsp   = rsp + rd;
-	     _rstkW = instr.alu.t_to_r;
-	     _rstkD = st0;
-	  end
-	else
-	  /* branch/call */
-	  begin
-	     if (is_zbranch)
-	       /* predicated jump is like DROP */
+             dd     = $signed(instr.alu.dstack); // explicit, because signed info is lost when using j1_wb_qii.sv
+             rd     = $signed(instr.alu.rstack);
+             _dsp   = dsp + dd;
+             _dstkW = instr.alu.t_to_n;
+             _rsp   = rsp + rd;
+             _rstkW = instr.alu.t_to_r;
+             _rstkD = st0;
+          end
+        else
+          /* branch/call */
+          begin
+             if (is_zbranch)
+               /* predicated jump is like DROP */
                _dsp = dsp - 5'd1;
 
-	     if (is_call)
-	       begin
-		  _rsp   = rsp + 5'd1;
-		  _rstkW = 1'b1;
-		  _rstkD = npc << 1;
-	       end
-	  end
+             if (is_call)
+               begin
+                  _rsp   = rsp + 5'd1;
+                  _rstkW = 1'b1;
+                  _rstkD = npc << 1;
+               end
+          end
      end
 
    /* control PC */
@@ -183,25 +184,50 @@ module j1_wb
      else
        pc = npc;
 
-   always_comb _npc = is_mem ? pc : pc + 13'd1;
+   always_comb
+     if(mem_addr_sel || wb.stall)
+       _npc = pc;
+     else
+       _npc= pc + 13'd1;
 
    /* update PC and stacks */
    always_ff @(posedge clk or posedge reset)
      if (reset)
        begin
-	  npc <= 13'h0;
-	  dsp <=  5'd0;
-	  st0 <= 16'h0;
-	  rsp <=  5'd0;
+          npc <= 13'h0;
+          dsp <=  5'd0;
+          st0 <= 16'h0;
+          rsp <=  5'd0;
        end
      else
        if (wb.cyc)
          begin
-	    npc <= _npc;
-	    dsp <= _dsp;
-	    st0 <= _st0;
-	    rsp <= _rsp;
+            npc <= _npc;
+            dsp <= _dsp;
+            st0 <= _st0;
+            rsp <= _rsp;
          end
+
+
+   always_ff @(posedge clk or posedge reset)
+     if (reset)
+       we_l <= 1'b0;
+     else
+       if (is_ld || is_st)
+         we_l <= wb.we;
+
+   always_ff @(posedge clk or posedge reset)
+     if (reset)
+       dat_o_l <= '0;
+     else
+       if (is_st)
+         dat_o_l <= st1;
+
+   always_comb
+     if (!wb.ack || instr_bubble)
+       instr = 16'h6000; // NOOP
+     else
+       instr = wb_dat_i;
 
    /* Wishbone */
    always_ff @(posedge clk or posedge reset)
@@ -216,45 +242,72 @@ module j1_wb
           wb.stb <= 1'b1;
        end
 
-   always_ff @(posedge clk or posedge reset)
-     if (reset)
-       is_ld_r <= 1'b0;
+   always_comb
+     if (is_st)
+       wb_dat_o = st1;
      else
-       if (is_ld)
-         is_ld_r <= 1'b1;
-       else if (wb.ack)
-         is_ld_r <= 1'b0;
+       wb_dat_o = dat_o_l;
+
+   always_comb
+     if (mem_addr_sel)
+       begin
+          wb.adr = {1'b0, st0[15:1]};
+          wb.we  = is_st || (we_l && !is_ld);
+       end
+     else
+       begin
+          wb.adr = {3'b0, pc};
+          wb.we  = 1'b0;
+       end
+
+   /* Control FSM */
+   enum integer unsigned {START, LD[2], ST[2]} state, next;
 
    always_ff @(posedge clk or posedge reset)
      if (reset)
-       is_st_r <= 1'b0;
+       state <= START;
      else
-       if (is_st)
-         is_st_r <= 1'b1;
-       else if (wb.ack)
-         is_st_r <= 1'b0;
+       state <= next;
 
    always_comb
      begin
- 	wb_dat_o = st1;
+        next = state;
 
-        if (is_mem)
-          begin
-	     wb.adr = {1'b0, st0[15:1]};
-             wb.we  = is_st;
-          end
-        else
-          begin
-             wb.adr = {3'b0, pc};
-             wb.we  = 1'b0;
-          end
+        case (state)
+          START:
+            if (is_ld && wb.stall)
+              next = LD0;
+            else if (is_ld && !wb.stall)
+              next = LD1;
+            else if (is_st && wb.stall)
+              next = ST0;
+            else if (is_st && !wb.stall)
+              next = ST1;
 
-        /* When bus is used for memory access insert bubble. */
-        if (!wb.ack || is_mem_r)
-          instr = 16'h6000; // NOOP
-        else
-          instr = wb_dat_i;
+          LD0:
+            if (!wb.stall)
+              next = LD1;
+
+          LD1:
+            if (wb.ack)
+              next = START;
+
+          ST0:
+            if (!wb.stall)
+              next = ST1;
+
+          ST1:
+            if (wb.ack)
+              next = START;
+
+          default
+            next = START;
+        endcase
      end
+
+   assign instr_bubble = state == LD0 || state == LD1 || state == ST0 || state == ST1;
+   assign mem_addr_sel = is_ld || state == LD0 || is_st || state == ST0;
+   assign ld_st0       = state == LD1 && wb.ack;
 endmodule
 
 `resetall

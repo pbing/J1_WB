@@ -36,7 +36,3 @@ dc_shell> get_lib_attribute tcbn90lphpwc_ccs/ND2D1 area
 | 24          | 24           | 21732      |  7700 
 | 28          | 28           | 24460      |  8666 
 | 32          | 32           | 27071      |  9591 
-
-## TODO
-This design assumes no wait cycles from the memories or
-I/O. Add wait cycles in order to conform the Wishbone standard.

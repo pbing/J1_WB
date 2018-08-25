@@ -3,13 +3,17 @@
 `default_nettype none
 
 module wb_ram
-  #(parameter size = 'h800) // RAM2048x16
+  #(parameter size       = 'h800, // RAM2048x16
+    parameter waitcycles = 0)
    (if_wb.slave wb);
 
+   wire                 valid;
+   wire                 ram_cen;
+   wire                 ram_wen;
+   logic [1:waitcycles] stall;   // optimized away when no waitcycles
+
+   /* work around missing modport expressions */
    wire [15:0] wb_dat_i, wb_dat_o;
-   wire        valid;
-   wire        ram_cen;
-   wire        ram_wen;
 
 `ifdef NO_MODPORT_EXPRESSIONS
    assign wb_dat_i = wb.dat_m;
@@ -21,12 +25,13 @@ module wb_ram
 
    spram
      #(.size(size))
-   ram(.clock   (wb.clk),
-       .address (wb.adr[$clog2(size) - 1:0]),
-       .data    (wb_dat_i),
-       .q       (wb_dat_o),
-       .cen     (ram_cen),
-       .wren    (ram_wen));
+   ram
+     (.clock   (wb.clk),
+      .address (wb.adr[$clog2(size) - 1:0]),
+      .data    (wb_dat_i),
+      .q       (wb_dat_o),
+      .cen     (ram_cen),
+      .wren    (ram_wen));
 
    assign ram_cen = valid;
    assign ram_wen = ram_cen & wb.we;
@@ -40,9 +45,26 @@ module wb_ram
      if (wb.rst)
        wb.ack <= 1'b0;
      else
-       wb.ack <= valid;
+       wb.ack <= valid & ~wb.stall;
 
-   assign wb.stall = 1'b0;
+   always_ff @(posedge wb.clk)
+     if (wb.rst)
+       stall <= '1;
+     else
+       if (stall == '0)
+         stall <= '1;
+       else
+         if (valid)
+           if (waitcycles < 2)
+             stall <= '0;
+           else
+             stall <= {1'b0, stall[$left(stall):$right(stall) - 1]};
+
+   always_comb
+     if (waitcycles == 0)
+       wb.stall = 1'b0;
+     else
+       wb.stall = valid & stall[$right(stall)];
 endmodule
 
 `resetall
