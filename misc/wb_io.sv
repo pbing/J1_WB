@@ -65,7 +65,7 @@ module wb_io
                    stall <= 1'b1;
                  else
                    if (valid)
-                     stall <= '0;
+                     stall <= 1'b0;
 
              assign wb.stall = valid & stall;
           end:w1
