@@ -1,3 +1,0 @@
-vcs -file vcs.args tb1.sv
-./simv -ucli -do run1.do
-[[ -d ./simv.vdb ]] && urg -dir ./simv.vdb
