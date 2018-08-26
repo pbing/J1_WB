@@ -1,11 +1,6 @@
-*.vpd
-.restartSimSession.*
-.synopsys_dve_rebuild.tcl
-DVEfiles/
-csrc/
-debug*.tcl
-simv
-simv.daidir/
-simv.vdb/
-ucli.key
-urgReport
+*.do
+*.mpf
+*.mti
+*.vstf
+*.wlf
+work/
