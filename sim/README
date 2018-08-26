@@ -1,2 +1,3 @@
-bsub -Is vcs -file vcs.args tb1.sv
-bsub -Is ./simv -ucli -do run1.do
+vcs -file vcs.args tb1.sv
+./simv -ucli -do run1.do
+[[ -d ./simv.vdb ]] && urg -dir ./simv.vdb

@@ -59,4 +59,16 @@ interface if_wb
       output .dat_o(dat_s)
 `endif
       );
+
+   modport monitor
+     (input  clk,
+      input  rst,
+      input  ack,
+      input  adr,
+      input  cyc,
+      input  stall,
+      input  stb,
+      input  we,
+      input  dat_m,
+      input  dat_s);
 endinterface: if_wb
