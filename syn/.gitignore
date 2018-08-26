@@ -1,7 +1,10 @@
-*.log
-*_LIB/
-default.svf
-logs/
-reports/
-results/
-work/
+*.json
+*.qws
+*.rpt
+*.txt
+*.xml
+.qsys_edit/
+db/
+incremental_db/
+output_files/
+simulation/
