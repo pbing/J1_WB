@@ -18,7 +18,7 @@ module j1_wb
    import j1_types::*;
 
    /* instruction fetch */
-   var instr_t  instr;  // instruction
+   var instr_t  instr;           // instruction
    logic [12:0] _npc, npc,       // processor counter
                 pc;
 

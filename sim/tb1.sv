@@ -144,8 +144,8 @@ module tb1;
 
    wire \CLOCK_125_p(n) ; // added for j1_wb.vo
 
-   defparam tb1.dut.wb_rom.waitcycles = 1;
-   defparam tb1.dut.wb_ram.waitcycles = 3;
+   defparam tb1.dut.wb_rom.waitcycles = 0;
+   defparam tb1.dut.wb_ram.waitcycles = 0;
    defparam tb1.dut.wb_io1.waitcycles = 0;
    defparam tb1.dut.wb_io2.waitcycles = 0;
    defparam tb1.dut.wb_io3.waitcycles = 0;
