@@ -66,20 +66,20 @@ module wb_checker (if_wb.monitor wb);
    unkown_dat_s
      (.clk             (wb.clk),
       .reset_n         (~wb.rst),
-      .antecedent_expr (wb.cyc && wb.ack),
+      .antecedent_expr (wb.cyc && !wb.we && wb.ack),
       .consequent_expr (!$isunknown(wb.dat_s)));
 
    /************************************************************************
     * There must be an ACK for each STB.
     ************************************************************************/
-   assert_next
-     #(.num_cks (1), // Is this true for classic pipeline mode?
-       .msg     ("Transaction is missing ACK after STB"))
-   transaction
-     (.clk         (wb.clk),
-      .reset_n     (~wb.rst),
-      .start_event (wb.cyc && wb.stb && !wb.stall),
-      .test_expr   (wb.ack));
+//  assert_next
+//    #(.num_cks (1), // Is this true for classic pipeline mode?
+//      .msg     ("Transaction is missing ACK after STB"))
+//  transaction
+//    (.clk         (wb.clk),
+//     .reset_n     (~wb.rst),
+//     .start_event (wb.cyc && wb.stb && !wb.stall),
+//     .test_expr   (wb.ack));
 
    /************************************************************************
     * 3.3 BLOCK READ / WRITE Cycles
