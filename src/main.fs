@@ -7,7 +7,7 @@ target
 
 \ low high  type          name
 $0000 $1fff cdata section ROM  \ ROM
-$2000 $2fff udata section URAM \ uninitalized RAM
+$2000 $27ff udata section URAM \ uninitalized RAM
 \ ... ...   idata section IRAM \ initalized RAM
 
 \ I/O addresses
@@ -47,7 +47,7 @@ hex
 \ for RTL simulation
 s" j1.hex" create-output-file
 :noname
-    4000 0 do
+    2000 0 do
        i t@ s>d <# # # # # #> type cr
     2 +loop
 ; execute
@@ -57,12 +57,12 @@ s" j1.mif" create-output-file
 :noname
    s" -- Quartus II generated Memory Initialization File (.mif)" type cr
    s" WIDTH=16;" type cr
-   s" DEPTH=8192;" type cr
+   s" DEPTH=4096;" type cr
    s" ADDRESS_RADIX=HEX;" type cr
    s" DATA_RADIX=HEX;" type cr
    s" CONTENT BEGIN" type cr
 
-    4000 0 do
+    2000 0 do
        4 spaces
        i 2/ s>d <# # # # # #> type s"  : " type
        i t@ s>d <# # # # # #> type [char] ; emit cr
@@ -72,6 +72,6 @@ s" j1.mif" create-output-file
 ; execute
 
 s" j1.lst" create-output-file
-0 2000 disassemble-block
+0 1000 disassemble-block
 
 bye
