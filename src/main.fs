@@ -6,11 +6,12 @@ include ../j1_forth/basewords.fs
 target
 
 \ low high  type          name
-$0000 $3fff cdata section ROM  \ ROM
-$4000 $4fff udata section URAM \ uninitalized RAM
+$0000 $1fff cdata section ROM  \ ROM
+$2000 $2fff udata section URAM \ uninitalized RAM
 \ ... ...   idata section IRAM \ initalized RAM
 
 \ I/O addresses
+$5000 constant gpio
 $6000 constant sw
 $7000 constant led
 
