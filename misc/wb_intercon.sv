@@ -51,8 +51,8 @@ module wb_intercon
 `endif
 
    assign valid = wbm.cyc & wbm.stb;
-   assign sel1  = valid && (wbm.adr[15:13] == 3'b0000);  // ROM 0000H...1FFFH
-   assign sel2  = valid && (wbm.adr[15:11] == 5'b0001);  // RAM 2000H...3FFFH
+   assign sel1  = valid && (wbm.adr[15:13] == 4'b0000);  // ROM 0000H...1FFFH
+   assign sel2  = valid && (wbm.adr[15:11] == 4'b0001);  // RAM 2000H...3FFFH
    assign sel3  = valid && (wbm.adr[15:11] == 5'b00101); // I/O 5000H...5FFFH
    assign sel4  = valid && (wbm.adr[15:11] == 5'b00110); // I/O 6000H...6FFFH
    assign sel5  = valid && (wbm.adr[15:11] == 5'b00111); // I/O 7000H...7FFFH
