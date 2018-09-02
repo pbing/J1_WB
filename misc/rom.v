@@ -3,7 +3,7 @@
 `default_nettype none
 
 module rom
-  #(parameter size       = 'h1000,
+  #(parameter size       = 'h2000, // maximum code space for J1
     parameter addr_width = $clog2(size),
     parameter data_width = 16)
    (input  wire                    clock,

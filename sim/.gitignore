@@ -1,6 +1,3 @@
-*.do
-*.mpf
-*.mti
-*.vstf
-*.wlf
-work/
+*
+!*.sv
+!*.svh

@@ -160,9 +160,11 @@ module top_c5gx
 
    j1_wb cpu(.wb(wbm), .*);
 
-   wb_rom wb_rom(.wb(wbs1)); // ROM 0000H...3FFFH
+   /* ROM 0000H...1FFFH */
+   wb_rom wb_rom(.wb(wbs1));
 
-   wb_ram wb_ram(.wb(wbs2)); // RAM 4000H...4FFFH
+   /* RAM 2000H...2FFFH */
+   wb_ram wb_ram(.wb(wbs2));
 
    /* I/O 5000H...5FFFH */
    wb_io  wb_io1

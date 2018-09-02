@@ -3,7 +3,7 @@
 `default_nettype none
 
 module spram
-  #(parameter size       = 'h1000,
+  #(parameter size       = 'h10000, // maximum data space for J1
     parameter addr_width = $clog2(size),
     parameter data_width = 16)
    (input  wire                    clock,

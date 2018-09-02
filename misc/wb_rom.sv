@@ -3,12 +3,12 @@
 `default_nettype none
 
 module wb_rom
-  #(parameter size       = 'h2000, // ROM8192x16
+  #(parameter size       = 'h1000, // ROM4092x16
     parameter waitcycles = 0)
    (if_wb.slave wb);
 
-   wire                 valid;
-   wire                 rom_cen;
+   wire valid;   // Wishbone bus valid
+   wire rom_cen; // memory enable
 
    /* work around missing modport expressions */
    wire [15:0] wb_dat_o;

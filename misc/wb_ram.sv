@@ -7,9 +7,9 @@ module wb_ram
     parameter waitcycles = 0)
    (if_wb.slave wb);
 
-   wire                 valid;
-   wire                 ram_cen;
-   wire                 ram_wen;
+   wire valid;   // Wishbone bus valid
+   wire ram_cen; // memory enable
+   wire ram_wen; // write enable
 
    /* work around missing modport expressions */
    wire [15:0] wb_dat_i, wb_dat_o;
